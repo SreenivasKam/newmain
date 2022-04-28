@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    
+    <script src="https://kit.fontawesome.com/3fa19425e3.js" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <title>HyperLedger</title>
+</head>
+
+<body>
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <div class="high2"><a href="#"><i class="fa-solid fa-id-card-clip rd"></i>Job Demand</a>
+        </div>
+        <a href="#"><i class="fa-solid fa-file rd"></i>Resume Pipeline</a>
+        <a href="#"><i class="fa-solid fa-clock-rotate-left rd"></i>Recent Profiles</a>
+        <a href="#"><i class="fa-solid fa-brain rd"></i>AI/ML</a>
+        <a href="#"><i class="fa-solid fa-clipboard-question rd"></i>Queries</a>
+    </div>
+    <div class="main">
+        <div class="side">
+            <button class="openbtn" onclick="openNav()"> <i class="fa-solid fa-bars sd sd1"></i></button>
+            <div class="inside">
+                <div class="high">
+                    <i class="fa-solid fa-id-card-clip sd"></i>
+                </div>
+                <i class="fa-solid fa-file sd"></i>
+                <i class="fa-solid fa-clock-rotate-left sd"></i>
+                <i class="fa-solid fa-brain sd"></i>
+                <i class="fa-solid fa-clipboard-question sd"></i>
+            </div>
+        </div>
+        <div class="right">
+            <div class="container-fluid">
+                <i class="fa-solid fa-right-to-bracket sd "></i>
+            </div>
+            <div class="inside">
+               {% block content %}
+                   
+               {% endblock %}
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+<script>
+    function openNav() {
+        document.getElementById("mySidebar").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+    }
+</script>
+
+</html>

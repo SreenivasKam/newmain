@@ -1,0 +1,28 @@
+{% extends 'home.html' %}
+{% block content %}
+<div class="container blackbox add-height">
+    <table>
+        <thead>
+            <h4>Filter</h4>
+        </thead>
+        <tbody>
+            <form action="{{ url_for('demand.projectfil') }}" method="post">
+                {% for i in range(count|length) %}
+                {% if i%2==0 %}
+                <tr>
+                    {% endif %}
+                    <td>
+                        <input type="checkbox" id={{count[i][1]}} name={{count[i][1]}} value={{count[i][0]}}>
+                        <label for={{count[i][1]}}>{{count[i][0]}}- {{count[i][1]}}</label><br>
+                    </td>
+                    {% if i%2==1 %}
+                </tr>
+                {% endif %}
+                {% endfor %}
+                <input type="submit" value="Submit">
+            </form>
+        </tbody>
+
+    </table>
+</div>
+{% endblock %}

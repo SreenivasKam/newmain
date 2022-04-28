@@ -1,0 +1,53 @@
+{% extends 'home.html' %}
+{% block content %}
+<script>
+    document.getElementById("resumeswipe").classList.add("high2");
+    document.getElementById("resumein").classList.add("high");
+</script>
+<div class="container blackbox">
+    <div class="add-height">
+        <form action="{{ url_for('resume.writeresume') }}" method="post">
+            <table class="table ">
+                <thead>
+                    <h3>Add data</h3>
+                </thead>
+                <tbody>
+                    {% for i in range(user|length)%}
+                    {% if i%2==0 %}
+                    <tr>
+                        {% endif %}
+                        <td>
+                            <div class="form-group">
+                                {% if user[i][0]|lower in count %}
+                                <label for={{user[i][0]|lower}}>{{user[i][0]}}</label>
+                                <select name={{user[i][0]|lower}} id={{user[i][0]|lower}}>
+                                    <option value="None">None</option>
+                                    {% for element in tabledata %}
+                                    {% if element[0]==user[i][0]|lower%}
+                                    <h1>sd</h1>
+                                    <option value={{element[1]}}>{{element[1]}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                                {% else %}
+                                {% if user[i][0]|lower not in nothis %}
+                                <label for={{user[i][0]|lower}}>{{user[i][0]}}</label>
+                                <input type="text" class="form-control col-4" id="exampleInputEmail1"
+                                    name={{user[i][0]|lower}} required>
+                                {% endif %}
+                                {% endif %}
+                            </div>
+                        </td>
+                        {% if i%2==1 %}
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            <input type="submit" class="btn btn-primary" value="Add Data">
+            <input type="button" class="btn btn-primary" value="Cancel" onclick="history.back()"/>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

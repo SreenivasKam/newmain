@@ -1,0 +1,47 @@
+{% extends 'home.html' %}
+{% block content %}
+<script>
+    document.getElementById("jobswipe").classList.add("high2");
+    document.getElementById("jobin").classList.add("high");
+    
+</script>
+<div class="parent flex-parent">
+    <div class="child flex-child">
+        <h2>Active Job Demands</h2>
+    </div>
+    <div class="child flex-child push-right">
+
+        <button type="button" class="btn1 only-shadow" onclick="location.href='/add_data'">+ New&nbsp</button>
+        <button type="button" class="btn1 only-shadow" onclick="location.href='/filter'">&nbsp&nbsp&nbspFilter&nbsp&nbsp&nbsp </button>
+    </div>
+</div>
+<div class="container blackbox horizon add-height">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                {% for element in user %}
+                <th scope="col">{{ element[0] }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in data %}
+            <tr>
+                {% for element in result %}
+                <td>
+                    {% if  element == 'Onboarding' %}
+                    <button type="button" class="btn btn-success down">{{ element }}</button>
+                    {% elif element == 'Closed' %}
+                    <button type="button" class="btn btn-danger down">&nbsp&nbsp&nbsp&nbsp{{ element }}&nbsp&nbsp&nbsp&nbsp</button>
+                    {% else %}
+                    {{ element }}
+                    {% endif %}
+                </td>
+                {% endfor %}
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

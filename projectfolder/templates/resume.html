@@ -1,0 +1,28 @@
+{% extends 'home.html' %}
+{% block content %}
+<script>
+    document.getElementById("resumeswipe").classList.add("high2");
+    document.getElementById("resumein").classList.add("high");
+</script>
+<div class="parent flex-parent">
+    <div class="child flex-child">
+        <h2>Resume Tracker</h2>
+    </div>
+    <div class="child flex-child push-right">
+
+        <button type="button" class="btn1 only-shadow" onclick="location.href='/add_data_resume'">+ New&nbsp</button>
+        <button type="button" class="btn1 only-shadow" onclick="location.href='/filter_resume'">&nbsp&nbsp&nbspFilter&nbsp&nbsp&nbsp </button>
+    </div>
+</div>
+<div class="container blackbox horizon add-height">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                {% for element in user %}
+                <th scope="col">{{ element[0] }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+    </table>
+</div>
+{% endblock %}
