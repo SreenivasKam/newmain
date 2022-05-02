@@ -17,8 +17,8 @@ demand = Blueprint('demand', __name__)
 def demander():
     cur = mysql.connection.cursor()
     cur.execute(
-        "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'demands';")
-    header = list(cur.fetchall())
+        "SHOW COLUMNS FROM demands;")
+    header = (cur.fetchall())
     cur.execute("SELECT * from demands;")
     data = list(cur.fetchall())
     return render_template('demand.html', user=header, data=data)
@@ -29,8 +29,8 @@ def add_data():
     nothis= ['record_creation_date','last_updated_date','last_updated_by']
     cur = mysql.connection.cursor()
     cur.execute(
-        "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'demands';")
-    header = list(cur.fetchall())
+        "SHOW COLUMNS FROM demands;")
+    header = tuple(cur.fetchall())
     cur.execute(
         "SELECT DISTINCT(type_) FROM legend")
     count = list(cur.fetchall())
@@ -61,7 +61,7 @@ def writedemand():
     msg =' '
     cur = mysql.connection.cursor()
     cur.execute(
-        "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'demands';")
+        "SHOW COLUMNS FROM demands;")
     header = list(cur.fetchall())
     # applying empty validation
     dict1 ={}

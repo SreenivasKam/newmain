@@ -32,7 +32,11 @@
                     {% if  element == 'Onboarding' %}
                     <button type="button" class="btn btn-success down">{{ element }}</button>
                     {% elif element == 'Closed' %}
-                    <button type="button" class="btn btn-danger down">&nbsp&nbsp&nbsp&nbsp{{ element }}&nbsp&nbsp&nbsp&nbsp</button>
+                    <button type="button" class="btn btn-danger down">&nbsp&nbsp&nbsp&nbsp&nbsp{{ element }}&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+                    {% elif element == 'On' %}
+                    <button type="button" class="btn btn-primary down">&nbsp&nbsp&nbsp On Hold&nbsp&nbsp&nbsp</button>
+                    {% elif element == 'Withdraw' %}
+                    <button type="button" class="btn btn-warning down">&nbsp&nbsp&nbsp{{ element }}&nbsp&nbsp&nbsp</button>
                     {% else %}
                     {{ element }}
                     {% endif %}
