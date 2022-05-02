@@ -3,7 +3,6 @@
 <script>
     document.getElementById("jobswipe").classList.add("high2");
     document.getElementById("jobin").classList.add("high");
-    
 </script>
 <div class="container blackbox">
     <div class="add-height">
@@ -19,9 +18,17 @@
                     <tr>
                         {% endif %}
                         <td>
+                            {% set a=verify[i]|string %}
+                            {% set c=a.strip("')")%}
+                            {% set d=c.strip("('")%}
+                            {% set b =[d.split("', '")]%}
+
                             <div class="form-group">
                                 {% if user[i][0]|lower in count %}
-                                <label for={{user[i][0]|lower}}>{{user[i][0]}}</label>
+                                <label for={{user[i][0]|lower}}>{{user[i][0]}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
+                                    class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
+                                    title="{{b[0][1]}}"></i>
+                                <br>
                                 <select name={{user[i][0]|lower}} id={{user[i][0]|lower}}>
                                     <option value="None">None</option>
                                     {% for element in tabledata %}
@@ -33,9 +40,16 @@
                                 </select>
                                 {% else %}
                                 {% if user[i][0]|lower not in nothis %}
-                                <label for={{user[i][0]|lower}}>{{user[i][0]}}</label>
+                                <label for={{user[i][0]|lower}}>{{user[i][0]}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
+                                    class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
+                                    title="{{b[0][1]}}"></i>
+                                {% if b[0][2]=='date' %}
+                                <input type="date" class="form-control col-4" id="exampleInputEmail1"
+                                    name={{user[i][0]|lower}} required>
+                                {%else%}
                                 <input type="text" class="form-control col-4" id="exampleInputEmail1"
                                     name={{user[i][0]|lower}} required>
+                                {% endif %}
                                 {% endif %}
                                 {% endif %}
                             </div>
@@ -47,7 +61,7 @@
                 </tbody>
             </table>
             <input type="submit" class="btn btn-primary" value="Add Data">
-            <input type="button" class="btn btn-primary" value="Cancel" onclick="history.back()"/>
+            <input type="button" class="btn btn-primary" value="Cancel" onclick="history.back()" />
         </form>
     </div>
 </div>

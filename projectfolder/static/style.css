@@ -200,3 +200,6 @@ button {
   ::-webkit-scrollbar-thumb:hover {
     background: #145DA0; 
   }
+  small{
+      font-size:larger;
+  }

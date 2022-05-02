@@ -30,7 +30,10 @@ def add_data():
     cur = mysql.connection.cursor()
     cur.execute(
         "SHOW COLUMNS FROM demands;")
-    header = tuple(cur.fetchall())
+    header = list(cur.fetchall())
+    cur.execute(
+        "Select * FROM demand_comments;")
+    verify= list(cur.fetchall())
     cur.execute(
         "SELECT DISTINCT(type_) FROM legend")
     count = list(cur.fetchall())
@@ -40,7 +43,7 @@ def add_data():
     data =[]
     for ele in count:
         data.append(ele[0])
-    return render_template('add_data.html', user=header,count=data,tabledata = tabledata,nothis=nothis)
+    return render_template('add_data.html',verify=list(verify),user=header,count=data,tabledata = tabledata,nothis=nothis)
     #return render_template('check.html',msg=nothis,count=data)
 
 @demand.route('/filter')
