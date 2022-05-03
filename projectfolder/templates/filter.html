@@ -1,32 +1,39 @@
 {% extends 'home.html' %}
 {% block content %}
+<script>
+    document.getElementById("jobswipe").classList.add("high2");
+    document.getElementById("jobin").classList.add("high");
+</script>
+{% set ns = namespace(x='weee') %}
 <div class="container blackbox add-height">
-    <table>
+    <h2>Filter</h2>
+    <form action="{{ url_for('demand.projectfil') }}" method="post">
+    {% for i in range(count|length) %}
+    {% if ns.x|string != count[i][0]|string %}
+    </table>
+    <table class="table">
         <thead>
-            <h4>Filter</h4>
+            {% set ns.x = count[i][0] %}
+            <h4>{{ns.x|capitalize}}</h4>
         </thead>
         <tbody>
-            <form action="{{ url_for('demand.projectfil') }}" method="post">
-                {% for i in range(count|length) %}
-                {% if i%2==0 %}
-                <tr>
-                    {% endif %}
-                    <td>
-                        {% if count[i][0]=="status" %}
-                        <input type="checkbox" id={{count[i][1]}} name={{count[i][1]}} value={{count[i][0]}}>
-                        <label for={{count[i][1]}}>{{count[i][0]}}- {{count[i][1]}}</label><br>
-                        {% endif %}
-                        
-                        
-                    </td>
-                    {% if i%2==1 %}
-                </tr>
+            {% endif %}
+            {% if i%2==0 %}
+            <tr>
                 {% endif %}
-                {% endfor %}
-                <input class ="btn btn-primary" type="submit" value="Submit">
-            </form>
-        </tbody>
+                <td>
+                    <input type="checkbox" id={{count[i][1]}} name="{{count[i][1]}}" value="{{count[i][1]}}">
+                    <label for="{{count[i][1]}}">{{count[i][0]}}- {{count[i][1]}}</label><br>
+                </td>
+                {% if i%2==1 %}
+            </tr>
+            {% endif %}
+            {% endfor %}
 
+        </tbody>
     </table>
+    <input class="btn btn-primary" type="submit" value="Submit">
+    </form>
+
 </div>
 {% endblock %}

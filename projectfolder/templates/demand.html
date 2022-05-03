@@ -3,7 +3,6 @@
 <script>
     document.getElementById("jobswipe").classList.add("high2");
     document.getElementById("jobin").classList.add("high");
-    
 </script>
 <div class="parent flex-parent">
     <div class="child flex-child">
@@ -12,10 +11,11 @@
     <div class="child flex-child push-right">
 
         <button type="button" class="btn1 only-shadow" onclick="location.href='/add_data'">+ New&nbsp</button>
-        <button type="button" class="btn1 only-shadow" onclick="location.href='/filter'">&nbsp&nbsp&nbspFilter&nbsp&nbsp&nbsp </button>
+        <button type="button" class="btn1 only-shadow"
+            onclick="location.href='/filter'">&nbsp&nbsp&nbspFilter&nbsp&nbsp&nbsp </button>
     </div>
 </div>
-<div class="container blackbox horizon add-height">
+<div class="container blackbox horizon">
     <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -30,27 +30,41 @@
                 {% for element in result %}
                 <td>
                     {% if  element == 'Onboarding' %}
-                    <button type="button" class="btn btn-success down">Onboarding</button>
+                    <button type="button" class="btn btn-success down">&nbsp&nbspOnboarding&nbsp&nbsp</button>
                     {% elif element == 'Closed' %}
-                    <button type="button" class="btn btn-danger down">&nbsp&nbsp&nbsp&nbsp&nbspClosed&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+                    <button type="button"
+                        class="btn btn-danger down">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspClosed&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
                     {% elif element == 'On Hold' %}
-                    <button type="button" class="btn btn-primary down">&nbsp&nbsp&nbsp On Hold&nbsp&nbsp&nbsp</button>
+                    <button type="button" class="btn btn-primary down">&nbsp&nbsp&nbsp&nbsp On Hold&nbsp&nbsp&nbsp&nbsp</button>
                     {% elif element == 'Withdraw' %}
-                    <button type="button" class="btn btn-warning down">&nbsp&nbsp&nbspWithdraw&nbsp&nbsp&nbsp</button>
+                    <button type="button" class="btn btn-warning down">&nbsp&nbsp&nbsp&nbspWithdraw&nbsp&nbsp&nbsp&nbsp</button>
                     {% elif element == 'Cancelled' %}
-                    <button type="button" class="btn btn-outline-primary down">&nbsp&nbspCancelled&nbsp&nbsp</button>
-                    {% elif element == 'Initated-Incomplete info' %}
-                    <button type="button" class="btn btn-outline-warning down">Initated-Incomplete info</button>
+                    <button type="button" class="btn btn-outline-primary down">&nbsp&nbsp&nbspCancelled&nbsp&nbsp&nbsp</button>
+                    {% elif element == 'Initiated-Incomplete info' %}
+                    <button type="button" class="btn btn-secondary down">Initated-<br>Incomplete info</button>
                     {% elif element == 'Open' %}
-                    <button type="button" class="btn btn-outline-success down">&nbsp&nbsp&nbsp&nbspOpen&nbsp&nbsp&nbsp&nbsp</button>
+                    <button type="button"
+                        class="btn btn-outline-success down">&nbsp&nbsp&nbsp&nbsp&nbspOpen&nbsp&nbsp&nbsp&nbsp&nbsp</button>
                     {% elif element == 'Missing' %}
-                    <button type="button" class="btn btn-outline-danger down">&nbsp&nbsp&nbspMissing&nbsp&nbsp&nbsp</button>
+                    <button type="button"
+                        class="btn btn-outline-danger down">&nbsp&nbsp&nbsp&nbsp&nbspMissing&nbsp&nbsp&nbsp&nbsp&nbsp</button>
                     {% else %}
                     {{ element }}
                     {% endif %}
                 </td>
                 {% endfor %}
+                <td>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-expanded="false">
+                            Actions
+                        </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Update</a>
+                        <a class="dropdown-item" href="#">Delete</a>
+                        <a class="dropdown-item" href="#">Parse Resumes</a>
 
+                    </div>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
