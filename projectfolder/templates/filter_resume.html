@@ -1,13 +1,13 @@
 {% extends 'home.html' %}
 {% block content %}
 <script>
-    document.getElementById("jobswipe").classList.add("high2");
-    document.getElementById("jobin").classList.add("high");
+    document.getElementById("resumeswipe").classList.add("high2");
+    document.getElementById("resumein").classList.add("high");
 </script>
 {% set ns = namespace(x='weee') %}
 <div class="container blackbox add-height">
     <h2>Filter</h2>
-    <form action="{{ url_for('demand.demandfil') }}" method="post">
+    <form action="{{ url_for('resume.resumefil') }}" method="post">
     {% for i in range(count|length) %}
     {% if ns.x|string != count[i][0]|string %}
     </table>
@@ -37,3 +37,4 @@
 
 </div>
 {% endblock %}
+

@@ -7,7 +7,7 @@
 <div class="container blackbox">
     <div class="add-height">
 
-        <form action="{{ url_for('demand.writedemand') }}" method="post">
+        <form action="{{ url_for('demand.changes') }}" method="post">
             <table class="table ">
                 <thead>
                     <h3>Add data</h3>
@@ -30,6 +30,7 @@
                                     title="{{b[0][1]}}"></i>
                                 <br>
                                 <select name={{user[i][0]|lower}} id={{user[i][0]|lower}} required>
+                                    <option value="{{msg[0][i]}}">{{msg[0][i]}}</option>
                                     <option value="None">None</option>
                                     {% for element in tabledata %}
                                     {% if element[0]==user[i][0]|lower%}
@@ -45,21 +46,24 @@
                                     title="{{b[0][1]}}"></i>
                                 {% if b[0][2]=='date' %}
                                 <input type="date" class="form-control col-4" id="exampleInputEmail1"
-                                    name={{user[i][0]|lower}} required>
+                                    name={{user[i][0]|lower}} value="{{msg[0][i]}}" required>
                                 {%else%}
                                 <input type="text" class="form-control col-4" id="exampleInputEmail1"
-                                    name={{user[i][0]|lower}} required>
+                                    name={{user[i][0]|lower}} value="{{msg[0][i]}}" required>
                                 {% endif %}
                                 {% endif %}
                                 {% endif %}
                             </div>
                         </td>
-                        {% if i%2==1 %}
-                    </tr>
-                    {% endif %}
+
                     {% endfor %}
                 </tbody>
             </table>
+            <label for="update_comments">Comments</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fa-solid fa-circle-info"
+                data-toggle="tooltip" data-placement="right" title="Message for updating this record"></i>
+            <br>
+                <input type="text" class="col-3"  name="update_comments" required>
+            <br>
             <input type="submit" class="btn btn-primary" value="Add Data">
             <input type="button" class="btn btn-primary" value="Cancel" onclick="history.back()" />
         </form>

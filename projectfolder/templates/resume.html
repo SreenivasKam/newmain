@@ -7,11 +7,18 @@
 <div class="parent flex-parent">
     <div class="child flex-child">
         <h2>Resume Tracker</h2>
+        {% if filter==1 %}
+        <div class="inline-block">
+        <h3>Flitered</h3>&nbsp&nbsp&nbsp&nbsp
+        <button type="button" class="btn btn-outline-danger down" onclick="location.href='/resume'">Back</button>
+    </div>
+        {% endif %}
     </div>
     <div class="child flex-child push-right">
 
         <button type="button" class="btn1 only-shadow" onclick="location.href='/add_data_resume'">+ New&nbsp</button>
-        <button type="button" class="btn1 only-shadow" onclick="location.href='/filter_resume'">&nbsp&nbsp&nbspFilter&nbsp&nbsp&nbsp </button>
+        <button type="button" class="btn1 only-shadow"
+            onclick="location.href='/filter_resume'">&nbsp&nbsp&nbspFilter&nbsp&nbsp&nbsp </button>
     </div>
 </div>
 <div class="container blackbox horizon add-height">
@@ -19,10 +26,30 @@
         <thead class="thead-dark">
             <tr>
                 {% for element in user %}
-                <th scope="col">{{ element[0] }}</th>
+                <th scope="col">{{ element[0]|capitalize }}</th>
                 {% endfor %}
             </tr>
         </thead>
+        <tbody>
+            {% for result in data %}
+            <tr>
+                {% for element in result %}
+                <td>{{element}}</td>
+                {% endfor %}
+                <td>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-expanded="false">
+                        Actions
+                    </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Update</a>
+                    <a class="dropdown-item" href="#">Delete</a>
+
+                </div>
+            </td>
+                {% endfor %}
+                </tr>
+        </tbody>
     </table>
 </div>
 {% endblock %}

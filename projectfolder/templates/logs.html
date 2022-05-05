@@ -1,0 +1,49 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<div class="container blackbox horizon2">
+    <h3>Demand Logs</h3>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                {% for element in user %}
+                <th scope="col">{{ element[0] }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in data %}
+            <tr>
+                {% for element in result %}
+                <td>
+                    {{ element }}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <h3>Resume Logs</h3>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                {% for element in user1 %}
+                <th scope="col">{{ element[0] }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in data1 %}
+            <tr>
+                {% for element in result %}
+                <td>
+                    {{ element }}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

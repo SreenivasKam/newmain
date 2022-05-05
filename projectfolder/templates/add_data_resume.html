@@ -17,23 +17,38 @@
                     <tr>
                         {% endif %}
                         <td>
+                            {% set a=verify[i]|string %}
+                            {% set c=a.strip("')")%}
+                            {% set d=c.strip("('")%}
+                            {% set b =[d.split("', '")]%}
                             <div class="form-group">
                                 {% if user[i][0]|lower in count %}
-                                <label for={{user[i][0]|lower}}>{{user[i][0]}}</label>
-                                <select name={{user[i][0]|lower}} id={{user[i][0]|lower}}>
+                                <label for={{user[i][0]|lower}}>{{user[i][0]|capitalize}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
+                                class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
+                                title="{{b[0][1]}}"></i><br>
+                                <select name={{user[i][0]|lower}} id={{user[i][0]|lower}} required>
                                     <option value="None">None</option>
                                     {% for element in tabledata %}
-                                    {% if element[0]==user[i][0]|lower%}
-                                    <h1>sd</h1>
-                                    <option value={{element[1]}}>{{element[1]}}</option>
-                                    {% endif %}
+                                    <option value="{{element[1]}}">{{element[1]}}</option>
                                     {% endfor %}
                                 </select>
                                 {% else %}
                                 {% if user[i][0]|lower not in nothis %}
-                                <label for={{user[i][0]|lower}}>{{user[i][0]}}</label>
-                                <input type="text" class="form-control col-4" id="exampleInputEmail1"
-                                    name={{user[i][0]|lower}} required>
+                                <label for={{user[i][0]|lower}}>{{user[i][0]|capitalize}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp
+                                <i class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
+                                    title="{{b[0][1]}}"></i>
+                                    {% if b[0][2]=='date' %}
+                                    <input type="date" class="form-control col-4" id="exampleInputEmail1"
+                                        name={{user[i][0]|lower}} required>
+                                    {%elif b[0][2]|lower =='integer'%}
+                                    <input type="tel" class="form-control col-4" id="exampleInputEmail1"
+                                        name={{user[i][0]|lower}} required>
+                                    {%else%}
+                                    <input type="text" class="form-control col-4" id="exampleInputEmail1"
+                                        name={{user[i][0]|lower}} required>
+                                    {% endif %}
+                                    
+
                                 {% endif %}
                                 {% endif %}
                             </div>

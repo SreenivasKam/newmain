@@ -6,7 +6,16 @@
 </script>
 <div class="parent flex-parent">
     <div class="child flex-child">
+        {% if filter==1 %}
+        <h3>Active Job Demands</h3>
+        <div class="inline-block">
+            <h5>Flitered</h5>&nbsp&nbsp&nbsp&nbsp
+            <button type="button" class="btn btn-outline-danger down" onclick="location.href='/'">Back</button>
+        </div>
+        {%else%}
         <h2>Active Job Demands</h2>
+        {% endif %}
+
     </div>
     <div class="child flex-child push-right">
 
@@ -27,19 +36,26 @@
         <tbody>
             {% for result in data %}
             <tr>
+                {% set ns = namespace(x=1) %}
                 {% for element in result %}
                 <td>
+                    {% if ns.x==1 %}
+                    {% set ns.x = element %}
+                    {% endif %}
                     {% if  element == 'Onboarding' %}
                     <button type="button" class="btn btn-success down">&nbsp&nbspOnboarding&nbsp&nbsp</button>
                     {% elif element == 'Closed' %}
                     <button type="button"
                         class="btn btn-danger down">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspClosed&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
                     {% elif element == 'On Hold' %}
-                    <button type="button" class="btn btn-primary down">&nbsp&nbsp&nbsp&nbsp On Hold&nbsp&nbsp&nbsp&nbsp</button>
+                    <button type="button" class="btn btn-primary down">&nbsp&nbsp&nbsp&nbsp On
+                        Hold&nbsp&nbsp&nbsp&nbsp</button>
                     {% elif element == 'Withdraw' %}
-                    <button type="button" class="btn btn-warning down">&nbsp&nbsp&nbsp&nbspWithdraw&nbsp&nbsp&nbsp&nbsp</button>
+                    <button type="button"
+                        class="btn btn-warning down">&nbsp&nbsp&nbsp&nbspWithdraw&nbsp&nbsp&nbsp&nbsp</button>
                     {% elif element == 'Cancelled' %}
-                    <button type="button" class="btn btn-outline-primary down">&nbsp&nbsp&nbspCancelled&nbsp&nbsp&nbsp</button>
+                    <button type="button"
+                        class="btn btn-outline-primary down">&nbsp&nbsp&nbspCancelled&nbsp&nbsp&nbsp</button>
                     {% elif element == 'Initiated-Incomplete info' %}
                     <button type="button" class="btn btn-secondary down">Initated-<br>Incomplete info</button>
                     {% elif element == 'Open' %}
@@ -54,17 +70,18 @@
                 </td>
                 {% endfor %}
                 <td>
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-expanded="false">
-                            Actions
-                        </a>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-expanded="false">
+                        Actions
+                    </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Update</a>
-                        <a class="dropdown-item" href="#">Delete</a>
-                        <a class="dropdown-item" href="#">Parse Resumes</a>
+                        <a class="dropdown-item" href="{{ url_for('demand.updates',id = ns.x) }}">Update</a>
+                        <a class="dropdown-item" href="{{ url_for('demand.delete',id = ns.x) }}">Delete</a>
+                        <a class="dropdown-item" href="{{ns.x}}resume">Parse Resumes</a>
 
                     </div>
                 </td>
+
             </tr>
             {% endfor %}
         </tbody>

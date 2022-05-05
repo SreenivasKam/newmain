@@ -170,7 +170,14 @@ button {
     overflow-y: scroll;
     white-space: nowrap;
 }
-
+.horizon2 {
+    line-height: 3rem;
+    font-weight: bold;
+    max-height: 90vh;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    white-space: nowrap;
+}
 .add-boundray-space {
     margin: 30px;
     padding: 30px;
@@ -216,4 +223,7 @@ small {
 }
 .dropdown-item{
     font-weight: 600 ;
+}
+.inline-block{
+    display: inline-flex;
 }
