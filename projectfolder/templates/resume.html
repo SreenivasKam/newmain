@@ -9,9 +9,9 @@
         <h2>Resume Tracker</h2>
         {% if filter==1 %}
         <div class="inline-block">
-        <h3>Flitered</h3>&nbsp&nbsp&nbsp&nbsp
-        <button type="button" class="btn btn-outline-danger down" onclick="location.href='/resume'">Back</button>
-    </div>
+            <h3>Flitered</h3>&nbsp&nbsp&nbsp&nbsp
+            <button type="button" class="btn btn-outline-danger down" onclick="location.href='/resume'">Back</button>
+        </div>
         {% endif %}
     </div>
     <div class="child flex-child push-right">
@@ -21,35 +21,61 @@
             onclick="location.href='/filter_resume'">&nbsp&nbsp&nbspFilter&nbsp&nbsp&nbsp </button>
     </div>
 </div>
-<div class="container blackbox horizon add-height">
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                {% for element in user %}
-                <th scope="col">{{ element[0]|capitalize }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for result in data %}
-            <tr>
-                {% for element in result %}
-                <td>{{element}}</td>
-                {% endfor %}
-                <td>
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-expanded="false">
-                        Actions
-                    </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Update</a>
-                    <a class="dropdown-item" href="#">Delete</a>
-
-                </div>
-            </td>
-                {% endfor %}
+<div class="container-fluid">
+    <div class="blackbox horizon add-height">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        <table class="table  table-hover">
+            <thead>
+                <tr class="table-warning">
+                    {% for element in user %}
+                    <th scope="col">{{ element[0]|capitalize }}</th>
+                    {% if element[0]|capitalize =='Box_link' %}
+                    <th> &nbsp</th>
+                    {% endif %}
+                    {% endfor %}
+                    <th></th>
                 </tr>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for result in data %}
+                {% set ns = namespace(x=1) %}
+                {% set nd = namespace(k='asd') %}
+                <tr>
+                    {% for element in result %}
+                    <td>{{element}}</td>
+                    {% set ns.x = ns.x + 1 %}
+                    {% if ns.x==3 %}
+                    {% set nd.k = element %}
+                    {% endif %}
+
+                    {% if ns.x == 10 %}
+                    <td><button onclick=" window.open('{{element}}','_blank')"
+                            class="btn btn-success down ">open</button></td>
+                    {% endif %}
+
+                    {% endfor %}
+                    <td>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-expanded="false">
+                            Actions
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url_for('resume.updated',id = nd.k) }}">Update</a>
+                            <a class="dropdown-item" href="{{ url_for('resume.deleted',id = nd.k) }}">Delete</a>
+
+                        </div>
+                    </td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

@@ -4,16 +4,16 @@
     document.getElementById("jobswipe").classList.add("high2");
     document.getElementById("jobin").classList.add("high");
 </script>
-<div class="container blackbox">
-    <div class="add-height">
+<div class="container-fluid">
+    <div class=" blackbox add-height">
 
         <form action="{{ url_for('demand.changes') }}" method="post">
             <table class="table ">
                 <thead>
-                    <h3>Add data</h3>
+                    <h3>Update Data</h3>
                 </thead>
                 <tbody>
-                    {% for i in range(user|length)%}
+                    {% for i in range(user|length -2)%}
                     {% if i%2==0 %}
                     <tr>
                         {% endif %}
@@ -29,7 +29,7 @@
                                     class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
                                     title="{{b[0][1]}}"></i>
                                 <br>
-                                <select name={{user[i][0]|lower}} id={{user[i][0]|lower}} required>
+                                <select name={{user[i][0]|lower}} id={{user[i][0]|lower}} class="col-8" required>
                                     <option value="{{msg[0][i]}}">{{msg[0][i]}}</option>
                                     <option value="None">None</option>
                                     {% for element in tabledata %}
@@ -45,10 +45,10 @@
                                     class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
                                     title="{{b[0][1]}}"></i>
                                 {% if b[0][2]=='date' %}
-                                <input type="date" class="form-control col-4" id="exampleInputEmail1"
+                                <input type="date" class="form-control col-8" id="exampleInputEmail1"
                                     name={{user[i][0]|lower}} value="{{msg[0][i]}}" required>
                                 {%else%}
-                                <input type="text" class="form-control col-4" id="exampleInputEmail1"
+                                <input type="text" class="form-control col-8" id="exampleInputEmail1"
                                     name={{user[i][0]|lower}} value="{{msg[0][i]}}" required>
                                 {% endif %}
                                 {% endif %}

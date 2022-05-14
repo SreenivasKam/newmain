@@ -1,0 +1,6 @@
+Field,Type,Null,Key,Default,Extra
+unique_id,varchar(255),YES,MUL,NULL,
+status,varchar(255),YES,,NULL,
+sub_status,varchar(255),YES,,NULL,
+comments,varchar(255),YES,,NULL,
+date_updated,datetime,YES,,NULL,

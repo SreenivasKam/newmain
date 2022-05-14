@@ -1,0 +1,4 @@
+Field,Type,Null,Key,Default,Extra
+type_,varchar(255),YES,,NULL,
+comment_,varchar(255),YES,,NULL,
+data_type,varchar(255),YES,,NULL,

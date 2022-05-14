@@ -1,0 +1,18 @@
+{% extends 'homescreen.html' %}
+
+{% block content %}
+<form class="form-signin" action="{{ url_for('core.signupdata') }}" method="post">
+    <h5 class="h4 mb-3 font-weight-normal">Signup</h5>
+    <label for="name" class="sr-only">Name</label>
+    <input type="text" name="name" class="form-control" placeholder="Full name" required autofocus>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email" name="inputEmail" class="form-control" placeholder="Email address" required>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" name="inputPassword" class="form-control" placeholder="Password" required>
+    <br>
+    <p>Have a acoount <a href="/"><strong> Login</strong></a></p>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+
+</form>
+{% endblock %}
+

@@ -1,0 +1,18 @@
+{% extends 'homescreen.html' %}
+
+{% block content %}
+<form class="form-signin" action="{{ url_for('core.connect') }}" method="post">
+    <h5 class="h4 mb-3 font-weight-normal">Login</h5>
+    <br>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email" name="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" name="inputPassword" class="form-control" placeholder="Password" required>
+    <span><a href="/forgot">Forgot password!</a></span>
+    <br>
+    <br>
+    <p>Create a account <a href="/signup"><strong> Sign Up</strong></a></p>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+
+</form>
+{% endblock %}

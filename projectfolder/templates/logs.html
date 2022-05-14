@@ -1,49 +1,150 @@
 {% extends 'home.html' %}
 
 {% block content %}
-<div class="container blackbox horizon2">
-    <h3>Demand Logs</h3>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                {% for element in user %}
-                <th scope="col">{{ element[0] }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for result in data %}
-            <tr>
-                {% for element in result %}
-                <td>
-                    {{ element }}
-                </td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <br>
-    <h3>Resume Logs</h3>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                {% for element in user1 %}
-                <th scope="col">{{ element[0] }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for result in data1 %}
-            <tr>
-                {% for element in result %}
-                <td>
-                    {{ element }}
-                </td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<style>
+    /* Style the tab */
+    .tab {
+        overflow: auto;
+        color: white;
+        width: fit-content;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        font-weight: bold;
+        border-radius: 10px;
+    }
+
+    /* Style the buttons inside the tab */
+    .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        width: 200px;
+        cursor: pointer;
+        padding: 5px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+        font-weight: bold;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+        background-color: #B1D4E0;
+        border-top-left-radius: 10px;
+        color: white;
+        font-weight: bold;
+        border-top-right-radius: 10px;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+        background-color: #2E8BC0;
+        border-top-left-radius: 10px;
+        color: white;
+        font-weight: bold;
+        border-top-right-radius: 10px;
+    }
+
+    /* Style the tab content */
+</style>
+<div class="container-fluid">
+    <div class="blackbox horizon2">
+        <div class="tab">
+            <button class="tablinks active" onclick="openCity(event, 'Demand',2)">Demand</button>
+            <button id="tabr1" class="tablinks " onclick="openCity(event, 'Resume',2)">Resume</button>
+        </div>
+        <div id="Demand" class="tabcontent  ">
+            <div class="parent flex-parent">
+                <div class="child flex-child">
+                    <h2>Demand Tacker</h2>
+                </div>
+                <div class="child flex-child push-right">
+                    <button type="button" class="btn btn-primary"
+                        onclick="location.href='/filter_datalogs'">&nbsp&nbsp&nbspFilter&nbsp&nbsp&nbsp </button>
+                </div>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr class="table-warning">
+                        {% for element in user %}
+                        <th scope="col">{{ element[0] }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in data %}
+                    <tr>
+                        {% for element in result %}
+                        <td>
+                            {{ element }}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div id="Resume" class="tabcontent">
+            <div class="parent flex-parent">
+                <div class="child flex-child">
+                    <h2>Resume Logs</h2>
+                </div>
+                <div class="child flex-child push-right">
+                    <button type="button" class="btn btn-primary"
+                        onclick="location.href='/filter_resumelogs'">&nbsp&nbsp&nbspFilter&nbsp&nbsp&nbsp </button>
+                </div>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr class="table-warning">
+                        {% for element in user1 %}
+                        <th scope="col">{{ element[0] }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in data1 %}
+                    <tr>
+                        {% for element in result %}
+                        <td>
+                            {{ element }}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
+<script>
+    function openCity(evt, cityName, p) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            if (p != 1) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+
+    }
+    openCity(event, 'Demand', 1);
+</script>
+{% if showresume == 10 %}
+<script>
+    openCity(event, 'Resume', 2);
+    var element = document.getElementById("tabr1");
+    element.classList.add("active");
+</script>
+
+{% endif %}
+
 {% endblock %}

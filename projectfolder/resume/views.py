@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template,request
+from flask import Blueprint, render_template,request, request ,flash,url_for,redirect
 from flask_mysqldb import MySQL
 from projectfolder import app
-from projectfolder.demand.views import mysql
+from projectfolder import mysql
 from datetime import datetime
 
 resume = Blueprint('resume', __name__)
@@ -9,6 +9,7 @@ resume = Blueprint('resume', __name__)
 
 @resume.route('/resume')
 def resumer():
+    
     cur = mysql.connection.cursor()
     cur.execute(
         "SHOW COLUMNS FROM emp_profiles;")
@@ -16,6 +17,7 @@ def resumer():
     cur.execute(
         "Select * FROM emp_profiles;")
     data = list(cur.fetchall())
+    mysql.connection.commit()
     return render_template('resume.html', user=header,data=data,filter=0)
 
 
@@ -80,8 +82,8 @@ def writeresume():
         mysql.connection.commit()
         # displaying message
         msg = 'Data has been added to the database'
-        link='/resume'
-    return render_template('check.html', msg=msg,link=link)
+        flash(msg)
+    return redirect(url_for('resume.resumer'))
 
 
 @resume.route('/filter_resume')
@@ -117,3 +119,130 @@ def resumefil():
         count1 = list(cur.fetchall())
     #return render_template('check.html',msg = p)
     return render_template('resume.html', user=header, data=count1,filter=1)
+
+
+@resume.route('/updated/<id>')
+def updated(id):
+    cur = mysql.connection.cursor()
+    nothis= ['record_creation','last_updated_date','last_updated_by']
+    p = "Select * from emp_profiles where unique_id  ='"+id+"';"
+    cur.execute(p)
+    sendata = list(cur.fetchall())
+    cur = mysql.connection.cursor()
+    cur.execute(
+        "SHOW COLUMNS FROM emp_profiles;")
+    header = list(cur.fetchall())
+    cur.execute(
+        "Select * FROM  resume_comments;")
+    verify = list(cur.fetchall())
+    cur.execute(
+        "Select * FROM  hiring_legends;")
+    tabledata = list(cur.fetchall())
+    count = ['cdo_tower_status']
+    return render_template('updating_resume.html', msg=sendata,verify=list(verify),user=header,count=count,tabledata = tabledata,nothis=nothis)
+
+@resume.route('/changesresume', methods=['GET','POST'])
+def changesresume():
+    msg = ' '
+    cur = mysql.connection.cursor()
+    cur.execute(
+        "SHOW COLUMNS FROM emp_profiles;")
+    header = list(cur.fetchall())
+    # applying empty validation
+    dict1 = {}
+    t = []
+    m = []
+    nothis = ['record_creation_date', 'last_updated_date', 'last_updated_by']
+    logs =['unique_id','cdo_tower_status']
+    if request.method == 'POST':
+        # passing HTML form data into python variable
+        p = 'update emp_profiles set '
+        for i in range(len(header)-3):
+            s = str(header[i][0]).lower()
+            if(i==1):
+                id=str(request.form.get(s, False))
+            else:
+                p = str(p)+ s + " = '" + str(request.form.get(s, False))+ "', "
+            if(s in logs):
+                m.append(request.form.get(s, False))
+
+        now = datetime.now()
+        dt_string = now.strftime("%Y-%m-%d")
+        p = p+" last_updated_date = '" + dt_string + "', "
+        p = p+" last_updated_by = 'Sreenivas' where unique_id = '" + id +"' ;"
+
+        comments = request.form.get("update_resume_comments", False)
+        current_time = datetime.now()  
+        m.append(comments)
+        m.append(current_time.strftime("%Y-%m-%d %H:%M:%S"))
+        m = str(m)
+        m = m[1:-1]
+
+        o = 'INSERT INTO resume_logs VALUES (' + m +');'
+        #cur.execute('INSERT INTO emp_profiles VALUES ('+g+')', tuple(t))
+        cur.execute(o)
+        cur.execute(p)
+        mysql.connection.commit()
+        # displaying message
+        msg = 'Data has been updated'
+        flash(msg)
+    return redirect(url_for('resume.resumer'))
+@resume.route('/deleted/<id>')
+def deleted(id):
+    p = "delete from emp_profiles where unique_id = '" + id + "';"
+    cur = mysql.connection.cursor()
+    current_time = datetime.now()
+    new = current_time.strftime("%Y-%m-%d %H:%M:%S")
+    id = "Removed ID: " + id
+    m= ['admin',id]
+    comments = "This data has been exhausted"
+    current_time = datetime.now()
+    m.append(comments)
+    m.append(current_time.strftime("%Y-%m-%d %H:%M:%S"))
+    m = str(m)
+    m = m[1:-1]
+    o = 'INSERT INTO resume_logs VALUES (' + m + ');'
+    cur.execute(o)
+    cur.execute(p)
+    mysql.connection.commit()
+    msg = " This Record is successfully deleted"
+    flash(msg)
+    return redirect(url_for('resume.resumer'))
+
+@resume.route('/filter_resumelogs')
+def fresumelogs():
+    cur = mysql.connection.cursor()
+    cur.execute(
+        "SHOW COLUMNS FROM resume_logs;")
+    header = list(cur.fetchall())
+    return render_template('logs_filter.html',header=header,value=2)
+
+@resume.route('/filter_resume_logs_push_back', methods=['GET','POST'])
+def filterLogsPushBack():
+    value = ''
+    if request.method == 'POST':
+        cur = mysql.connection.cursor()
+        field = request.form.get('field', False)
+        type = request.form.get('type', False)
+        textbox = request.form.get('textbox', False)
+        if(type == 'starts'):
+            value = " LIKE '" + str(textbox) + "%'"
+        elif(type == 'equal'):
+            value = " =  '" + str(textbox) + "'" 
+        else:
+            s = str(list(textbox.split(",")))
+            s =s[1:-1]
+            value = " in (" + str(s) + ")" 
+        o = "select * from resume_logs where " + str(field) + " " + str(value) + " ;"
+        cur.execute(o)
+        data1 = cur.fetchall()
+        cur = mysql.connection.cursor()
+        cur.execute(
+        "SHOW COLUMNS FROM data_logs;")
+        header = (cur.fetchall())
+        cur.execute("SELECT * from data_logs order by date_updated desc limit 10;")
+        data = list(cur.fetchall())
+        cur.execute(
+        "SHOW COLUMNS FROM resume_logs;")
+        header1 = (cur.fetchall())
+        return render_template('logs.html', user=header, data=data, user1=header1, data1=data1,showresume=10)

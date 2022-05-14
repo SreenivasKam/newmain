@@ -1,27 +1,23 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, flash, url_for, redirect
 from flask_mysqldb import MySQL
 from projectfolder import app
 from datetime import datetime
-
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'sree9078'
-app.config['MYSQL_DB'] = 'project'
+from projectfolder import mysql
 
 
-mysql = MySQL(app)
 demand = Blueprint('demand', __name__)
 
 
-@demand.route('/')
+@demand.route('/demand')
 def demander():
     cur = mysql.connection.cursor()
     cur.execute(
         "SHOW COLUMNS FROM demands;")
     header = (cur.fetchall())
-    cur.execute("SELECT * from demands;")
+    cur.execute("SELECT * from demands order by priority desc,last_updated_date desc;")
     data = list(cur.fetchall())
     return render_template('demand.html', user=header, data=data, filter=0)
+    #return render_template('check.html', msg = header)
 
 
 @demand.route('/add_data')
@@ -100,17 +96,20 @@ def writedemand():
         "SHOW COLUMNS FROM demands;")
     header = list(cur.fetchall())
     # applying empty validation
-    dict1 = {}
+    dict1 = {'open':1}
     t = []
     m = []
-    nothis = ['record_creation_date', 'last_updated_date', 'last_updated_by']
+    priorityVaraiable = ''
+    nothis = ['record_creation_date', 'last_updated_date', 'last_updated_by','priority']
     logs = ['id', 'status', 'sub_status']
     if request.method == 'POST':
         # passing HTML form data into python variable
         g = ''
-        for i in range(len(header)-3):
+        for i in range(len(header)-4):
             s = str(header[i][0]).lower()
             if(s in logs):
+                if(s=='status'):
+                    priorityVaraiable = request.form.get(s, False)
                 m.append(request.form.get(s, False))
             t.append(request.form.get(s, False))
             g = g+'%s,'
@@ -127,8 +126,12 @@ def writedemand():
         m.append(current_time.strftime("%Y-%m-%d %H:%M:%S"))
         m = str(m)
         m = m[1:-1]
-        t = t[:-1]
+        t = t[:-2]
         t.append("Sreenivas")
+        if(priorityVaraiable =='Open'):
+            t.append(1)
+        else:
+            t.append(0)
         g = g[:len(g)-1]
         o = 'INSERT INTO data_logs VALUES (' + m + ');'
         cur.execute('INSERT INTO demands VALUES ('+g+')', tuple(t))
@@ -136,8 +139,8 @@ def writedemand():
         mysql.connection.commit()
         # displaying message
         msg = 'Data has been added to the database'
-        link = '/'
-    return render_template('check.html', msg=msg, link=link)
+        flash(msg)
+    return redirect(url_for('demand.demander'))
 
 
 @demand.route('/logs')
@@ -146,14 +149,14 @@ def logs():
     cur.execute(
         "SHOW COLUMNS FROM data_logs;")
     header = (cur.fetchall())
-    cur.execute("SELECT * from data_logs;")
+    cur.execute("SELECT * from data_logs order by date_updated desc limit 10;")
     data = list(cur.fetchall())
     cur.execute(
         "SHOW COLUMNS FROM resume_logs;")
     header1 = (cur.fetchall())
-    cur.execute("SELECT * from resume_logs;")
+    cur.execute("SELECT * from resume_logs limit 10;")
     data1 = list(cur.fetchall())
-    return render_template('logs.html', user=header, data=data, user1=header1, data1=data1)
+    return render_template('logs.html', user=header, data=data, user1=header1, data1=data1,showresume = 0)
 
 
 @demand.route('/updates/<id>')
@@ -162,7 +165,7 @@ def updates(id):
     p = "Select * from demands where ID ='"+id+"';"
     cur.execute(p)
     sendata = list(cur.fetchall())
-    nothis = ['record_creation_date', 'last_updated_date', 'last_updated_by']
+    nothis = ['record_creation_date', 'last_updated_date', 'last_updated_by','priority']
     cur = mysql.connection.cursor()
     cur.execute(
         "SHOW COLUMNS FROM demands;")
@@ -179,10 +182,11 @@ def updates(id):
     data = []
     for ele in count:
         data.append(ele[0])
-    #return render_template('check.html',msg = sendata)
-    return render_template('updating.html',msg=sendata,verify=list(verify), user=header, count=data, tabledata=tabledata, nothis=nothis)
+    # return render_template('check.html',msg = sendata)
+    return render_template('updating.html', msg=sendata, verify=list(verify), user=header, count=data, tabledata=tabledata, nothis=nothis)
 
-@demand.route('/changes',methods=['GET', 'POST'])
+
+@demand.route('/changes', methods=['GET', 'POST'])
 def changes():
     msg = ' '
     cur = mysql.connection.cursor()
@@ -193,25 +197,32 @@ def changes():
     dict1 = {}
     t = []
     m = []
-    nothis = ['record_creation_date', 'last_updated_date', 'last_updated_by']
+    priorityVaraiable = ''
+    nothis = ['record_creation_date', 'last_updated_date', 'last_updated_by','priority']
     logs = ['id', 'status', 'sub_status']
     if request.method == 'POST':
         # passing HTML form data into python variable
         p = 'update demands set '
-        for i in range(len(header)-3):
+        for i in range(len(header)-4):
             s = str(header[i][0]).lower()
-            if(i==0):
-                id=str(request.form.get(s, False))
+            if(s == 'status'):
+                priorityVaraiable = request.form.get(s, False)
+            if(i == 0):
+                id = str(request.form.get(s, False))
             else:
-                p = str(p)+ s + " = '" + str(request.form.get(s, False))+ "', "
+                p = str(p) + s + " = '" + \
+                    str(request.form.get(s, False)) + "', "
             if(s in logs):
                 m.append(request.form.get(s, False))
 
         now = datetime.now()
         dt_string = now.strftime("%Y-%m-%d")
-        t.append(dt_string)
         p = p+" last_updated_date = '" + dt_string + "', "
-        p = p+" last_updated_by = 'Sreenivas' where ID = '" + id +"' ;"
+        p = p+" last_updated_by = 'Sreenivas' " + ", " 
+        if(priorityVaraiable =='Open'):
+            p = p + " priority = '1'" + " where ID = '" + id + "' ;"
+        else:
+            p = p + " priority = '0'" + " where ID = '" + id + "' ;"
 
         comments = request.form.get("update_comments", False)
         current_time = datetime.now()
@@ -225,9 +236,10 @@ def changes():
         mysql.connection.commit()
         # displaying message
         msg = 'Data has been updated successfully'
-        link = '/'
-    return render_template('check.html', msg=msg,link=link)
-    #return render_template('check.html',msg = 'this works bro')
+        flash(msg)
+    return redirect(url_for('demand.demander'))
+    # return render_template('check.html',msg = 'this works bro')
+
 
 @demand.route('/delete/<id>')
 def delete(id):
@@ -237,7 +249,7 @@ def delete(id):
     current_time = datetime.now()
     new = current_time.strftime("%Y-%m-%d %H:%M:%S")
     id = "Removed ID: " + id
-    m= ['admin','Deleted',id]
+    m = ['admin', 'Deleted', id]
     comments = "This data has been exhausted"
     current_time = datetime.now()
     m.append(comments)
@@ -250,4 +262,46 @@ def delete(id):
     cur.execute(p)
     mysql.connection.commit()
     msg = " This Record is successfully deleted"
-    return render_template("check.html",msg= msg)
+    flash(msg)
+    return redirect(url_for('demand.demander'))
+
+
+@demand.route('/filter_datalogs')
+def fdemandlogs():
+    cur = mysql.connection.cursor()
+    cur.execute(
+        "SHOW COLUMNS FROM data_logs;")
+    header = list(cur.fetchall())
+    return render_template('logs_filter.html', header=header, value=1)
+
+
+@demand.route('/filter_demand_logs_push_back', methods=['GET', 'POST'])
+def filterLogsPushBack():
+    value = ''
+    if request.method == 'POST':
+        cur = mysql.connection.cursor()
+        field = request.form.get('field', False)
+        type = request.form.get('type', False)
+        textbox = request.form.get('textbox', False)
+        if(type == 'starts'):
+            value = " LIKE '" + str(textbox) + "%'"
+        elif(type == 'equal'):
+            value = " =  '" + str(textbox) + "'" 
+        else:
+            s = str(list(textbox.split(",")))
+            s =s[1:-1]
+            value = " in (" + str(s) + ")" 
+        o = "select * from data_logs where " + str(field) + " " + str(value) + " order by date_updated desc;"
+        cur.execute(o)
+        data = cur.fetchall()
+        cur = mysql.connection.cursor()
+        cur.execute(
+        "SHOW COLUMNS FROM data_logs;")
+        header = (cur.fetchall())
+        cur.execute(
+        "SHOW COLUMNS FROM resume_logs;")
+        header1 = (cur.fetchall())
+        cur.execute("SELECT * from resume_logs limit 10;")
+        data1 = list(cur.fetchall())
+        return render_template('logs.html', user=header, data=data, user1=header1, data1=data1,showresume = 0)
+

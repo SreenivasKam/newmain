@@ -1,0 +1,235 @@
+type_,value_
+us_rm,Seetha
+us_rm,Venky
+us_rm,Vijay
+us_rm,Richard
+us_rm,Tony
+us_rm,Sekar
+us_rm,Venu
+us_rm,"Sean W"
+us_rm,Missing
+us_rm,Dinesh
+india_rm,Chandra
+india_rm,Sindhu
+india_rm,Manish
+india_rm,Murali
+india_rm,Rajesh
+india_rm,Sandeep
+india_rm,Vijay
+india_rm,Missing
+position_type,New
+position_type,Backfill
+position_type,"Migrate- IBM US"
+position_type,"Migrate- ATT"
+position_type,"Capability- Hire"
+position_type,"Capability- Bench"
+position_type,GH
+position_type,Other
+position_type,Missing
+position_type,Prospect
+position_type,Lead
+position_type,"Migrate- IBM "
+contract_info,"CDO-10461.W.180-AT&T CDO BI Professional Services"
+contract_info,"CDO-10461.W.306-Cognos Migration Project"
+contract_info,"CDO-10461.W.309-DIRECTV Extending Capabilities of Data Mesh for Viewership"
+contract_info,"DTV-TBD-Protection Plan"
+contract_info,"DTV-TBD-DirecTv T&M"
+contract_info,Missing
+contract_info,DTV-TBD-UsmanMetrics
+contract_info,CDO-NA-Unbilled
+contract_info,"DTV-10461.W.315-DIRECTV-Cloud Data Platform Project Support Services"
+primary_jrss,"Application Architect- Data Platforms"
+primary_jrss,"Application Architect-AWS Cloud Migration"
+primary_jrss,"Application Database Administrator-RDBMS"
+primary_jrss,"Application Developer-DevOps"
+primary_jrss,"Application Developer-EAI"
+primary_jrss,"Application Developer-Java FullStack"
+primary_jrss,"Application Developer-Microsoft Analytics"
+primary_jrss,"Application Developer-Microsoft Cloud"
+primary_jrss,"Application Developer-Open Source"
+primary_jrss,"Business Analyst-ADM"
+primary_jrss,"Business Analyst-Business Operations"
+primary_jrss,"Data Engineer-Big Data"
+primary_jrss,"Data Engineer-Business Intelligence"
+primary_jrss,"Data Engineer-Data Integration"
+primary_jrss,"Data Engineer-Data Warehouse"
+primary_jrss,"Data Scientist-Artificial Intelligence"
+primary_jrss,"Infrastructure Specialist-Cloud Platforms"
+primary_jrss,"Pakage Consultant-Oracle Business Analytics"
+primary_jrss,"Project Manager-ADM"
+primary_jrss,"Project Manager-Data Platforms"
+primary_jrss,"Project Manager-IBM Cloud Solutions"
+primary_jrss,"Test Specialist-Automation"
+primary_jrss,"Test Specialist-Data"
+primary_jrss,"Infrastructure Specialist-Azure Platform"
+primary_jrss,Missing
+status,Cancelled
+status,Closed
+status,"Initiated-Incomplete info"
+status,"On Hold"
+status,Onboarding
+status,Open
+status,Withdraw
+status,Missing
+sub_status,"All Set- Waiting for start date"
+sub_status,"AT& Access- In progress"
+sub_status,"Selected- WFM Confirmation pending"
+nba_owner,Chandra
+nba_owner,Laha
+nba_owner,Manish
+nba_owner,Murali
+nba_owner,Nishi
+nba_owner,Rajesh
+nba_owner,Richard
+nba_owner,Sandeep
+nba_owner,"Sean W"
+nba_owner,Seetha
+nba_owner,Sekar
+nba_owner,Tony
+nba_owner,Venkat
+nba_owner,Venky
+nba_owner,Venu
+nba_owner,Vijay
+nba_owner,Missing
+fulfilment_strategy,TA
+fulfilment_strategy,Regular
+fulfilment_strategy,"Regular, Niche SSP"
+fulfilment_strategy,Any
+fulfilment_strategy,"Rotation- Tower"
+fulfilment_strategy,Missing
+fulfilment_strategy,SSP
+fulfilment_strategy,SSP/Regular
+band,6G
+band,6A
+band,6B
+band,7A
+band,7B
+band,8
+band,9
+band,10
+band,Any
+position_filled_with_source,TA
+position_filled_with_source,"IBM Internal"
+position_filled_with_source,SSP
+position_filled_with_source,"Rotation- Tower"
+position_filled_with_source,"Rotation- Account"
+position_filled_with_source,USPO
+position_filled_with_source,Missing
+att_avp_name,"ERGAZ, DROR"
+att_avp_name,"KANAPARTHI, MAHENDER"
+att_avp_name,"MARATHE, VIKRAM"
+att_avp_name,"QUDDOOS, USMAN"
+att_avp_name,"SEDLOCK, DAVID"
+att_avp_name,"WARREN, KRISTINE"
+att_avp_name,"WHITTINGTON, DAVID"
+att_avp_name,Missing
+att_avp_name,"Add Dropdown value"
+team_name,"Admin Access Support Team"
+team_name,"Advanced Analytics"
+team_name,"Base- Sharath Patel"
+team_name,"BIRD Support"
+team_name,CCBI
+team_name,CP
+team_name,"CP-Cognos to PBI"
+team_name,CP-PBI
+team_name,CP-SF
+team_name,CP-Tableau
+team_name,CP-Tax360
+team_name,CPPBI
+team_name,CV-EVP
+team_name,CV-Ph1-Framework
+team_name,CV-Ph1-Viewership
+team_name,CV-Ph2-Framework
+team_name,CV-Ph2-Viewership
+team_name,CV-PS
+team_name,"DEEP Squad"
+team_name,"DIRECTV - STARS"
+team_name,DTV-DP
+team_name,"DTV-Jessica- Dashboard team"
+team_name,EBBR
+team_name,ETL-PS
+team_name,EVP-Nifi/STL/DP
+team_name,EVP-Transformation
+team_name,NFL
+team_name,"Palantir Support"
+team_name,"Platform Support"
+team_name,PM/PMO
+team_name,PowerBI-?
+team_name,PowerBI-Prasanna
+team_name,"Protection Plan"
+team_name,RIT
+team_name,"RIT- Stream Analytics"
+team_name,"RIT-Designer-Dave "
+team_name,SAS
+team_name,"SAS Migration"
+team_name,"SAS Support"
+team_name,"Snowflake Investment team"
+team_name,T.DATA
+team_name,Tax360
+fg_manager_name,"ALLURI,VENKATA SAROJA"
+fg_manager_name,"BARAN,ISILAY"
+fg_manager_name,"BLANCO,LEANNE"
+fg_manager_name,"BOTCHA,PRATIMA V"
+fg_manager_name,"CABRERA,ANGELA M"
+fg_manager_name,"CAO,YING"
+fg_manager_name,"CHANG,WEIYANG"
+fg_manager_name,"CHEKURI,SIVANI"
+fg_manager_name,"CHODISETTI,ESWAR S"
+fg_manager_name,"D'SOUZA,NITIN P"
+fg_manager_name,"DANIELS,SEAN P"
+fg_manager_name,"DIGIOIA,ROBERT M"
+fg_manager_name,"FURMAN,DAVID C"
+fg_manager_name,"GUSTAFSON,JACK L"
+fg_manager_name,"HURLBERT,DANIEL H"
+fg_manager_name,"JACKSON,NELSON R"
+fg_manager_name,"JANGAON,JEEVAN K"
+fg_manager_name,"KAMINSKI,MIKHAIL"
+fg_manager_name,"KANAPARTHI,MAHENDER"
+fg_manager_name,"KODALI,SREE VANI"
+fg_manager_name,"KUMETHA,RAVINDRA R"
+fg_manager_name,"MAINKA,NEELANGI A"
+fg_manager_name,"MATTIGUNTA,MAYURI"
+fg_manager_name,"MEKALA,RAKESH REDDY"
+fg_manager_name,"MORSE,SCOTT A"
+fg_manager_name,"NALLAMILLI,SATEESH"
+fg_manager_name,"NUTTAKI,LAKSHMI NARAYANA CHOWDARY"
+fg_manager_name,"PATEL,CHIRAG R"
+fg_manager_name,"PATIL,GIRISH"
+fg_manager_name,"PEAY,JOSEPH A,JR."
+fg_manager_name,"PENMETCHA,PRASANNA V"
+fg_manager_name,"PEREZ,JAVIER E"
+fg_manager_name,"PERKIT,SURESH"
+fg_manager_name,"PUGAZHENTHI,JEGADEESAN"
+fg_manager_name,"PURVIS,JACK"
+fg_manager_name,"RACHAKONDA,KIRAN K"
+fg_manager_name,"REBMAN,JANNINE M"
+fg_manager_name,"RIVAS,FELIPE J"
+fg_manager_name,"RUSSO,DEBORAH J"
+fg_manager_name,"SAMPINO,JOSEPH"
+fg_manager_name,"SANCHEZ,GABRIEL"
+fg_manager_name,"SAYANA,RAMA D"
+fg_manager_name,"SELVAKUMAR,VIKRAMACHANDRAN"
+fg_manager_name,"SHAH,CHINTAN"
+fg_manager_name,"SINGALREDDY,UMAKANTH"
+fg_manager_name,"TANGIRALA,PAPI REDDY"
+fg_manager_name,"THAMMU,SANTOSH"
+fg_manager_name,"THOMAS,LIJU"
+fg_manager_name,"VEMULAPALLI,PRAVEEN K"
+fg_manager_name,"VUTUKURU,PAVANKUMAR"
+fg_manager_name,"WANG,JASON"
+fg_manager_name,"YOVANOVICH,JOHN P"
+fg_manager_name,Missing
+att_director_name,"BARAN, ISILAY"
+att_director_name,"GUSTAFSON, JACK"
+att_director_name,"IYENGAR, KAUSHIK"
+att_director_name,"LOWE, FREDRICK"
+att_director_name,"MILES, JOHN"
+att_director_name,"NARREDDY, KISHORE"
+att_director_name,"PURVIS, JACK"
+att_director_name,"ROSSI, JOHN"
+att_director_name,"SANCHEZ LANZILOTTI, GABRIEL"
+att_director_name,"STROUD, KARLA"
+att_director_name,"TANGIRALA, PAPI REDDY"
+att_director_name,"VEMULAPALLI, PRAVEEN"
+att_director_name,"YOVANOVICH, JOHN"
+att_director_name,Missing

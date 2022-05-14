@@ -5,36 +5,36 @@
     document.getElementById("resumein").classList.add("high");
 </script>
 {% set ns = namespace(x='weee') %}
-<div class="container blackbox add-height">
-    <h2>Filter</h2>
-    <form action="{{ url_for('resume.resumefil') }}" method="post">
-    {% for i in range(count|length) %}
-    {% if ns.x|string != count[i][0]|string %}
-    </table>
-    <table class="table">
-        <thead>
-            {% set ns.x = count[i][0] %}
-            <h4>{{ns.x|capitalize}}</h4>
-        </thead>
-        <tbody>
-            {% endif %}
-            {% if i%2==0 %}
-            <tr>
-                {% endif %}
-                <td>
-                    <input type="checkbox" id={{count[i][1]}} name="{{count[i][1]}}" value="{{count[i][1]}}">
-                    <label for="{{count[i][1]}}">{{count[i][1]}}</label><br>
-                </td>
-                {% if i%2==1 %}
-            </tr>
-            {% endif %}
-            {% endfor %}
+<div class="container-fluid">
+    <div class="blackbox add-height">
+        <h2>Filter</h2>
+        <form action="{{ url_for('resume.resumefil') }}" method="post">
+            {% for i in range(count|length) %}
+            {% if ns.x|string != count[i][0]|string %}
+            </table>
+            <table class="table">
+                <thead>
+                    {% set ns.x = count[i][0] %}
+                    <h4>{{ns.x|capitalize}}</h4>
+                </thead>
+                <tbody>
+                    {% endif %}
+                    {% if i%2==0 %}
+                    <tr>
+                        {% endif %}
+                        <td>
+                            <input type="checkbox" id={{count[i][1]}} name="{{count[i][1]}}" value="{{count[i][1]}}">
+                            <label for="{{count[i][1]}}">{{count[i][1]}}</label><br>
+                        </td>
+                        {% if i%2==1 %}
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
 
-        </tbody>
-    </table>
-    <input class="btn btn-primary" type="submit" value="Submit">
-    </form>
-
+                </tbody>
+            </table>
+            <input class="btn btn-primary" type="submit" value="Submit">
+        </form>
+    </div>
 </div>
 {% endblock %}
-

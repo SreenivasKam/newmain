@@ -4,6 +4,8 @@
     document.getElementById("jobswipe").classList.add("high2");
     document.getElementById("jobin").classList.add("high");
 </script>
+
+
 <div class="parent flex-parent">
     <div class="child flex-child">
         {% if filter==1 %}
@@ -24,67 +26,84 @@
             onclick="location.href='/filter'">&nbsp&nbsp&nbspFilter&nbsp&nbsp&nbsp </button>
     </div>
 </div>
-<div class="container blackbox horizon">
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                {% for element in user %}
-                <th scope="col">{{ element[0] }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for result in data %}
-            <tr>
-                {% set ns = namespace(x=1) %}
-                {% for element in result %}
-                <td>
-                    {% if ns.x==1 %}
-                    {% set ns.x = element %}
-                    {% endif %}
-                    {% if  element == 'Onboarding' %}
-                    <button type="button" class="btn btn-success down">&nbsp&nbspOnboarding&nbsp&nbsp</button>
-                    {% elif element == 'Closed' %}
-                    <button type="button"
-                        class="btn btn-danger down">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspClosed&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
-                    {% elif element == 'On Hold' %}
-                    <button type="button" class="btn btn-primary down">&nbsp&nbsp&nbsp&nbsp On
-                        Hold&nbsp&nbsp&nbsp&nbsp</button>
-                    {% elif element == 'Withdraw' %}
-                    <button type="button"
-                        class="btn btn-warning down">&nbsp&nbsp&nbsp&nbspWithdraw&nbsp&nbsp&nbsp&nbsp</button>
-                    {% elif element == 'Cancelled' %}
-                    <button type="button"
-                        class="btn btn-outline-primary down">&nbsp&nbsp&nbspCancelled&nbsp&nbsp&nbsp</button>
-                    {% elif element == 'Initiated-Incomplete info' %}
-                    <button type="button" class="btn btn-secondary down">Initated-<br>Incomplete info</button>
-                    {% elif element == 'Open' %}
-                    <button type="button"
-                        class="btn btn-outline-success down">&nbsp&nbsp&nbsp&nbsp&nbspOpen&nbsp&nbsp&nbsp&nbsp&nbsp</button>
-                    {% elif element == 'Missing' %}
-                    <button type="button"
-                        class="btn btn-outline-danger down">&nbsp&nbsp&nbsp&nbsp&nbspMissing&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+<div class="container-fluid">
+    <div class="blackbox horizon3">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        <table class="table table-hover">
+            <thead class="thead">
+                <tr class="table-warning">
+                    {% for element in user %}
+                    {% if element[0] == 'priority' %}
+                    <th> &nbsp </th>
                     {% else %}
-                    {{ element }}
+                    <th scope="col">{{ element[0] }}</th>
                     {% endif %}
-                </td>
+                    {% endfor %}
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in data %}
+                <tr>
+                    {% set ns = namespace(x=1) %}
+                    {% for element in result %}
+                    <td>
+                        {% if ns.x==1 %}
+                        {% set ns.x = element %}
+                        {% endif %}
+                        {% if  element == 'Onboarding' %}
+                        <button type="button" class="btn btn-success down">&nbsp&nbspOnboarding&nbsp&nbsp</button>
+                        {% elif element == 'Closed' %}
+                        <button type="button"
+                            class="btn btn-danger down">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspClosed&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+                        {% elif element == 'On Hold' %}
+                        <button type="button" class="btn btn-primary down">&nbsp&nbsp&nbsp&nbsp On
+                            Hold&nbsp&nbsp&nbsp&nbsp</button>
+                        {% elif element == 'Withdraw' %}
+                        <button type="button"
+                            class="btn btn-warning down">&nbsp&nbsp&nbsp&nbspWithdraw&nbsp&nbsp&nbsp&nbsp</button>
+                        {% elif element == 'Cancelled' %}
+                        <button type="button"
+                            class="btn btn-outline-primary down">&nbsp&nbsp&nbspCancelled&nbsp&nbsp&nbsp</button>
+                        {% elif element == 'Initiated-Incomplete info' %}
+                        <button type="button" class="btn btn-secondary down">Initated-<br>Incomplete info</button>
+                        {% elif element == 'Open' %}
+                        <button type="button"
+                            class="btn btn-outline-success down">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspOpen&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+                        {% elif element == 'Missing' %}
+                        <button type="button"
+                            class="btn btn-outline-danger down">&nbsp&nbsp&nbsp&nbsp&nbspMissing&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+                        {% elif element == 1 or element == 0%}
+
+                        {% else %}
+                        {{ element }}
+                        {% endif %}
+                    </td>
+                    {% endfor %}
+                    <td>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-expanded="false">
+                            Actions
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url_for('demand.updates',id = ns.x) }}">Update</a>
+                            <a class="dropdown-item" href="{{ url_for('demand.delete',id = ns.x) }}">Delete</a>
+                            <a class="dropdown-item" href="{{ns.x}}resume">Shortlist Resumes</a>
+
+                        </div>
+                    </td>
+
+                </tr>
                 {% endfor %}
-                <td>
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-expanded="false">
-                        Actions
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ url_for('demand.updates',id = ns.x) }}">Update</a>
-                        <a class="dropdown-item" href="{{ url_for('demand.delete',id = ns.x) }}">Delete</a>
-                        <a class="dropdown-item" href="{{ns.x}}resume">Parse Resumes</a>
-
-                    </div>
-                </td>
-
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

@@ -1,0 +1,18 @@
+type_,comment_,data_type
+"Proposal date","Date in which profile was shared",date
+"Employee ID","ID of employee, if profile from IBM internal (WFM), bench etc",VARCHAR
+"PAN Card Details","PAN card details, incase of SSP, USPO for tracking duplicates",VARCHAR
+Source,"WFM, SSP, Slack, USPO- list from drop down",VARCHAR
+Name,"Full name of the candidate",VARCHAR
+JRS,"Major job type from the list ex: big data or cloud etc",VARCHAR
+Sub-Skills,"Specific skill like Python, Hadoop, Spark, Oracle etc",VARCHAR
+"Band	Details","6B, 7A etc- list from drop down",VARCHAR
+"Box link","URL Link of file uploaded in box",VARCHAR
+"Position ID","Resume/profile uploaded for specific demand/JD - can be tracked Position ID",VARCHAR
+Location,"Current location of the candidate",VARCHAR
+"Contact Number","Mobile number of the candidate",INTEGER
+"Notice Period","Notice period of the candidate",VARCHAR
+"Feedback Status","Current status- to be entered bt CDO SPOC",VARCHAR
+"CDO Tower Status","Resume received, select, tech interview set up etc",VARCHAR
+"Staffing Team Status","Pending, closed, etc",VARCHAR
+"Tech Panel","Name/ SPOC/ SME - who shall screen or conduct the interview",VARCHAR

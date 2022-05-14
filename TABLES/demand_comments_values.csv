@@ -1,0 +1,32 @@
+type_,comment_,data_type
+ID,"Unique ID number generated for each entry - Position ID",VARCHAR
+"US RM","Reporting managers from US/onsite",VARCHAR
+"India RM","Reporting managers from India ",VARCHAR
+"Special Project","Details of the project",VARCHAR
+"Position Type","New, Backfill or migration, GH etc",VARCHAR
+"Backfill for and LWD","Name of the backfill & LWD of current resource",VARCHAR
+"Primary JRSS","Major job type from the list ex: big data or cloud etc",VARCHAR
+"Preferred Skills","	Delivery manager will enter specific skill like Python, Hadoop etc",VARCHAR
+"Min Skill required","	Delivery manager will enter minimum skill",VARCHAR
+"Additional info","Delivery manager will enter additional skill ",VARCHAR
+"Team name","Client specific project name",VARCHAR
+"Will client decide, Decision Maker Name","Yes- Name of the client or No- Name of the delivery manager",VARCHAR
+"Decision Maker Name","Yes- Name of the client or No- Name of the delivery manager",VARCHAR
+"Target DOJ- ORIGINAL","Expected DOJ of prospective candidate",date
+Status,"Open, onboarding, closed, cancelled",VARCHAR
+Sub-status,"sub-status within each level",VARCHAR
+"Running Status","Comments entered by SPOC",VARCHAR
+"Position Opened Date","Date when the position is opened",date
+"Candidate Finalized on Date","Date when the candidate is finalized",date
+"Actual- DOJ","DOJ when the candidates actual DOJ",date
+"Position filled with (Emp#:Name","Name of the employee, when the position is filled",date
+"Position flled with Source","	Source pf the candidate ex : Regular, SSP, USPO",VARCHAR
+"Contract Info","Details of billing ",VARCHAR
+"Fulfilment strategy","Regular, SSP or USPO ",VARCHAR
+"Band Low","Minimum band for the position ",VARCHAR
+"Band High","Maximun band for the position ",VARCHAR
+JD,"Job description for the position",VARCHAR
+"FG manager Name","Client manager who approve FG requests",VARCHAR
+"ATT Director Name","Client Director name- ",VARCHAR
+"ATT AVP Name","Client AVP name- ",VARCHAR
+"Initiated by Reference email(s)- Subject and Sender","Subject and Sender when the candidates initiated by, reference email(s) Subject and Sender",VARCHAR

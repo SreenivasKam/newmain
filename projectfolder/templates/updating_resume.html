@@ -5,14 +5,14 @@
     document.getElementById("resumein").classList.add("high");
 </script>
 <div class="container-fluid">
-    <div class=" blackbox add-height">
-        <form action="{{ url_for('resume.writeresume') }}" method="post">
+    <div class="  blackbox add-height">
+        <form action="{{ url_for('resume.changesresume') }}" method="post">
             <table class="table ">
                 <thead>
                     <h3>Add data</h3>
                 </thead>
                 <tbody>
-                    {% for i in range(user|length -2)%}
+                    {% for i in range(user|length)%}
                     {% if i%2==0 %}
                     <tr>
                         {% endif %}
@@ -26,7 +26,8 @@
                                 <label for={{user[i][0]|lower}}>{{user[i][0]|capitalize}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
                                 class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
                                 title="{{b[0][1]}}"></i><br>
-                                <select name={{user[i][0]|lower}} id={{user[i][0]|lower}}  class="col-8" required>
+                                <select name={{user[i][0]|lower}} id={{user[i][0]|lower}} required>
+                                    <option value="{{msg[0][i]}}">{{msg[0][i]}}</option>
                                     <option value="None">None</option>
                                     {% for element in tabledata %}
                                     <option value="{{element[1]}}">{{element[1]}}</option>
@@ -38,11 +39,11 @@
                                 <i class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
                                     title="{{b[0][1]}}"></i>
                                     {% if b[0][2]=='date' %}
-                                    <input type="date" class="form-control col-10" id="exampleInputEmail1"
-                                        name={{user[i][0]|lower}} required>
+                                    <input type="date" class="form-control col-4" id="exampleInputEmail1"
+                                        name={{user[i][0]|lower}} value="{{msg[0][i]}}" required>
                                     {%else%}
-                                    <input type="text" class="form-control col-10" id="exampleInputEmail1"
-                                        name={{user[i][0]|lower}} required>
+                                    <input type="text" class="form-control col-4" id="exampleInputEmail1"
+                                        name={{user[i][0]|lower}} value="{{msg[0][i]}}" required>
                                     {% endif %}
                                 {% endif %}
                                 {% endif %}
@@ -54,6 +55,11 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <label for="update_resume_comments">Comments</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fa-solid fa-circle-info"
+                data-toggle="tooltip" data-placement="right" title="Message for updating this record"></i>
+            <br>
+                <input type="text" class="col-3"  name="update_resume_comments" required>
+            <br>
             <input type="submit" class="btn btn-primary" value="Add Data">
             <input type="button" class="btn btn-primary" value="Cancel" onclick="history.back()"/>
         </form>

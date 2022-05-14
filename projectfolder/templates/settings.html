@@ -1,0 +1,76 @@
+{% extends 'home.html' %}
+{% block content %}
+<style>
+    .first-row {
+        display: block;
+    }
+
+
+    .left-column1 {
+        float: left;
+        width: 20%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        line-height: 5rem;
+        align-items: center;
+    }
+
+    .right-column1 {
+        float: right;
+        width: 80%;
+        background: rgb(245, 245, 245);
+        height: 100vh;
+        border-radius: 10px;
+        padding: 15px;
+    }
+
+
+    .solid {
+        text-align: center;
+        border: none;
+        width: 100%;
+        margin-top:10px;
+        margin-bottom:10px;
+        border-bottom: 1px solid rgb(139, 138, 138);
+    }
+    h6:hover{
+        color: #2E8BC0;
+        font-weight: 700;
+    }
+    .present{
+        color: #145DA0;
+        font-weight: 700;
+    }
+    .center1{
+        text-align: center;
+    }
+</style>
+<script>
+    document.getElementById("settingswipe").classList.add("high2");
+    document.getElementById("settingin").classList.add("high");
+</script>
+<div class="container-fluid ">
+    <div class="blackbox add-height">
+        <div class="first-row">
+            <div class="left-column1">
+                <h6 class="present">My Profile</h6>
+                <div class="solid"></div>
+                <h6>Manage Users</h6>
+                <div class="solid"></div>
+                <h6>Manage Legend</h6>
+                <div class="solid"></div>
+            </div>
+            <div class="right-column1">
+                <div class="container-fluid center1">
+                    <img src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png" alt="Italian Trulli" width="150px" height="150px">
+                    <h3>Name</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

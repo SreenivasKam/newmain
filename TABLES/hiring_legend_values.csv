@@ -1,0 +1,20 @@
+type_,value_
+CDO_Tower_status,"Closed - Candidate Not Available"
+CDO_Tower_status,"Candidate- Not Reachable"
+CDO_Tower_status,"Candidate- Wants later date"
+CDO_Tower_status,"Resume- Received"
+CDO_Tower_status,"Resume - Hold"
+CDO_Tower_status,"Resume- Shortlist"
+CDO_Tower_status,"Resume- Insufficient Skills/Exp"
+CDO_Tower_status,"Resume- Reject"
+CDO_Tower_status,"Resume- Not Recevied"
+CDO_Tower_status,"Tech Interview Setup"
+CDO_Tower_status,"TechInterview- Awaited"
+CDO_Tower_status,"TechInterview- Select"
+CDO_Tower_status,TechInterview-Reject
+CDO_Tower_status,PeM/ClientInterview-Select
+CDO_Tower_status,PeM/ClientInterviewReject
+CDO_Tower_status,"Select- DOJ Negotiation in progress"
+CDO_Tower_status,"Reject - Staffing Plan Changed"
+CDO_Tower_status,"Closed- Candidate onboarded"
+CDO_Tower_status,Duplicate
