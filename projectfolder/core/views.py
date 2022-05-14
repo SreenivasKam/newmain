@@ -25,8 +25,8 @@ def connect():
             if(data[3] == password):
                 current_time = datetime.now()
                 current = current_time.strftime("%Y-%m-%d %H:%M:%S")
-                data = 'insert into session_table (user_id,entry) values(' + str(int(data[0])) + ",'" +current +"');"
-                cur.execute(data)
+                data1 = 'insert into session_table (user_id,entry) values(' + str(int(data[0])) + ",'" +current +"');"
+                cur.execute(data1)
                 mysql.connection.commit()
                 session_info['loggedin'] = True
                 session_info['id'] = data[0]
