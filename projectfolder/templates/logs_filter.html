@@ -1,38 +1,42 @@
 {% extends 'home.html' %}
 
 {% block content %}
-<div class="container blackbox horizon add-height">
-    {% if value==1 %}
-    <form action="{{ url_for('demand.filterLogsPushBack') }}" method="post">
-    {% else %}
-    <form action="{{ url_for('resume.filterLogsPushBack') }}" method="post">
-    {% endif %}
-        <div class="form-group">
-            <label for="field">Select the field:</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
-                class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right" title="Select the required fields"></i>
-            <br>
-            <select name="field" class="col-5" required>
-                <option value="None">None</option>
-                {% for element in header %}
-                <option value="{{element[0]|string}}">{{element[0]}}</option>
-                {% endfor %}
-            </select>
-            <br>
-            <label for="type">Select the type filter:</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
-                class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right" title="Select the type of filter required"></i>
-            <br>
-            <select name="type" class="col-5" required>
-                <option value="None">None</option>
-                <option value="starts">Starts with</option>
-                <option value="equal">Equal to</option>
-                <option value="in_list">In the List</option>
-            </select>
-            <br>
-            <label for="type">Enter the value:</label>
-            <input type="text" class="form-control col-6" name="textbox" required>
-            <br>
-            <input type="submit"  class="btn btn-primary" value="Submit">
-        </div>
-    </form>
+<div class="container-fluid">
+    <div class="blackbox horizon2">
+        {% if value==1 %}
+        <form action="{{ url_for('demand.filterLogsPushBack') }}" method="post">
+            {% else %}
+            <form action="{{ url_for('resume.filterLogsPushBack') }}" method="post">
+                {% endif %}
+                <div class="form-group">
+                    <label for="field">Select the field:</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
+                        class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
+                        title="Select the required fields"></i>
+                    <br>
+                    <select name="field" class="col-5" required>
+                        <option value="None">None</option>
+                        {% for element in header %}
+                        <option value="{{element[0]|string}}">{{element[0]}}</option>
+                        {% endfor %}
+                    </select>
+                    <br>
+                    <label for="type">Select the type filter:</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
+                        class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
+                        title="Select the type of filter required"></i>
+                    <br>
+                    <select name="type" class="col-5" required>
+                        <option value="None">None</option>
+                        <option value="starts">Starts with</option>
+                        <option value="equal">Equal to</option>
+                        <option value="in_list">In the List</option>
+                    </select>
+                    <br>
+                    <label for="type">Enter the value:</label>
+                    <input type="text" class="form-control col-6" name="textbox" required>
+                    <br>
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </div>
+            </form>
+    </div>
 </div>
 {% endblock %}

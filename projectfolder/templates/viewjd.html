@@ -1,0 +1,36 @@
+{% extends 'home.html' %}
+{% block content %}
+<style>
+
+    .align {
+        text-align: start;
+        padding: 10px;
+    }
+
+    .card {
+        padding: 6px;
+    }
+</style>
+<div class="parent flex-parent">
+    <div class="child flex-child">
+        <h3>Requested JD</h3>
+    </div>
+    <div class="child flex-child push-right">
+        
+        <button type="button" class="btn1 only-shadow" onclick="history.back()">&nbsp&nbsp&nbsp&nbsp&nbspBack&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="blackbox horizon add-height">
+        <div class="align">
+            <div class="card" style="width: 100%;">
+                {% for i in range(titles|length -1) %}
+                <div class="card">
+                    {{titles[i][0]|capitalize}} : &nbsp {{sendData[i]}}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

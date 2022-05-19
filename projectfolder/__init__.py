@@ -8,7 +8,7 @@ from flask_migrate import Migrate
 app = Flask(__name__)
 
 
-session_info = {}
+
 
 
 ###################################
@@ -27,16 +27,20 @@ db = SQLAlchemy(app)
 Migrate(app,db)
 
 mysql = MySQL(app)
+# def move_forward():
+#     with app.app_context():
+#         cur = mysql.connection.cursor()
+#     cur.execute("select * from session_table order by entry desc limit 1;")
+#     data = cur.fetchone()
+#     if(data[4] != 'N'):
+#         session_info['loggedin'] = True
+#         session_info['id'] = data[1]
+#         session_info['username'] = data[2]
+#     else:
+#         session_info = {}
 
-######################################
-
-
-
-
-
-
-
-
+#move_forward()
+###############################################
 
 from projectfolder.errorpages.handlers import error_pages
 from projectfolder.demand.views import demand

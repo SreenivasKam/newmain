@@ -1,25 +1,29 @@
 from flask import Blueprint, render_template, request, flash, url_for, redirect
 from flask_mysqldb import MySQL
-from projectfolder import app
+from projectfolder import app,mysql
+from projectfolder.trello.back import create_list
+from projectfolder.core.views import connect
 from datetime import datetime
-from projectfolder import mysql
-
 
 demand = Blueprint('demand', __name__)
 
-
+############## Screen for displaying the active job demands ###############
 @demand.route('/demand')
 def demander():
-    cur = mysql.connection.cursor()
-    cur.execute(
-        "SHOW COLUMNS FROM demands;")
-    header = (cur.fetchall())
-    cur.execute("SELECT * from demands order by priority desc,last_updated_date desc;")
-    data = list(cur.fetchall())
-    return render_template('demand.html', user=header, data=data, filter=0)
-    #return render_template('check.html', msg = header)
+    if(connect.session_info['groupno']!=3):
+        cur = mysql.connection.cursor()
+        cur.execute(
+            "SHOW COLUMNS FROM demands;")
+        header = (cur.fetchall())
+        cur.execute("SELECT * from demands order by priority desc,last_updated_date desc;")
+        data = list(cur.fetchall())
+        cur.close()
+        return render_template('demand.html', user=header, data=data, filter=0,session_info=connect.session_info)
+    else:
+        return redirect(url_for('resume.resumer'))
+        # return render_template('check.html', msg = session_info['groupno'])
 
-
+########### screen which shows the columns for adding the data ###########
 @demand.route('/add_data')
 def add_data():
     nothis = ['record_creation_date', 'last_updated_date', 'last_updated_by']
@@ -39,19 +43,21 @@ def add_data():
     data = []
     for ele in count:
         data.append(ele[0])
+    cur.close()
     return render_template('add_data.html', verify=list(verify), user=header, count=data, tabledata=tabledata, nothis=nothis)
     # return render_template('check.html',msg=nothis,count=data)
 
-
+############# screen to show the filtering of the data ###########
 @demand.route('/filter')
 def filter():
     cur = mysql.connection.cursor()
     cur.execute(
         "SELECT * FROM legend where type_ in ('status','primary_jrss','position_type')")
     count = list(cur.fetchall())
+    cur.close()
     return render_template('filter.html', count=count)
 
-
+################# function to return the filtered data ################
 @demand.route('/demandfil', methods=['GET', 'POST'])
 def demandfil():
     msg = 'Ok'
@@ -84,10 +90,11 @@ def demandfil():
         p = p+";"
         cur.execute(p)
         count1 = list(cur.fetchall())
+        cur.close()
     # return render_template('check.html',msg = p)
     return render_template('demand.html', user=header, data=count1, filter=1)
 
-
+############## function to append the data to the database ##############
 @demand.route('/writedemand', methods=['GET', 'POST'])
 def writedemand():
     msg = ' '
@@ -99,7 +106,7 @@ def writedemand():
     dict1 = {'open':1}
     t = []
     m = []
-    priorityVaraiable = ''
+    priorityVaraiable, idvalue= ''
     nothis = ['record_creation_date', 'last_updated_date', 'last_updated_by','priority']
     logs = ['id', 'status', 'sub_status']
     if request.method == 'POST':
@@ -110,6 +117,8 @@ def writedemand():
             if(s in logs):
                 if(s=='status'):
                     priorityVaraiable = request.form.get(s, False)
+                if(s=='id'):
+                    idvalue = request.form.get(s, False)
                 m.append(request.form.get(s, False))
             t.append(request.form.get(s, False))
             g = g+'%s,'
@@ -127,7 +136,7 @@ def writedemand():
         m = str(m)
         m = m[1:-1]
         t = t[:-2]
-        t.append("Sreenivas")
+        t.append(session_info['username'])
         if(priorityVaraiable =='Open'):
             t.append(1)
         else:
@@ -139,10 +148,12 @@ def writedemand():
         mysql.connection.commit()
         # displaying message
         msg = 'Data has been added to the database'
+
         flash(msg)
+        cur.close()
     return redirect(url_for('demand.demander'))
 
-
+############## screen to show the logs of the database ########################
 @demand.route('/logs')
 def logs():
     cur = mysql.connection.cursor()
@@ -154,11 +165,15 @@ def logs():
     cur.execute(
         "SHOW COLUMNS FROM resume_logs;")
     header1 = (cur.fetchall())
-    cur.execute("SELECT * from resume_logs limit 10;")
+    cur.execute("SELECT * from resume_logs order by date_updated desc limit 10;")
     data1 = list(cur.fetchall())
-    return render_template('logs.html', user=header, data=data, user1=header1, data1=data1,showresume = 0)
+    cur.close()
+    if(connect.session_info['groupno'] != 3):  
+        return render_template('logs.html', user=header, data=data, user1=header1, data1=data1,showresume = 0,session_info=connect.session_info)
+    else:
+        return render_template('logs.html', user=header, data=data, user1=header1, data1=data1,showresume = 1,session_info=connect.session_info)
 
-
+############ screen to the fields for updating the data#################
 @demand.route('/updates/<id>')
 def updates(id):
     cur = mysql.connection.cursor()
@@ -182,10 +197,12 @@ def updates(id):
     data = []
     for ele in count:
         data.append(ele[0])
+        
     # return render_template('check.html',msg = sendata)
+    cur.close()
     return render_template('updating.html', msg=sendata, verify=list(verify), user=header, count=data, tabledata=tabledata, nothis=nothis)
 
-
+############## function to upodate the above changes to the database #############
 @demand.route('/changes', methods=['GET', 'POST'])
 def changes():
     msg = ' '
@@ -218,7 +235,7 @@ def changes():
         now = datetime.now()
         dt_string = now.strftime("%Y-%m-%d")
         p = p+" last_updated_date = '" + dt_string + "', "
-        p = p+" last_updated_by = 'Sreenivas' " + ", " 
+        p = p+" last_updated_by = '"+ str(session_info['username']) + "', " 
         if(priorityVaraiable =='Open'):
             p = p + " priority = '1'" + " where ID = '" + id + "' ;"
         else:
@@ -237,10 +254,11 @@ def changes():
         # displaying message
         msg = 'Data has been updated successfully'
         flash(msg)
+        cur.close()
     return redirect(url_for('demand.demander'))
     # return render_template('check.html',msg = 'this works bro')
 
-
+############### function to delete the data from the active demand and the database######
 @demand.route('/delete/<id>')
 def delete(id):
     f = "delete from data_logs where unique_id = '" + id + "';"
@@ -263,18 +281,20 @@ def delete(id):
     mysql.connection.commit()
     msg = " This Record is successfully deleted"
     flash(msg)
+    cur.close()
     return redirect(url_for('demand.demander'))
 
-
+############### screen for showing the field for filter the logs data########
 @demand.route('/filter_datalogs')
 def fdemandlogs():
     cur = mysql.connection.cursor()
     cur.execute(
         "SHOW COLUMNS FROM data_logs;")
     header = list(cur.fetchall())
+    cur.close()
     return render_template('logs_filter.html', header=header, value=1)
 
-
+############# functions which pushes back the filtered data of the logs #########
 @demand.route('/filter_demand_logs_push_back', methods=['GET', 'POST'])
 def filterLogsPushBack():
     value = ''
@@ -303,5 +323,6 @@ def filterLogsPushBack():
         header1 = (cur.fetchall())
         cur.execute("SELECT * from resume_logs limit 10;")
         data1 = list(cur.fetchall())
-        return render_template('logs.html', user=header, data=data, user1=header1, data1=data1,showresume = 0)
+        cur.close()
+        return render_template('logs.html', user=header, data=data, user1=header1, data1=data1,showresume = 0,session_info=connect.session_info)
 

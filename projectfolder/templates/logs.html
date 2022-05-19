@@ -49,16 +49,22 @@
 
     /* Style the tab content */
 </style>
+{% if session_info['groupno'] == 3  %}
+<script>
+    document.getElementById("jobswipe").classList.add("invisible");
+    document.getElementById("jobin").classList.add("invisible");
+</script>
+{% endif %}
 <div class="container-fluid">
     <div class="blackbox horizon2">
         <div class="tab">
-            <button class="tablinks active" onclick="openCity(event, 'Demand',2)">Demand</button>
+            <button id ="demandbtn" class="tablinks active" onclick="openCity(event, 'Demand',2)">Demand</button>
             <button id="tabr1" class="tablinks " onclick="openCity(event, 'Resume',2)">Resume</button>
         </div>
         <div id="Demand" class="tabcontent  ">
             <div class="parent flex-parent">
                 <div class="child flex-child">
-                    <h2>Demand Tacker</h2>
+                    <h2>Demand Tracker</h2>
                 </div>
                 <div class="child flex-child push-right">
                     <button type="button" class="btn btn-primary"
@@ -136,13 +142,19 @@
         evt.currentTarget.className += " active";
 
     }
+    
+</script>
+{% if showresume != 1 %}
+<script>
     openCity(event, 'Demand', 1);
 </script>
-{% if showresume == 10 %}
+{% else %}
 <script>
-    openCity(event, 'Resume', 2);
-    var element = document.getElementById("tabr1");
-    element.classList.add("active");
+    openCity(event, 'Resume', 1);
+    document.getElementById("demandbtn").classList.add("invisible");
+    // openCity(event, 'Resume', 2);
+    // var element = document.getElementById("tabr1");
+    // element.classList.add("active");
 </script>
 
 {% endif %}

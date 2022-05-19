@@ -2,6 +2,7 @@ from flask import Blueprint, render_template,request, request ,flash,url_for,red
 from flask_mysqldb import MySQL
 from projectfolder import app
 from projectfolder import mysql
+from projectfolder.core.views import connect
 from datetime import datetime
 
 resume = Blueprint('resume', __name__)
@@ -9,7 +10,6 @@ resume = Blueprint('resume', __name__)
 
 @resume.route('/resume')
 def resumer():
-    
     cur = mysql.connection.cursor()
     cur.execute(
         "SHOW COLUMNS FROM emp_profiles;")
@@ -17,9 +17,12 @@ def resumer():
     cur.execute(
         "Select * FROM emp_profiles;")
     data = list(cur.fetchall())
+    cur.execute(
+        "Select * FROM emp_profiles;")
+    data = list(cur.fetchall())
     mysql.connection.commit()
-    return render_template('resume.html', user=header,data=data,filter=0)
-
+    return render_template('resume.html', user=header,data=data,filter=0,session_info=connect.session_info)
+    # return render_template('check.html',msg = connect.session_info['groupno'])
 
 @resume.route('/add_data_resume')
 def add_data_resume():
@@ -34,8 +37,12 @@ def add_data_resume():
     cur.execute(
         "Select * FROM  hiring_legends;")
     tabledata = list(cur.fetchall())
-    count = ['cdo_tower_status']
-    return render_template('add_data_resume.html', verify=list(verify),user=header,count=count,tabledata = tabledata,nothis=nothis)
+    cur.execute(
+        "Select id FROM  demands where status = 'Open'")
+    jdData = list(cur.fetchall())
+    count = ['cdo_tower_status','linking_jd']
+    cur.close()
+    return render_template('add_data_resume.html', verify=list(verify),jdData = jdData,user=header,count=count,tabledata = tabledata,nothis=nothis)
     #return render_template('check.html',msg=nothis,count=data)
 
 @resume.route('/writeresume', methods=['GET','POST'])
@@ -51,6 +58,7 @@ def writeresume():
     m = []
     nothis = ['record_creation_date', 'last_updated_date', 'last_updated_by']
     logs =['unique_id','cdo_tower_status']
+    jd = ['linking_jd']
     if request.method == 'POST':
         # passing HTML form data into python variable
         g = ''
@@ -189,6 +197,7 @@ def changesresume():
     return redirect(url_for('resume.resumer'))
 @resume.route('/deleted/<id>')
 def deleted(id):
+    f = "delete from resume_logs where unique_id = '" + id + "';"
     p = "delete from emp_profiles where unique_id = '" + id + "';"
     cur = mysql.connection.cursor()
     current_time = datetime.now()
@@ -202,6 +211,7 @@ def deleted(id):
     m = str(m)
     m = m[1:-1]
     o = 'INSERT INTO resume_logs VALUES (' + m + ');'
+    cur.execute(f)
     cur.execute(o)
     cur.execute(p)
     mysql.connection.commit()
@@ -245,4 +255,24 @@ def filterLogsPushBack():
         cur.execute(
         "SHOW COLUMNS FROM resume_logs;")
         header1 = (cur.fetchall())
-        return render_template('logs.html', user=header, data=data, user1=header1, data1=data1,showresume=10)
+        return render_template('logs.html', user=header, data=data, user1=header1, data1=data1,showresume=10,session_info=connect.session_info)
+
+@resume.route('/viewjd', methods=['GET','POST'])
+def viewjd():
+    if request.method == 'POST':
+        cur = mysql.connection.cursor()
+        field = request.form.get('field', False)
+    return render_template('check.html',p=0)
+
+@resume.route('/contact', methods=['GET','POST'])
+def contact():
+    if request.method == 'POST':
+        if request.form.get('field', False):
+            cur = mysql.connection.cursor()
+            field = request.form.get('field', False)
+            cur.execute(
+            "SHOW COLUMNS FROM demands;")
+            header = (cur.fetchall())
+            cur.execute("select * from demands where id = '" + str(field) + "';")
+            sendData = cur.fetchone()
+            return render_template('viewjd.html',titles=header,sendData=sendData)

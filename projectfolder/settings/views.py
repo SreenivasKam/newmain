@@ -1,21 +1,20 @@
 from flask import Blueprint, render_template, request, flash, url_for, redirect
 from flask_mysqldb import MySQL
-from projectfolder import app, mysql,session_info
+from projectfolder import app, mysql
+from projectfolder.core.views import connect
 from datetime import datetime
 
 settings = Blueprint('settings', __name__)
-# session_info['loggedin'] = True
-# session_info['id'] = 1
 
 @settings.route('/settings')
 def setting():
-   groupList = ['Managers','Master Admin','Tech SPOCs','Staffing Team']
-   if session_info['loggedin']:
+   groupList = ['Manager','Master Admin','Tech SPOCs','Staffing Team']
+   if connect.session_info['loggedin']:
       cur = mysql.connection.cursor()
-      fetchUserData = "select * from user_table where user_id = " + str(session_info['id']) + ";"
+      fetchUserData = "select * from user_table where user_id = " + str(connect.session_info['id']) + ";"
       cur.execute(fetchUserData)
       userData = cur.fetchone()
-      fetchGroupData = "select * from access_table where user_id = " + str(session_info['id']) + ";"
+      fetchGroupData = "select * from access_table where user_id = " + str(connect.session_info['id']) + ";"
       cur.execute(fetchGroupData)
       groupData = cur.fetchone()
       name =  userData[1]
@@ -24,5 +23,39 @@ def setting():
       skill = groupData[3]
       titles = ['Name','Email','Access Name','Skill']
       sendData = (name,email,groupName,skill)
-      return render_template('settings.html',titles = titles,sendData =sendData)
+      value = 0
+      return render_template('settings.html',titles = titles,sendData =sendData,session_info=connect.session_info,elementValue = value)
       # return render_template('settings.html',msg = fetchUserData,msg1 = fetchGroupData)
+
+@settings.route('/manageaccess')
+def manageaccess():
+      cur = mysql.connection.cursor()
+      tableHead = ['Select','Name','Email','Group','Skill']
+      groupList = ['Manager','Master Admin','Tech SPOCs','Staffing Team']
+      skills = ['Databricks','Python','Pyspark']
+      fetchUserData = "select * from user_table where skills = 'Empty'"
+      cur.execute(fetchUserData)
+      accessData = cur.fetchall()
+      return render_template('settings.html',accessdata = list(accessData),tableHead =tableHead,groupList = groupList,skills = skills,elementValue = 1,session_info=connect.session_info)
+
+@settings.route('/pushdata', methods=['GET', 'POST'])
+def pushData():
+   groupList = ['Manager','Master Admin','Tech SPOCs','Staffing Team']
+   cur = mysql.connection.cursor()
+   fetchUserData = "select * from user_table where skills = 'Empty'"
+   cur.execute(fetchUserData)
+   accessData = cur.fetchall()
+   for i in range(len(accessData)):
+      id = request.form.get(str(accessData[i][0]), False)
+      if(id!='on'):
+         continue
+      group = request.form.get('group'+str(accessData[i][0]), False)
+      value = groupList.index(str(group)) +1 
+      skill = request.form.get('skill'+str(accessData[i][0]), False)
+      updateVariable = "Update user_table set skills = '"+ skill + "' where user_id = " + str(accessData[i][0])+ " ;"
+      insertVariable  = "insert into access_table (groupid,user_id,skills) values ("+str(value) + ","  + str(accessData[i][0]) + ",'" + str(skill) +"');"
+      cur.execute(updateVariable)
+      cur.execute(insertVariable)
+   mysql.connection.commit()
+   flash('User approved','success')
+   return redirect(url_for('settings.manageaccess'))

@@ -9,10 +9,10 @@
         <form action="{{ url_for('resume.changesresume') }}" method="post">
             <table class="table ">
                 <thead>
-                    <h3>Add data</h3>
+                    <h3>Update data</h3>
                 </thead>
                 <tbody>
-                    {% for i in range(user|length)%}
+                    {% for i in range(user|length-1)%}
                     {% if i%2==0 %}
                     <tr>
                         {% endif %}
@@ -39,10 +39,10 @@
                                 <i class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
                                     title="{{b[0][1]}}"></i>
                                     {% if b[0][2]=='date' %}
-                                    <input type="date" class="form-control col-4" id="exampleInputEmail1"
+                                    <input type="date" class="form-control col-8" id="exampleInputEmail1"
                                         name={{user[i][0]|lower}} value="{{msg[0][i]}}" required>
                                     {%else%}
-                                    <input type="text" class="form-control col-4" id="exampleInputEmail1"
+                                    <input type="text" class="form-control col-8" id="exampleInputEmail1"
                                         name={{user[i][0]|lower}} value="{{msg[0][i]}}" required>
                                     {% endif %}
                                 {% endif %}

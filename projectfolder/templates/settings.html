@@ -65,18 +65,41 @@
     document.getElementById("settingswipe").classList.add("high2");
     document.getElementById("settingin").classList.add("high");
 </script>
+{% if session_info['groupno'] == 3  %}
+<script>
+    document.getElementById("jobswipe").classList.add("invisible");
+    document.getElementById("jobin").classList.add("invisible");
+</script>
+{% endif %}
 <div class="container-fluid ">
     <div class="blackbox add-height">
         <div class="first-row">
             <div class="left-column1">
+                {% if elementValue == 0 %}
                 <h6 class="present">My Profile</h6>
+                {% else %}
+                <h6 class="" onclick="location.href='/settings'">My Profile</h6>
+                {% endif %}
                 <div class="solid"></div>
-                <h6>Manage Users</h6>
+                {% if session_info['groupno'] == 2  %}
+                {% if elementValue == 1 %}
+                <h6 class="present" onclick="location.href='/manageaccess'">Manage Users</h6>
+                {% else %}
+                <h6 class=" " onclick="location.href='/manageaccess'">Manage Users</h6>
+                {% endif %}
                 <div class="solid"></div>
+                {% if elementValue == 2  %}
+                <h6 class="present">Manage Legend</h6>
+                {% else %}
                 <h6>Manage Legend</h6>
+                {% endif %}
+                <div class="solid"></div>
+                {% endif %}
+                <h6 onclick="location.href='/logout'">Logout</h6>
                 <div class="solid"></div>
             </div>
             <div class="right-column1">
+                {% if elementValue == 0 %}
                 <div class="container-fluid center1">
                     <img src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png" alt="Italian Trulli"
                         width="130px" height="130px">
@@ -85,11 +108,89 @@
                         <div class="card" style="width: 100%;">
                             {% for i in range(titles|length) %}
                             <div class="card">
-                                {{titles[i]}} : {{sendData[i]}}
+                                {{titles[i]}} : &nbsp {{sendData[i]|capitalize}}
                             </div>
                             {% endfor %}
                         </div>
                     </div>
+                    {% elif elementValue == 1  %}
+                    <div class="container-fluid center1 align">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                        {% for category, message in messages %}
+                        {% if category=='error' %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% else %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endif %}
+
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                        <h4>Approval Access</h4>
+                        {% if accessdata != None  %}
+                        <form action="{{ url_for('settings.pushData') }}" method="post">
+                            <table class="table table-hover">
+                                <thead class="thead">
+                                    <tr class="table-warning">
+                                        {% for element in tableHead %}
+                                        <th>{{ element }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+
+
+                                <tbody class="tbody">
+                                    {% for i in range(accessdata|length) %}
+                                    <tr class="table-light">
+                                        <td><input type="checkbox" name={{accessdata[i][0]}}></td>
+                                        <td>{{accessdata[i][1]}}</td>
+                                        <td>{{accessdata[i][2]}}</td>
+                                        <td>
+                                            <select name=group{{accessdata[i][0]}} required>
+                                                <option value="None">None</option>
+                                                {% for element in groupList %}
+                                                <option value="{{element}}">{{element}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name=skill{{accessdata[i][0]}} required>
+                                                <option value="None">None</option>
+                                                {% for element in skills %}
+                                                <option value="{{element}}">{{element}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                        </form>
+                        {% else %}
+                        <h5>No Approvals pending</h5>
+                        {% endif %}
+                    </div>
+                    {% elif elementValue == 2  %}
+                    <div class="container-fluid center1">
+                        <h1>2</h1>
+                    </div>
+                    {% else %}
+                    <div class="container-fluid center1">
+                        <h1>else</h1>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
