@@ -966,9 +966,7 @@ insert into user_table values (1,'Admin Access','adminaccess@gmail.com','````','
 31-05-2022
 show databases;
 USE project;
-
 show tables;
-describe emp_profiles;
 CREATE TABLE emp_profiles (Proposal_date date,
 unique_id varchar(255) primary key,
 pancard varchar(255),
