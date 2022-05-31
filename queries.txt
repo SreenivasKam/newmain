@@ -960,3 +960,496 @@ describe session_table;
 -- insert into session_table values(1,current_timestamp());
 -- select * from session_table;
 insert into user_table values (1,'Admin Access','adminaccess@gmail.com','````','Invalid');
+
+
+
+31-05-2022
+show databases;
+USE project;
+
+show tables;
+describe emp_profiles;
+CREATE TABLE emp_profiles (Proposal_date date,
+unique_id varchar(255) primary key,
+pancard varchar(255),
+sources varchar(255),
+cand_name varchar(255),
+JRSS varchar(255),
+skills varchar(255),
+band varchar(2),
+box_link varchar(255),
+position_id varchar(255),
+location varchar(255),
+contact_num integer,
+notice_period varchar(255),
+comments varchar(255),
+cdo_tower_status varchar(255),
+staff_status varchar(255),
+tech_panel varchar(255),
+record_creation date,
+last_updated_date date,
+last_updated_by varchar(255) );
+describe emp_profiles;
+select * from emp_profiles;
+
+
+
+CREATE TABLE demands(ID int auto_increment primary key,
+US_RM varchar(255),
+India_RM varchar(255),
+Special_Project varchar(255),
+Position_Type varchar(255),
+Backfill_name varchar(255),
+Primary_JRSS varchar(255),
+Preferred_Skills varchar(255),
+Min_Skill_required varchar(255),
+Additional_info varchar(255),
+Team_name varchar(255),
+Will_client_decide varchar(255),
+Decision_maker_name varchar(255),
+Target_DOJ date,
+Status varchar(255),
+Sub_status varchar(255),
+comments varchar(255),
+Position_Opened_Date date,
+Candidate_Finalized_Date date,
+Actual_DOJ date,
+Position_filled_with_Emp_Name varchar(255),
+Position_filled_with_Source varchar(255),
+Contract_Info varchar(255),
+Fulfilment_strategy varchar(255),
+Band_Low varchar(2),
+Band_High varchar(2),
+JD varchar(255),
+FG_manager_Name varchar(255),
+ATT_Director_Name varchar(255),
+ATT_AVP_Name varchar(255),
+Initiated_by varchar(255),
+Demand_Code varchar(255),
+Record_creation_date date,
+Last_updated_date date,
+Last_updated_by varchar(255));
+
+-- describe demands;
+-- select * from demands;
+
+
+
+create table legend ( type_ varchar(255), value_ varchar(255));
+
+
+insert into legend (type_,value_) values ('us_rm','Seetha');
+insert into legend (type_,value_) values ('us_rm','Venky');
+insert into legend (type_,value_) values ('us_rm','Vijay');
+insert into legend (type_,value_) values ('us_rm','Richard');
+insert into legend (type_,value_) values ('us_rm','Tony');
+insert into legend (type_,value_) values ('us_rm','Sekar');
+insert into legend (type_,value_) values ('us_rm','Venu');
+insert into legend (type_,value_) values ('us_rm','Sean W');
+insert into legend (type_,value_) values ('us_rm','Missing');
+insert into legend (type_,value_) values ('us_rm','Dinesh');
+insert into legend (type_,value_) values ('india_rm','Chandra');
+insert into legend (type_,value_) values ('india_rm','Sindhu');
+insert into legend (type_,value_) values ('india_rm','Manish');
+insert into legend (type_,value_) values ('india_rm','Murali');
+insert into legend (type_,value_) values ('india_rm','Rajesh');
+insert into legend (type_,value_) values ('india_rm','Sandeep');
+insert into legend (type_,value_) values ('india_rm','Vijay');
+insert into legend (type_,value_) values ('india_rm','Missing');
+insert into legend (type_,value_) values ('position_type','New');
+insert into legend (type_,value_) values ('position_type','Backfill');
+insert into legend (type_,value_) values ('position_type','Migrate- IBM US');
+insert into legend (type_,value_) values ('position_type','Migrate- ATT');
+insert into legend (type_,value_) values ('position_type','Capability- Hire');
+insert into legend (type_,value_) values ('position_type','Capability- Bench');
+insert into legend (type_,value_) values ('position_type','GH');
+insert into legend (type_,value_) values ('position_type','Other');
+insert into legend (type_,value_) values ('position_type','Missing');
+insert into legend (type_,value_) values ('position_type','Prospect');
+insert into legend (type_,value_) values ('position_type','Lead');
+insert into legend (type_,value_) values ('position_type','Migrate- IBM ');
+
+
+insert into legend (type_,value_) values ('contract_info','CDO-10461.W.180-AT&T CDO BI Professional Services');
+insert into legend (type_,value_) values ('contract_info','CDO-10461.W.306-Cognos Migration Project');
+insert into legend (type_,value_) values ('contract_info','CDO-10461.W.309-DIRECTV Extending Capabilities of Data Mesh for Viewership');
+insert into legend (type_,value_) values ('contract_info','DTV-TBD-Protection Plan');
+insert into legend (type_,value_) values ('contract_info','DTV-TBD-DirecTv T&M');
+insert into legend (type_,value_) values ('contract_info','Missing');
+insert into legend (type_,value_) values ('contract_info','DTV-TBD-UsmanMetrics');
+insert into legend (type_,value_) values ('contract_info','CDO-NA-Unbilled');
+insert into legend (type_,value_) values ('contract_info','DTV-10461.W.315-DIRECTV-Cloud Data Platform Project Support Services');
+insert into legend (type_,value_) values ('primary_jrss','Application Architect- Data Platforms');
+insert into legend (type_,value_) values ('primary_jrss','Application Architect-AWS Cloud Migration');
+insert into legend (type_,value_) values ('primary_jrss','Application Database Administrator-RDBMS');
+insert into legend (type_,value_) values ('primary_jrss','Application Developer-DevOps');
+insert into legend (type_,value_) values ('primary_jrss','Application Developer-EAI');
+insert into legend (type_,value_) values ('primary_jrss','Application Developer-Java FullStack');
+insert into legend (type_,value_) values ('primary_jrss','Application Developer-Microsoft Analytics');
+insert into legend (type_,value_) values ('primary_jrss','Application Developer-Microsoft Cloud');
+insert into legend (type_,value_) values ('primary_jrss','Application Developer-Open Source');
+insert into legend (type_,value_) values ('primary_jrss','Business Analyst-ADM');
+insert into legend (type_,value_) values ('primary_jrss','Business Analyst-Business Operations');
+insert into legend (type_,value_) values ('primary_jrss','Data Engineer-Big Data');
+insert into legend (type_,value_) values ('primary_jrss','Data Engineer-Business Intelligence');
+insert into legend (type_,value_) values ('primary_jrss','Data Engineer-Data Integration');
+insert into legend (type_,value_) values ('primary_jrss','Data Engineer-Data Warehouse');
+insert into legend (type_,value_) values ('primary_jrss','Data Scientist-Artificial Intelligence');
+insert into legend (type_,value_) values ('primary_jrss','Infrastructure Specialist-Cloud Platforms');
+insert into legend (type_,value_) values ('primary_jrss','Pakage Consultant-Oracle Business Analytics');
+insert into legend (type_,value_) values ('primary_jrss','Project Manager-ADM');
+insert into legend (type_,value_) values ('primary_jrss','Project Manager-Data Platforms');
+insert into legend (type_,value_) values ('primary_jrss','Project Manager-IBM Cloud Solutions');
+insert into legend (type_,value_) values ('primary_jrss','Test Specialist-Automation');
+insert into legend (type_,value_) values ('primary_jrss','Test Specialist-Data');
+insert into legend (type_,value_) values ('primary_jrss','Infrastructure Specialist-Azure Platform');
+insert into legend (type_,value_) values ('primary_jrss','Missing');
+insert into legend (type_,value_) values ('status','Cancelled');
+insert into legend (type_,value_) values ('status','Closed');
+insert into legend (type_,value_) values ('status','Initiated-Incomplete info');
+insert into legend (type_,value_) values ('status','On Hold');
+insert into legend (type_,value_) values ('status','Onboarding');
+insert into legend (type_,value_) values ('status','Open');
+insert into legend (type_,value_) values ('status','Withdraw');
+insert into legend (type_,value_) values ('status','Missing');
+insert into legend (type_,value_) values ('sub_status','All Set- Waiting for start date');
+insert into legend (type_,value_) values ('sub_status','AT& Access- In progress');
+insert into legend (type_,value_) values ('sub_status','Selected- WFM Confirmation pending');
+insert into legend (type_,value_) values ('nba_owner','Chandra');
+insert into legend (type_,value_) values ('nba_owner','Laha');
+insert into legend (type_,value_) values ('nba_owner','Manish');
+insert into legend (type_,value_) values ('nba_owner','Murali');
+insert into legend (type_,value_) values ('nba_owner','Nishi');
+insert into legend (type_,value_) values ('nba_owner','Rajesh');
+insert into legend (type_,value_) values ('nba_owner','Richard');
+insert into legend (type_,value_) values ('nba_owner','Sandeep');
+insert into legend (type_,value_) values ('nba_owner','Sean W');
+insert into legend (type_,value_) values ('nba_owner','Seetha');
+insert into legend (type_,value_) values ('nba_owner','Sekar');
+insert into legend (type_,value_) values ('nba_owner','Tony');
+insert into legend (type_,value_) values ('nba_owner','Venkat');
+insert into legend (type_,value_) values ('nba_owner','Venky');
+insert into legend (type_,value_) values ('nba_owner','Venu');
+insert into legend (type_,value_) values ('nba_owner','Vijay');
+insert into legend (type_,value_) values ('nba_owner','Missing');
+insert into legend (type_,value_) values ('fulfilment_strategy','TA');
+insert into legend (type_,value_) values ('fulfilment_strategy','Regular');
+insert into legend (type_,value_) values ('fulfilment_strategy','Regular, Niche SSP');
+insert into legend (type_,value_) values ('fulfilment_strategy','Any');
+insert into legend (type_,value_) values ('fulfilment_strategy','Rotation- Tower');
+insert into legend (type_,value_) values ('fulfilment_strategy','Missing');
+insert into legend (type_,value_) values ('fulfilment_strategy','SSP');
+insert into legend (type_,value_) values ('fulfilment_strategy','SSP/Regular');
+insert into legend (type_,value_) values ('band','6G');
+insert into legend (type_,value_) values ('band','6A');
+insert into legend (type_,value_) values ('band','6B');
+insert into legend (type_,value_) values ('band','7A');
+insert into legend (type_,value_) values ('band','7B');
+insert into legend (type_,value_) values ('band','8');
+insert into legend (type_,value_) values ('band','9');
+insert into legend (type_,value_) values ('band','10');
+insert into legend (type_,value_) values ('band','Any');
+insert into legend (type_,value_) values ('position_filled_with_source','TA');
+insert into legend (type_,value_) values ('position_filled_with_source','IBM Internal');
+insert into legend (type_,value_) values ('position_filled_with_source','SSP');
+insert into legend (type_,value_) values ('position_filled_with_source','Rotation- Tower');
+insert into legend (type_,value_) values ('position_filled_with_source','Rotation- Account');
+insert into legend (type_,value_) values ('position_filled_with_source','USPO');
+insert into legend (type_,value_) values ('position_filled_with_source','Missing');
+
+insert into legend (type_,value_) values ('att_director_name','BARAN, ISILAY');
+insert into legend (type_,value_) values ('att_director_name','GUSTAFSON, JACK');
+insert into legend (type_,value_) values ('att_director_name','IYENGAR, KAUSHIK');
+insert into legend (type_,value_) values ('att_director_name','LOWE, FREDRICK');
+insert into legend (type_,value_) values ('att_director_name','MILES, JOHN');
+insert into legend (type_,value_) values ('att_director_name','NARREDDY, KISHORE');
+insert into legend (type_,value_) values ('att_director_name','PURVIS, JACK');
+insert into legend (type_,value_) values ('att_director_name','ROSSI, JOHN');
+insert into legend (type_,value_) values ('att_director_name','SANCHEZ LANZILOTTI, GABRIEL');
+insert into legend (type_,value_) values ('att_director_name','STROUD, KARLA');
+insert into legend (type_,value_) values ('att_director_name','TANGIRALA, PAPI REDDY');
+insert into legend (type_,value_) values ('att_director_name','VEMULAPALLI, PRAVEEN');
+insert into legend (type_,value_) values ('att_director_name','YOVANOVICH, JOHN');
+insert into legend (type_,value_) values ('att_director_name','Missing');
+
+
+insert into legend (type_,value_) values ('att_avp_name','ERGAZ, DROR');
+insert into legend (type_,value_) values ('att_avp_name','KANAPARTHI, MAHENDER');
+insert into legend (type_,value_) values ('att_avp_name','MARATHE, VIKRAM');
+insert into legend (type_,value_) values ('att_avp_name','QUDDOOS, USMAN');
+insert into legend (type_,value_) values ('att_avp_name','SEDLOCK, DAVID');
+insert into legend (type_,value_) values ('att_avp_name','WARREN, KRISTINE');
+insert into legend (type_,value_) values ('att_avp_name','WHITTINGTON, DAVID');
+insert into legend (type_,value_) values ('att_avp_name','Missing');
+insert into legend (type_,value_) values ('att_avp_name','Add Dropdown value');
+
+insert into legend (type_,value_) values ('team_name','Admin Access Support Team');
+insert into legend (type_,value_) values ('team_name','Advanced Analytics');
+insert into legend (type_,value_) values ('team_name','Base- Sharath Patel');
+insert into legend (type_,value_) values ('team_name','BIRD Support');
+insert into legend (type_,value_) values ('team_name','CCBI');
+insert into legend (type_,value_) values ('team_name','CP');
+insert into legend (type_,value_) values ('team_name','CP-Cognos to PBI');
+insert into legend (type_,value_) values ('team_name','CP-PBI');
+insert into legend (type_,value_) values ('team_name','CP-SF');
+insert into legend (type_,value_) values ('team_name','CP-Tableau');
+insert into legend (type_,value_) values ('team_name','CP-Tax360');
+insert into legend (type_,value_) values ('team_name','CPPBI');
+insert into legend (type_,value_) values ('team_name','CV-EVP');
+insert into legend (type_,value_) values ('team_name','CV-Ph1-Framework');
+insert into legend (type_,value_) values ('team_name','CV-Ph1-Viewership');
+insert into legend (type_,value_) values ('team_name','CV-Ph2-Framework');
+insert into legend (type_,value_) values ('team_name','CV-Ph2-Viewership');
+insert into legend (type_,value_) values ('team_name','CV-PS');
+insert into legend (type_,value_) values ('team_name','DEEP Squad');
+insert into legend (type_,value_) values ('team_name','DIRECTV - STARS');
+insert into legend (type_,value_) values ('team_name','DTV-DP');
+insert into legend (type_,value_) values ('team_name','DTV-Jessica- Dashboard team');
+insert into legend (type_,value_) values ('team_name','EBBR');
+insert into legend (type_,value_) values ('team_name','ETL-PS');
+insert into legend (type_,value_) values ('team_name','EVP-Nifi/STL/DP');
+insert into legend (type_,value_) values ('team_name','EVP-Transformation');
+insert into legend (type_,value_) values ('team_name','NFL');
+insert into legend (type_,value_) values ('team_name','Palantir Support');
+insert into legend (type_,value_) values ('team_name','Platform Support');
+insert into legend (type_,value_) values ('team_name','PM/PMO');
+insert into legend (type_,value_) values ('team_name','PowerBI-?');
+insert into legend (type_,value_) values ('team_name','PowerBI-Prasanna');
+insert into legend (type_,value_) values ('team_name','Protection Plan');
+insert into legend (type_,value_) values ('team_name','RIT');
+insert into legend (type_,value_) values ('team_name','RIT- Stream Analytics');
+insert into legend (type_,value_) values ('team_name','RIT-Designer-Dave ');
+insert into legend (type_,value_) values ('team_name','SAS');
+insert into legend (type_,value_) values ('team_name','SAS Migration');
+insert into legend (type_,value_) values ('team_name','SAS Support');
+insert into legend (type_,value_) values ('team_name','Snowflake Investment team');
+insert into legend (type_,value_) values ('team_name','T.DATA');
+insert into legend (type_,value_) values ('team_name','Tax360');
+insert into legend (type_,value_) values ('status','Vikram');
+
+insert into legend (type_,value_) values ('fg_manager_name','ALLURI,VENKATA SAROJA');
+insert into legend (type_,value_) values ('fg_manager_name','BARAN,ISILAY');
+insert into legend (type_,value_) values ('fg_manager_name','BLANCO,LEANNE');
+insert into legend (type_,value_) values ('fg_manager_name','BOTCHA,PRATIMA V');
+insert into legend (type_,value_) values ('fg_manager_name','CABRERA,ANGELA M');
+insert into legend (type_,value_) values ('fg_manager_name','CAO,YING');
+insert into legend (type_,value_) values ('fg_manager_name','CHANG,WEIYANG');
+insert into legend (type_,value_) values ('fg_manager_name','CHEKURI,SIVANI');
+insert into legend (type_,value_) values ('fg_manager_name','CHODISETTI,ESWAR S');
+insert into legend (type_,value_) values ('fg_manager_name',"D'SOUZA,NITIN P");
+insert into legend (type_,value_) values ('fg_manager_name','DANIELS,SEAN P');
+insert into legend (type_,value_) values ('fg_manager_name','DIGIOIA,ROBERT M');
+insert into legend (type_,value_) values ('fg_manager_name','FURMAN,DAVID C');
+insert into legend (type_,value_) values ('fg_manager_name','GUSTAFSON,JACK L');
+insert into legend (type_,value_) values ('fg_manager_name','HURLBERT,DANIEL H');
+insert into legend (type_,value_) values ('fg_manager_name','JACKSON,NELSON R');
+insert into legend (type_,value_) values ('fg_manager_name','JANGAON,JEEVAN K');
+insert into legend (type_,value_) values ('fg_manager_name','KAMINSKI,MIKHAIL');
+insert into legend (type_,value_) values ('fg_manager_name','KANAPARTHI,MAHENDER');
+insert into legend (type_,value_) values ('fg_manager_name','KODALI,SREE VANI');
+insert into legend (type_,value_) values ('fg_manager_name','KUMETHA,RAVINDRA R');
+insert into legend (type_,value_) values ('fg_manager_name','MAINKA,NEELANGI A');
+insert into legend (type_,value_) values ('fg_manager_name','MATTIGUNTA,MAYURI');
+insert into legend (type_,value_) values ('fg_manager_name','MEKALA,RAKESH REDDY');
+insert into legend (type_,value_) values ('fg_manager_name','MORSE,SCOTT A');
+insert into legend (type_,value_) values ('fg_manager_name','NALLAMILLI,SATEESH');
+insert into legend (type_,value_) values ('fg_manager_name','NUTTAKI,LAKSHMI NARAYANA CHOWDARY');
+insert into legend (type_,value_) values ('fg_manager_name','PATEL,CHIRAG R');
+insert into legend (type_,value_) values ('fg_manager_name','PATIL,GIRISH');
+insert into legend (type_,value_) values ('fg_manager_name','PEAY,JOSEPH A,JR.');
+insert into legend (type_,value_) values ('fg_manager_name','PENMETCHA,PRASANNA V');
+insert into legend (type_,value_) values ('fg_manager_name','PEREZ,JAVIER E');
+insert into legend (type_,value_) values ('fg_manager_name','PERKIT,SURESH');
+insert into legend (type_,value_) values ('fg_manager_name','PUGAZHENTHI,JEGADEESAN');
+insert into legend (type_,value_) values ('fg_manager_name','PURVIS,JACK');
+insert into legend (type_,value_) values ('fg_manager_name','RACHAKONDA,KIRAN K');
+insert into legend (type_,value_) values ('fg_manager_name','REBMAN,JANNINE M');
+insert into legend (type_,value_) values ('fg_manager_name','RIVAS,FELIPE J');
+insert into legend (type_,value_) values ('fg_manager_name','RUSSO,DEBORAH J');
+insert into legend (type_,value_) values ('fg_manager_name','SAMPINO,JOSEPH');
+insert into legend (type_,value_) values ('fg_manager_name','SANCHEZ,GABRIEL');
+insert into legend (type_,value_) values ('fg_manager_name','SAYANA,RAMA D');
+insert into legend (type_,value_) values ('fg_manager_name','SELVAKUMAR,VIKRAMACHANDRAN');
+insert into legend (type_,value_) values ('fg_manager_name','SHAH,CHINTAN');
+insert into legend (type_,value_) values ('fg_manager_name','SINGALREDDY,UMAKANTH');
+insert into legend (type_,value_) values ('fg_manager_name','TANGIRALA,PAPI REDDY');
+insert into legend (type_,value_) values ('fg_manager_name','THAMMU,SANTOSH');
+insert into legend (type_,value_) values ('fg_manager_name','THOMAS,LIJU');
+insert into legend (type_,value_) values ('fg_manager_name','VEMULAPALLI,PRAVEEN K');
+insert into legend (type_,value_) values ('fg_manager_name','VUTUKURU,PAVANKUMAR');
+insert into legend (type_,value_) values ('fg_manager_name','WANG,JASON');
+insert into legend (type_,value_) values ('fg_manager_name','YOVANOVICH,JOHN P');
+insert into legend (type_,value_) values ('fg_manager_name','Missing');
+
+
+-- select * from demands;
+-- DROP TABLE demands;
+
+create table comments(  type_ varchar(255), comment_ varchar(255), data_type varchar(255));
+
+
+insert into comments ( type_,comment_,data_type ) values ('ID','Unique ID number generated for each entry - Position ID','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('US RM','Reporting managers from US/onsite','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('India RM','Reporting managers from India ','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Special Project','Details of the project','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Position Type','New, Backfill or migration, GH etc','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Backfill for and LWD','Name of the backfill & LWD of current resource','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Primary JRSS','Major job type from the list ex: big data or cloud etc','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Preferred Skills','	Delivery manager will enter specific skill like Python, Hadoop etc','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Min Skill required','	Delivery manager will enter minimum skill','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Additional info','Delivery manager will enter additional skill ','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Team name','Client specific project name','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Will client decide, Decision Maker Name','Yes- Name of the client or No- Name of the delivery manager','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Target DOJ- ORIGINAL','Expected DOJ of prospective candidate','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Status','Open, onboarding, closed, cancelled','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Sub-status','sub-status within each level','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Running Status','Comments entered by SPOC','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Position Opened Date','Date when the position is opened','date');
+insert into comments ( type_,comment_,data_type ) values ('Candidate Finalized on Date','Date when the candidate is finalized','date');
+insert into comments ( type_,comment_,data_type ) values ('Actual- DOJ','DOJ when the candidates actual DOJ','date');
+insert into comments ( type_,comment_,data_type ) values ('Position filled with (Emp#:Name','Name of the employee, when the position is filled','date');
+insert into comments ( type_,comment_,data_type ) values ('Position flled with Source','	Source pf the candidate ex : Regular, SSP, USPO','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Contract Info','Details of billing ','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Fulfilment strategy','Regular, SSP or USPO ','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Band Low','Minimum band for the position ','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Band High','Maximun band for the position ','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('JD','Job description for the position','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('FG manager Name','Client manager who approve FG requests','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('ATT Director Name','Client Director name- ','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('ATT AVP Name','Client AVP name- ','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Initiated by Reference email(s)- Subject and Sender','Subject and Sender when the candidates initiated by, reference email(s) Subject and Sender','VARCHAR');
+insert into comments ( type_,comment_,data_type ) values ('Demand Code','Demand code generated from the staffing tool','VARCHAR');
+
+create table resume_comments (  type_ varchar(255), comment_ varchar(255), data_type varchar(255));
+
+insert into resume_comments ( type_,comment_,data_type ) values ('Proposal date','Date in which profile was shared','date');
+insert into resume_comments ( type_,comment_,data_type ) values ('Employee ID','ID of employee, if profile from IBM internal (WFM), bench etc','VARCHAR');
+insert into resume_comments ( type_,comment_,data_type ) values ('PAN Card Details','PAN card details, incase of SSP, USPO for tracking duplicates','VARCHAR');
+insert into resume_comments ( type_,comment_,data_type ) values ('Source','WFM, SSP, Slack, USPO- list from drop down','VARCHAR');
+insert into resume_comments ( type_,comment_,data_type ) values ('Name','Full name of the candidate','VARCHAR');
+insert into resume_comments ( type_,comment_,data_type ) values ('JRS','Major job type from the list ex: big data or cloud etc','VARCHAR');
+insert into resume_comments ( type_,comment_,data_type ) values ('Sub-Skills','Specific skill like Python, Hadoop, Spark, Oracle etc','VARCHAR');
+insert into resume_comments ( type_,comment_,data_type ) values ('Band	Details','6B, 7A etc- list from drop down','VARCHAR');
+insert into resume_comments ( type_,comment_,data_type ) values ('Box link','URL Link of file uploaded in box','VARCHAR');
+insert into resume_comments ( type_,comment_,data_type ) values ('Position ID','Resume/profile uploaded for specific demand/JD - can be tracked Position ID','VARCHAR');
+insert into resume_comments ( type_,comment_,data_type ) values ('Location','Current location of the candidate','VARCHAR');
+insert into resume_comments ( type_,comment_,data_type ) values ('Contact Number','Mobile number of the candidate','INTEGER');
+insert into resume_comments ( type_,comment_,data_type ) values ('Notice Period','Notice period of the candidate','VARCHAR');
+insert into resume_comments ( type_,comment_,data_type ) values ('Feedback Status','Current status- to be entered bt CDO SPOC','VARCHAR');
+insert into resume_comments ( type_,comment_,data_type ) values ('CDO Tower Status','Resume received, select, tech interview set up etc','VARCHAR');
+insert into resume_comments ( type_,comment_,data_type ) values ('Staffing Team Status','Pending, closed, etc','VARCHAR');
+insert into resume_comments ( type_,comment_,data_type ) values ('Tech Panel','Name/ SPOC/ SME - who shall screen or conduct the interview','VARCHAR');
+
+-- use project;
+-- insert into table
+CREATE TABLE data_logs(     
+unique_id int ,
+status varchar(255),
+sub_status varchar(255),
+    comments varchar(255),
+    date_updated datetime,
+    FOREIGN KEY (unique_id) REFERENCES demands(ID)
+);
+CREATE TABLE resume_logs (     unique_id varchar(255) ,
+status varchar(255),
+     comments varchar(255),
+     date_updated datetime,
+     FOREIGN KEY (unique_id) REFERENCES emp_profiles(unique_id) );
+-- DELETE FROM demands;
+-- delete from data_logs;
+ ALTER TABLE demands ADD priority int;
+-- select  * from data_logs;
+-- drop table resume_comments;
+-- use project;
+-- show tables;
+-- delete from data_logs;
+-- drop table data_logs;
+ALTER TABLE  demands MODIFY COLUMN ID int;
+create table hiring_legends ( type_ varchar(255) DEFAULT 'CDO_Tower_status', value_ varchar(255));
+-- select * from demands where ID='asdasqqqqqqqqqqqqqqqqqqqq';
+-- select * from data_logs where unique_id='asdasqqqqqqqqqqqqqqqqqqqq';
+-- delete from emp_profiles where unique_id='sdfsdf';
+-- insert into hiring_legends( 'value_') values ('Closed - Candidate Not Available');
+insert into hiring_legends( value_) values ('Candidate- Wants later date'),('Resume- Received'),('Resume - Hold'),('Resume- Shortlist'),('Resume- Insufficient Skills/Exp'),('Resume- Reject'),('Resume- Not Recevied'),('Tech Interview Setup'),('TechInterview- Awaited'),('TechInterview- Select'),('TechInterview-Reject'),('PeM/ClientInterview-Select'),('PeM/ClientInterviewReject'),('Select- DOJ Negotiation in progress'),('Reject - Staffing Plan Changed'),('Closed- Candidate onboarded'),('Duplicate');
+
+-- use project;
+-- describe demands;
+-- describe emp_profiles;
+-- describe data_logs;
+-- describe resume_logs;
+-- describe legends;
+-- select  type_ from legend;
+-- describe hiring_legends;
+-- delete from emp_profiles where unique_id = 'TR123';
+-- select * from hiring_legends;
+-- describe demand_comments;
+-- select * from demand_comments;
+-- describe resume_comments;
+-- select * from resume_comments;
+
+
+create table user_table( user_id int auto_increment,
+user_name varchar(255),
+email varchar(255),
+user_password varchar(255),
+skills varchar(255),
+primary key (user_id));
+
+
+create table group_table( groupid int auto_increment,
+group_name varchar(255),
+screen_name varchar(255),
+access_read varchar(255),
+access_add varchar(255),
+access_update varchar(255),
+access_delete varchar(255),
+primary key (groupid)
+);
+
+
+create table access_table ( access_id int auto_increment,
+groupid int,
+user_id int,
+skills varchar(255),
+primary key(access_id),
+foreign key (user_id) references user_table(user_id),
+foreign key (groupid) references group_table(groupid));
+ 
+-- insert into access_table values(1,2,1,'Invalid');
+
+-- insert into group_table (group_name,screen_name,access_read,access_add,access_update,
+-- access_delete) values('Master admin','Both','Y','Y','Y','N');
+insert into group_table values(1,'Master admin','Both','Y','Y','Y','Y');
+
+-- drop table data_logs;
+-- drop table demands;
+-- use project;
+-- update demands set id = 2 where id = 1 
+-- select * from demands;
+-- select * from data_logs;
+-- delete from data_logs where unique_id = 1;
+-- select * from group_table;
+-- select * from access_table;
+-- select * from access_table  where user_id = 1;
+-- Update user_table set skills = 'Empty' where user_id = 4;
+create table session_table(session_id int auto_increment,
+user_id int,
+user_name varchar(255),
+entry datetime,
+logged_info varchar(5),
+primary key(session_id),
+foreign key (user_id) references user_table(user_id));
+-- insert into session_table values(1,1,'Admin',current_timestamp(),'N');
+describe session_table;
+-- insert into access_table (groupid,user_id,skills) values(1,2,1,'Invalid');
+-- drop table access_table;
+-- drop table user_table;
+-- drop table session_table;
+-- delete from resume_logs;
+-- delete from emp_profiles;
+
+-- drop table resume_logs;
+-- drop table  emp_profiles;
+-- insert into session_table values(1,current_timestamp());
+--  select * from user_table;
+insert into user_table values (1,'Admin Access','adminaccess@gmail.com','````','Invalid');
