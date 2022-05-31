@@ -13,8 +13,8 @@
                     <h3>Add data</h3>
                 </thead>
                 <tbody>
-                    {% for i in range(user|length -2)%}
-                    {% if i%2==0 %}
+                    {% for i in range(1,user|length -2)%}
+                    {% if i%2==1 %}
                     <tr>
                         {% endif %}
                         <td>
@@ -25,36 +25,60 @@
 
                             <div class="form-group">
                                 {% if user[i][0]|lower in count %}
-                                <label for={{user[i][0]|lower}}>{{user[i][0]}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
-                                    class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
-                                    title="{{b[0][1]}}"></i>
-                                <br>
-                                <select name={{user[i][0]|lower}} id={{user[i][0]|lower}} class="col-8" required>
-                                    <option value="None">None</option>
-                                    {% for element in tabledata %}
-                                    {% if element[0]==user[i][0]|lower%}
-                                    <h1>sd</h1>
-                                    <option value="{{element[1]|string}}">{{element[1]}}</option>
+                                    {% if user[i][0]|lower in notimpdrop %}
+                                    <label for={{user[i][0]|lower}}>{{user[i][0]}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
+                                        class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
+                                        title="{{b[0][1]}}"></i>
+                                    <br>
+                                    <select name={{user[i][0]|lower}} id={{user[i][0]|lower}} class="col-10">
+                                        <option value="None">None</option>
+                                        {% for element in tabledata %}
+                                        {% if element[0]==user[i][0]|lower%}
+                                        <h1>sd</h1>
+                                        <option value="{{element[1]|string}}">{{element[1]}}</option>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                    {% else %}
+                                    <label for={{user[i][0]|lower}}>{{user[i][0]}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
+                                        class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
+                                        title="{{b[0][1]}}"></i>
+                                    <i class="fa-solid fa-star fa-2xs" style="color:red"></i><br>
+                                    <select name={{user[i][0]|lower}} id={{user[i][0]|lower}} class="col-10" required>
+                                        <option value="None">None</option>
+                                        {% for element in tabledata %}
+                                        {% if element[0]==user[i][0]|lower%}
+                                        <h1>sd</h1>
+                                        <option value="{{element[1]|string}}">{{element[1]}}</option>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </select>
                                     {% endif %}
-                                    {% endfor %}
-                                </select>
                                 {% else %}
-                                {% if user[i][0]|lower not in nothis %}
-                                <label for={{user[i][0]|lower}}>{{user[i][0]}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
-                                    class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
-                                    title="{{b[0][1]}}"></i>
-                                {% if b[0][2]=='date' %}
-                                <input type="date" class="form-control col-8" id="exampleInputEmail1"
-                                    name={{user[i][0]|lower}} required>
-                                {%else%}
-                                <input type="text" class="form-control col-8" id="exampleInputEmail1"
-                                    name={{user[i][0]|lower}} required>
-                                {% endif %}
-                                {% endif %}
+                                    {% if user[i][0]|lower not in nothis %}
+                                    <label for={{user[i][0]|lower}}>{{user[i][0]}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
+                                        class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
+                                        title="{{b[0][1]}}"></i>
+                                    {% if b[0][2]=='date' %}
+                                    {% if user[i][0]|lower in notimpdate %}
+                                    <input type="date" class="form-control col-10" name={{user[i][0]|lower}}>
+                                    {% else %}
+                                    <i class="fa-solid fa-star fa-2xs" style="color:red"></i>
+                                    <input type="date" class="form-control col-10" name={{user[i][0]|lower}} required>
+                                    {% endif %}
+                                    {%else%}
+                                    {% if user[i][0]|lower =='demand_code' %}
+                                    <input type="text" class="form-control col-10" name={{user[i][0]|lower}}>
+                                    {% else %}
+                                    <i class="fa-solid fa-star fa-2xs" style="color:red"></i>
+                                    <input type="text" class="form-control col-10" name={{user[i][0]|lower}} required>
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endif %}
                                 {% endif %}
                             </div>
                         </td>
-                        {% if i%2==1 %}
+                        {% if i%2==0 %}
                     </tr>
                     {% endif %}
                     {% endfor %}

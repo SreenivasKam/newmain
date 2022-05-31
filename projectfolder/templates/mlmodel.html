@@ -1,0 +1,49 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<script>
+    document.getElementById("aiswipe").classList.add("high2");
+    document.getElementById("aiin").classList.add("high");
+</script>
+
+<div class="container-fluid">
+    <h2>Shortlisted Resumes</h2>
+    <div class="blackbox horizon add-height">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% set ns = namespace(x=1) %}
+        <table class="table  table-hover">
+            <thead>
+                <tr class="table-warning">
+                    {% for element in user %}
+                    {% if element[0]|capitalize in list1 %}
+                    <th scope="col">{{ element[0]|capitalize }}</th>
+                    {% if element[0]|capitalize =='Box_link'%}
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                    <th>Percentage Accuracy</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in data %}
+                <tr>
+                    {% for i in range(result|length) %}
+                    <td>{{result[i]}}</td>
+                    {% set ns.x =result[i] %}
+                    {% endfor %}
+                    <td>{{msg[ns.x]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

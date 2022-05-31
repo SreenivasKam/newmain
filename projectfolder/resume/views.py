@@ -17,9 +17,6 @@ def resumer():
     cur.execute(
         "Select * FROM emp_profiles;")
     data = list(cur.fetchall())
-    cur.execute(
-        "Select * FROM emp_profiles;")
-    data = list(cur.fetchall())
     mysql.connection.commit()
     return render_template('resume.html', user=header,data=data,filter=0,session_info=connect.session_info)
     # return render_template('check.html',msg = connect.session_info['groupno'])

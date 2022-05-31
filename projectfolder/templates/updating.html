@@ -25,11 +25,12 @@
 
                             <div class="form-group">
                                 {% if user[i][0]|lower in count %}
+                                {% if user[i][0]|lower in notimpdrop %}
                                 <label for={{user[i][0]|lower}}>{{user[i][0]}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
                                     class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
                                     title="{{b[0][1]}}"></i>
                                 <br>
-                                <select name={{user[i][0]|lower}} id={{user[i][0]|lower}} class="col-8" required>
+                                <select name={{user[i][0]|lower}} id={{user[i][0]|lower}} class="col-8">
                                     <option value="{{msg[0][i]}}">{{msg[0][i]}}</option>
                                     <option value="None">None</option>
                                     {% for element in tabledata %}
@@ -40,29 +41,58 @@
                                     {% endfor %}
                                 </select>
                                 {% else %}
+                                <label for={{user[i][0]|lower}}>{{user[i][0]}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
+                                    class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
+                                    title="{{b[0][1]}}"></i>
+                                <i class="fa-solid fa-star fa-2xs" style="color:red"></i><br>
+                                <select name={{user[i][0]|lower}} id={{user[i][0]|lower}} class="col-8" required>
+                                    <option value="{{msg[0][i]}}">{{msg[0][i]}}</option>
+                                    <option value="None">None</option>
+                                    {% for element in tabledata %}
+                                    {% if element[0]==user[i][0]|lower%}
+                                    <option value="{{element[1]|string}}">{{element[1]}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                                {% endif %}
+                                {% else %}
                                 {% if user[i][0]|lower not in nothis %}
                                 <label for={{user[i][0]|lower}}>{{user[i][0]}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
                                     class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
                                     title="{{b[0][1]}}"></i>
                                 {% if b[0][2]=='date' %}
-                                <input type="date" class="form-control col-8" id="exampleInputEmail1"
-                                    name={{user[i][0]|lower}} value="{{msg[0][i]}}" required>
+                                {% if user[i][0]|lower in notimpdate %}
+                                <input type="date" class="form-control col-8" name={{user[i][0]|lower}}
+                                    value="{{msg[0][i]}}">
+                                {% else %}
+                                <i class="fa-solid fa-star fa-2xs" style="color:red"></i>
+                                <input type="date" class="form-control col-8" name={{user[i][0]|lower}}
+                                    value="{{msg[0][i]}}" required>
+                                {% endif %}
                                 {%else%}
-                                <input type="text" class="form-control col-8" id="exampleInputEmail1"
-                                    name={{user[i][0]|lower}} value="{{msg[0][i]}}" required>
+                                {% if user[i][0]|lower == 'id' %}
+                                <input type="text" class="form-control col-8" name={{user[i][0]|lower}}
+                                value="{{msg[0][i]}}" readonly>
+                                {% else %}
+                                <i class="fa-solid fa-star fa-2xs" style="color:red"></i>
+                                <input type="text" class="form-control col-8" name={{user[i][0]|lower}}
+                                    value="{{msg[0][i]}}" required>
+                                {% endif %}
+                                
+                                
                                 {% endif %}
                                 {% endif %}
                                 {% endif %}
                             </div>
-                        </td>
+                        </td> 
 
-                    {% endfor %}
+                        {% endfor %}
                 </tbody>
             </table>
             <label for="update_comments">Comments</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fa-solid fa-circle-info"
                 data-toggle="tooltip" data-placement="right" title="Message for updating this record"></i>
             <br>
-                <input type="text" class="col-3"  name="update_comments" required>
+            <input type="text" class="col-3" name="update_comments" required>
             <br>
             <input type="submit" class="btn btn-primary" value="Add Data">
             <input type="button" class="btn btn-primary" value="Cancel" onclick="history.back()" />

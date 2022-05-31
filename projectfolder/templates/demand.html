@@ -97,7 +97,7 @@
                             {% if session_info['groupno'] == 2  %}
                             <a class="dropdown-item" href="{{ url_for('demand.delete',id = ns.x) }}">Delete</a>
                             {% endif %}
-                            <a class="dropdown-item" href="{{ns.x}}resume">Shortlist Resumes</a>
+                            <a class="dropdown-item" href="{{ url_for('triage.shortlist',id = ns.x) }}">Shortlist Resumes</a>
 
                         </div>
                     </td>

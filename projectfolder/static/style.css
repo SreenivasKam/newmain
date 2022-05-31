@@ -199,6 +199,10 @@ button {
     width: 7px;
     height: 8px;
 }
+.fa-2xs{
+    margin-top: -10px;
+    font-size: 6px;
+}
 
 /* Track */
 ::-webkit-scrollbar-track {
@@ -239,8 +243,18 @@ small {
 }
 
 
-
-
+#button{
+    display: none;
+    background-color: transparent;
+    margin: 2px;
+}
+.padding{
+    padding-left: 2px;
+}
+.nomargin{
+    padding-left: 0px;
+    padding-right: 0px;
+}
 @media screen and (max-height: 450px) {
     .sidebar {
         padding-top: 15px;
@@ -268,5 +282,11 @@ small {
         width: 100% !important;
         background: lightgrey;
         height: 100vh;
+    }
+    #button{
+        display: inline-block;
+        background-color: transparent;
+        float: left;
+        margin: 10px;
     }
 }

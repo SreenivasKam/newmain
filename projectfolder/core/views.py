@@ -3,13 +3,12 @@ from flask_mysqldb import MySQL
 from projectfolder import app
 from projectfolder import mysql
 from datetime import datetime
+import cache
 
 core = Blueprint('core', __name__)
-
 @core.route('/')
 def login():
     return render_template('login.html')
-
 
 @core.route('/connect', methods=['GET', 'POST'])
 def connect():

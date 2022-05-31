@@ -56,7 +56,7 @@
             <a href="/resume"><i class="fa-solid fa-file rd"></i>Resume Pipeline</a>
         </div>
         <div id="aiswipe" class="">
-            <a href="#"><i class="fa-solid fa-brain rd"></i>AI/ML</a>
+            <a href="/triage"><i class="fa-solid fa-brain rd"></i>AI/ML</a>
         </div>
         <div id="settingswipe" class="">
             <a href="/settings"><i class="fa-solid fa-gear rd"></i>Settings</a>
@@ -74,7 +74,7 @@
                         <i onclick="location.href='/resume'" class="fa-solid fa-file sd"></i>
                     </div>
                     <div id="aiin" class=" ">
-                        <i class="fa-solid fa-brain sd"></i>
+                        <i onclick="location.href='/triage'" class="fa-solid fa-brain sd"></i>
                     </div>
                     <div id="settingin" class=" " >
                         <i onclick="location.href='/settings'" class="fa-solid fa-gear sd"></i>
@@ -83,10 +83,12 @@
             </div>
         </div>
         <div class=right-column>
-            <div class="container-fluid navb">
-                <i onclick="location.href='/logout'" class="fa-solid fa-right-to-bracket sd "></i>
-                &nbsp&nbsp
-                <a href="/logs"><i class="fa-solid fa-clipboard-list sd"></i></a>
+            <div class="container-fluid nomargin">
+                <div class="padding" ><button id ="button" class="openbtn" onclick="openNav()"> <i class="fa-solid fa-bars sd sd1"></i></button></div>
+                <div class="navb"><i onclick="location.href='/logout'" class="fa-solid fa-right-to-bracket sd "></i>
+                    &nbsp&nbsp
+                    <a href="/logs"><i class="fa-solid fa-clipboard-list sd"></i></a></div>
+                
             </div>
             <div>
                 {% block content %}

@@ -1,6 +1,9 @@
 from flask import Blueprint, render_template, request, flash, url_for, redirect
 from flask_mysqldb import MySQL
+import random
 from projectfolder import app,mysql
+from flask_mail import Mail, Message
+from projectfolder.trello.back import create_card
 from projectfolder.trello.back import create_list
 from projectfolder.core.views import connect
 from datetime import datetime
@@ -26,7 +29,9 @@ def demander():
 ########### screen which shows the columns for adding the data ###########
 @demand.route('/add_data')
 def add_data():
-    nothis = ['record_creation_date', 'last_updated_date', 'last_updated_by']
+    nothis = ['id','initiated_by','record_creation_date', 'last_updated_date', 'last_updated_by']
+    notimpdate = ['candidate_finalized_date','actual_doj','position_filled_with_emp_name','position_filled_with_source']
+    notimpdrop= ['fg_manager_name','att_director_name','att_avp_name']
     cur = mysql.connection.cursor()
     cur.execute(
         "SHOW COLUMNS FROM demands;")
@@ -44,7 +49,7 @@ def add_data():
     for ele in count:
         data.append(ele[0])
     cur.close()
-    return render_template('add_data.html', verify=list(verify), user=header, count=data, tabledata=tabledata, nothis=nothis)
+    return render_template('add_data.html', verify=list(verify), user=header, count=data, tabledata=tabledata, nothis=nothis,notimpdrop=notimpdrop,notimpdate=notimpdate)
     # return render_template('check.html',msg=nothis,count=data)
 
 ############# screen to show the filtering of the data ###########
@@ -106,26 +111,34 @@ def writedemand():
     dict1 = {'open':1}
     t = []
     m = []
-    priorityVaraiable, idvalue= ''
+    id = random.randint(3,999999)
+    m.append(id)
+    t.append(id)
+    priorityVaraiable=''
+    idvalue= id
+    name = ['initiated_by']
     nothis = ['record_creation_date', 'last_updated_date', 'last_updated_by','priority']
-    logs = ['id', 'status', 'sub_status']
+    logs = ['status', 'sub_status']
     if request.method == 'POST':
         # passing HTML form data into python variable
-        g = ''
-        for i in range(len(header)-4):
+        g = []
+        g.append('id')
+        for i in range(1,len(header)-4):
             s = str(header[i][0]).lower()
-            if(s in logs):
-                if(s=='status'):
-                    priorityVaraiable = request.form.get(s, False)
-                if(s=='id'):
-                    idvalue = request.form.get(s, False)
-                m.append(request.form.get(s, False))
-            t.append(request.form.get(s, False))
-            g = g+'%s,'
-            dict1[header[i][0].lower()] = request.form.get(s, False)
-
+            if(request.form.get(s, False)!=''):
+                g.append(s)
+                if(s in logs):
+                    if(s=='status'):
+                        priorityVaraiable = request.form.get(s, False)
+                    m.append(request.form.get(s, False))
+                    t.append(request.form.get(s, False))
+                else:
+                    if(s in name):
+                        t.append(connect.session_info['username'])
+                    else:
+                        t.append(request.form.get(s, False))
         for ele in nothis:
-            g = g+'%s,'
+            g.append(str(ele))
             now = datetime.now()
             dt_string = now.strftime("%Y-%m-%d")
             t.append(dt_string)
@@ -136,22 +149,29 @@ def writedemand():
         m = str(m)
         m = m[1:-1]
         t = t[:-2]
-        t.append(session_info['username'])
+        t.append(connect.session_info['username'])
         if(priorityVaraiable =='Open'):
             t.append(1)
         else:
             t.append(0)
-        g = g[:len(g)-1]
+        # return render_template('check.html',msg =(len(g),len(t)))
+        g = (',').join(g)
+        t = str(t)
+        t = t[1:-1]
         o = 'INSERT INTO data_logs VALUES (' + m + ');'
-        cur.execute('INSERT INTO demands VALUES ('+g+')', tuple(t))
-        cur.execute(o)
+        p= 'INSERT INTO demands ('+g+') VALUES ('+t+')'
+        cur.execute(p)
+        cur.execute(o)    
         mysql.connection.commit()
         # displaying message
         msg = 'Data has been added to the database'
-
         flash(msg)
         cur.close()
+        # server.sendmail(sender_email, receiver_email, message)
+        card_name ="New Job Demand for ID:" + str(id)+"  created by " + str(connect.session_info['username'])
+        create_card(card_name)
     return redirect(url_for('demand.demander'))
+    # return render_template('check.html',msg =(len(g),len(t),p))
 
 ############## screen to show the logs of the database ########################
 @demand.route('/logs')
@@ -176,11 +196,13 @@ def logs():
 ############ screen to the fields for updating the data#################
 @demand.route('/updates/<id>')
 def updates(id):
+    nothis = ['initiated_by','record_creation_date', 'last_updated_date', 'last_updated_by']
+    notimpdate = ['candidate_finalized_date','actual_doj','position_filled_with_emp_name','position_filled_with_source']
+    notimpdrop= ['fg_manager_name','att_director_name','att_avp_name']
     cur = mysql.connection.cursor()
     p = "Select * from demands where ID ='"+id+"';"
     cur.execute(p)
     sendata = list(cur.fetchall())
-    nothis = ['record_creation_date', 'last_updated_date', 'last_updated_by','priority']
     cur = mysql.connection.cursor()
     cur.execute(
         "SHOW COLUMNS FROM demands;")
@@ -200,7 +222,7 @@ def updates(id):
         
     # return render_template('check.html',msg = sendata)
     cur.close()
-    return render_template('updating.html', msg=sendata, verify=list(verify), user=header, count=data, tabledata=tabledata, nothis=nothis)
+    return render_template('updating.html', msg=sendata,notimpdrop=notimpdrop, verify=list(verify),notimpdate=notimpdate, user=header, count=data, tabledata=tabledata, nothis=nothis)
 
 ############## function to upodate the above changes to the database #############
 @demand.route('/changes', methods=['GET', 'POST'])
@@ -222,20 +244,21 @@ def changes():
         p = 'update demands set '
         for i in range(len(header)-4):
             s = str(header[i][0]).lower()
-            if(s == 'status'):
-                priorityVaraiable = request.form.get(s, False)
-            if(i == 0):
-                id = str(request.form.get(s, False))
-            else:
-                p = str(p) + s + " = '" + \
-                    str(request.form.get(s, False)) + "', "
-            if(s in logs):
-                m.append(request.form.get(s, False))
+            if((request.form.get(s, False) !=None) and (request.form.get(s, False) !='') ):
+                if(s == 'status'):
+                    priorityVaraiable = request.form.get(s, False)
+                if(i == 0):
+                    id = str(request.form.get(s, False))
+                else:
+                    p = str(p) + s + " = '" + \
+                        str(request.form.get(s, False)) + "', "
+                if(s in logs):
+                    m.append(request.form.get(s, False))
 
         now = datetime.now()
         dt_string = now.strftime("%Y-%m-%d")
         p = p+" last_updated_date = '" + dt_string + "', "
-        p = p+" last_updated_by = '"+ str(session_info['username']) + "', " 
+        p = p+" last_updated_by = '"+ str(connect.session_info['username']) + "', " 
         if(priorityVaraiable =='Open'):
             p = p + " priority = '1'" + " where ID = '" + id + "' ;"
         else:
@@ -261,13 +284,13 @@ def changes():
 ############### function to delete the data from the active demand and the database######
 @demand.route('/delete/<id>')
 def delete(id):
-    f = "delete from data_logs where unique_id = '" + id + "';"
-    p = "delete from demands where ID = '" + id + "';"
+    f = "delete from data_logs where unique_id = " + id + ";"
+    p = "delete from demands where ID = " + id + ";"
     cur = mysql.connection.cursor()
     current_time = datetime.now()
     new = current_time.strftime("%Y-%m-%d %H:%M:%S")
     id = "Removed ID: " + id
-    m = ['admin', 'Deleted', id]
+    m = ['2', 'Deleted', id]
     comments = "This data has been exhausted"
     current_time = datetime.now()
     m.append(comments)
