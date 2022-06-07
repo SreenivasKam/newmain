@@ -966,9 +966,7 @@ insert into user_table values (1,'Admin Access','adminaccess@gmail.com','````','
 31-05-2022
 show databases;
 USE project;
-
 show tables;
-describe emp_profiles;
 CREATE TABLE emp_profiles (Proposal_date date,
 unique_id varchar(255) primary key,
 pancard varchar(255),
@@ -1453,6 +1451,7 @@ describe session_table;
 -- insert into session_table values(1,current_timestamp());
 --  select * from user_table;
 insert into user_table values (1,'Admin Access','adminaccess@gmail.com','````','Invalid');
+<<<<<<< HEAD
 
 
 07/06/2022
@@ -1981,3 +1980,5 @@ foreign key (user_id) references user_table(user_id));
 -- insert into alloted_resumes values(9,'IYR5436',1,'Python,Java');
 -- select user_id from resumemapping order by mapped_resumes;
 
+=======
+>>>>>>> 79e07226ae40e12d063e7413a00e8ef5dee46ee2
