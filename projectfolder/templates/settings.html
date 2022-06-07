@@ -70,6 +70,10 @@
 <script>
     document.getElementById("jobswipe").classList.add("invisible");
     document.getElementById("jobin").classList.add("invisible");
+    document.getElementById("resumeing").onclick="location.href='/resume2'";
+    document.getElementById("resumeswipeing").href='/resume2';
+    var submitButton = document.getElementById('resumeing');
+    submitButton.setAttribute('onclick',  "location.href='/resume2");
 </script>
 {% endif %}
 <div class="container-fluid ">
@@ -90,9 +94,9 @@
                 {% endif %}
                 <div class="solid"></div>
                 {% if elementValue == 2  %}
-                <h6 class="present">Manage Legend</h6>
+                <h6 class="present" onclick="location.href='/managelegend'">Manage Legend</h6>
                 {% else %}
-                <h6>Manage Legend</h6>
+                <h6 onclick="location.href='/managelegend'">Manage Legend</h6>
                 {% endif %}
                 <div class="solid"></div>
                 {% endif %}
@@ -166,12 +170,14 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <select name=skill{{accessdata[i][0]}} required>
+                                            <input type="text" class="form-control" name=skill{{accessdata[i][0]}}
+                                                placeholder="Python,Bigdata" id="">
+                                            <!-- <select name=skill{{accessdata[i][0]}} required>
                                                 <option value="None">None</option>
                                                 {% for element in skills %}
                                                 <option value="{{element}}">{{element}}</option>
                                                 {% endfor %}
-                                            </select>
+                                            </select> -->
                                         </td>
                                     </tr>
                                     {% endfor %}
@@ -184,8 +190,50 @@
                         {% endif %}
                     </div>
                     {% elif elementValue == 2  %}
-                    <div class="container-fluid center1">
-                        <h1>2</h1>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                    {% if category=='error' %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endif %}
+
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <div class="container-fluid ">
+                        <h4>Manage Legend</h4>
+                        <form action="{{ url_for('settings.pushData1') }}" method="post">
+                            <div class="form-group">
+                                <label for="field">Select the legend type:</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
+                                    class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
+                                    title="Select the required fields"></i>
+                                <br>
+                                <select name="field" class="col-5" required>
+                                    <option value="None">None</option>
+                                    {% for element in typedata %}
+                                    <option value="{{element[0]|string}}">{{element[0]}}</option>
+                                    {% endfor %}
+                                </select>
+                                <br>
+                                <input type="text" name="val" class="form-control" placeholder="Enter new legend value"
+                                    style="width:42%" required>
+                                <input type="submit" class="btn btn-primary" value="Submit">
+
+                            </div>
+                        </form>
+
                     </div>
                     {% else %}
                     <div class="container-fluid center1">

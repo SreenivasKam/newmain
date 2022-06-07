@@ -10,14 +10,20 @@
     .card {
         padding: 6px;
     }
+    .left-column {
+        display: none;
+    }
+    .right-column{
+        width: 100%;
+    }
+
 </style>
 <div class="parent flex-parent">
     <div class="child flex-child">
         <h3>Requested JD</h3>
     </div>
     <div class="child flex-child push-right">
-        
-        <button type="button" class="btn1 only-shadow" onclick="history.back()">&nbsp&nbsp&nbsp&nbsp&nbspBack&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+        <input type="button" value ="Close" class="btn btn-primary" onclick="window.opener=null; window.close(); history.back(); return false;" />
     </div>
 </div>
 <div class="container-fluid">

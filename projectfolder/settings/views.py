@@ -38,6 +38,15 @@ def manageaccess():
       accessData = cur.fetchall()
       return render_template('settings.html',accessdata = list(accessData),tableHead =tableHead,groupList = groupList,skills = skills,elementValue = 1,session_info=connect.session_info)
 
+@settings.route('/managelegend')
+def managelegend():
+   cur =mysql.connection.cursor()
+   types="select distinct type_ from legend "
+   cur.execute(types)
+   typeData=cur.fetchall()
+   return render_template('settings.html',typedata=list(typeData),elementValue = 2,session_info=connect.session_info)
+
+
 @settings.route('/pushdata', methods=['GET', 'POST'])
 def pushData():
    groupList = ['Manager','Master Admin','Tech SPOCs','Staffing Team']
@@ -59,3 +68,18 @@ def pushData():
    mysql.connection.commit()
    flash('User approved','success')
    return redirect(url_for('settings.manageaccess'))
+
+@settings.route('/pushdata1', methods=['GET', 'POST'])
+def pushData1():
+   cur =mysql.connection.cursor()
+   types="select distinct type_ from legend "
+   cur.execute(types)
+   typeData=cur.fetchall()
+   if request.method == 'POST':
+        name = request.form.get('field', False)
+        val = request.form.get('val', False)
+        o = "insert into legend (type_,value_) values ('" + name + "','" + val + "');"
+        cur.execute(o)
+        mysql.connection.commit()
+   flash('Legend Successfully added to Database','success')
+   return redirect(url_for('settings.managelegend'))

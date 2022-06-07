@@ -12,7 +12,7 @@ resume = Blueprint('resume', __name__)
 def resumer():
     cur = mysql.connection.cursor()
     cur.execute(
-        "SHOW COLUMNS FROM emp_profiles;")
+        "Select type_ from resume_comments;")
     header = list(cur.fetchall())
     cur.execute(
         "Select * FROM emp_profiles;")
@@ -20,6 +20,35 @@ def resumer():
     mysql.connection.commit()
     return render_template('resume.html', user=header,data=data,filter=0,session_info=connect.session_info)
     # return render_template('check.html',msg = connect.session_info['groupno'])
+@resume.route('/resume2')
+def resumer2():
+    cur = mysql.connection.cursor()
+    cur.execute(
+        "Select * FROM  hiring_legends;")
+    tabledata = list(cur.fetchall())
+    cur.execute(
+        "Select type_ from resume_comments;")
+    header = list(cur.fetchall())
+    cur.execute(
+        "(select unique_id,demand_id from resumemapping where user_id =" + str(connect.session_info['id']) + ");")
+    data1 = list(cur.fetchall())
+    d1 = {}
+    for p in data1:
+        if(p[1] in d1.keys()):
+            d1[p[1]].append(p[0])
+        else:
+            d1[p[1]] = []
+            d1[p[1]].append(p[0])
+    x =  list(d1.values())
+    k = ['0']+[j for i in x for j in i]
+    k = str(k)
+    k = k[1:-1]
+    l = "Select * FROM emp_profiles where unique_id in (" +k+");"
+    cur.execute(l)
+    data = list(cur.fetchall())
+    mysql.connection.commit()
+    return render_template('resume2.html', dict1 = d1,tabledata =tabledata ,user=header,data=data,filter=0,session_info=connect.session_info)
+    # return render_template('check.html',msg =l)
 
 @resume.route('/add_data_resume')
 def add_data_resume():
@@ -28,6 +57,9 @@ def add_data_resume():
     cur.execute(
         "SHOW COLUMNS FROM emp_profiles;")
     header = list(cur.fetchall())
+    cur.execute(
+        "select type_ from resume_comments;")
+    head = list(cur.fetchall())
     cur.execute(
         "Select * FROM  resume_comments;")
     verify = list(cur.fetchall())
@@ -39,7 +71,7 @@ def add_data_resume():
     jdData = list(cur.fetchall())
     count = ['cdo_tower_status','linking_jd']
     cur.close()
-    return render_template('add_data_resume.html', verify=list(verify),jdData = jdData,user=header,count=count,tabledata = tabledata,nothis=nothis)
+    return render_template('add_data_resume.html', verify=list(verify),head=head,jdData = jdData,user=header,count=count,tabledata = tabledata,nothis=nothis)
     #return render_template('check.html',msg=nothis,count=data)
 
 @resume.route('/writeresume', methods=['GET','POST'])
@@ -273,3 +305,24 @@ def contact():
             cur.execute("select * from demands where id = '" + str(field) + "';")
             sendData = cur.fetchone()
             return render_template('viewjd.html',titles=header,sendData=sendData)
+
+
+@resume.route('/reject')
+def reject():
+    pass
+
+@resume.route('/selected')
+def selected():
+    pass
+
+
+@resume.route('/viewjd/<key1>')
+def viewedjd(key1):
+    cur = mysql.connection.cursor()
+    cur.execute(
+    "SHOW COLUMNS FROM demands;")
+    header = (cur.fetchall())
+    cur.execute("select * from demands where id = '" + str(key1) + "';")
+    sendData = cur.fetchone()
+    return render_template('viewjd.html',titles=header,sendData=sendData)
+

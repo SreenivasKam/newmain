@@ -72,9 +72,11 @@ from projectfolder.resume.views import resume
 from projectfolder.core.views import core
 from projectfolder.triage.views import triage
 from projectfolder.settings.views import settings
+from projectfolder.panelist.views import panelist
 app.register_blueprint(error_pages)
 app.register_blueprint(core)
 app.register_blueprint(demand)
 app.register_blueprint(settings)
 app.register_blueprint(resume)
 app.register_blueprint(triage)
+app.register_blueprint(panelist)

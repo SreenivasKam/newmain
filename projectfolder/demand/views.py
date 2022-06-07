@@ -3,8 +3,8 @@ from flask_mysqldb import MySQL
 import random
 from projectfolder import app,mysql
 from flask_mail import Mail, Message
-from projectfolder.trello.back import create_card
-from projectfolder.trello.back import create_list
+# from projectfolder.trello.back import create_card
+# from projectfolder.trello.back import create_list
 from projectfolder.core.views import connect
 from datetime import datetime
 
@@ -16,26 +16,30 @@ def demander():
     if(connect.session_info['groupno']!=3):
         cur = mysql.connection.cursor()
         cur.execute(
-            "SHOW COLUMNS FROM demands;")
+            "Select type_ FROM demand_comments;")
         header = (cur.fetchall())
         cur.execute("SELECT * from demands order by priority desc,last_updated_date desc;")
         data = list(cur.fetchall())
         cur.close()
         return render_template('demand.html', user=header, data=data, filter=0,session_info=connect.session_info)
     else:
-        return redirect(url_for('resume.resumer'))
+        return redirect(url_for('resume.resumer2'))
         # return render_template('check.html', msg = session_info['groupno'])
 
 ########### screen which shows the columns for adding the data ###########
 @demand.route('/add_data')
 def add_data():
-    nothis = ['id','initiated_by','record_creation_date', 'last_updated_date', 'last_updated_by']
-    notimpdate = ['candidate_finalized_date','actual_doj','position_filled_with_emp_name','position_filled_with_source']
-    notimpdrop= ['fg_manager_name','att_director_name','att_avp_name']
+    nothis = ['id','initiated_by','record_creation_date', 'last_updated_date', 'last_updated_by','priority']
+    notimpdate = ['candidate_finalized_date','actual_doj','position_filled_with_emp_name','priority','position_filled_with_source']
+    notimpdrop= ['fg_manager_name','att_director_name','att_avp_name','priority']
+    skills =['skill_with_experience']
     cur = mysql.connection.cursor()
     cur.execute(
         "SHOW COLUMNS FROM demands;")
     header = list(cur.fetchall())
+    cur.execute(
+        "Select type_ FROM demand_comments;")
+    head = list(cur.fetchall())
     cur.execute(
         "Select * FROM demand_comments;")
     verify = list(cur.fetchall())
@@ -49,7 +53,7 @@ def add_data():
     for ele in count:
         data.append(ele[0])
     cur.close()
-    return render_template('add_data.html', verify=list(verify), user=header, count=data, tabledata=tabledata, nothis=nothis,notimpdrop=notimpdrop,notimpdate=notimpdate)
+    return render_template('add_data.html', verify=list(verify),head=head,skills=skills, user=header, count=data, tabledata=tabledata, nothis=nothis,notimpdrop=notimpdrop,notimpdate=notimpdate)
     # return render_template('check.html',msg=nothis,count=data)
 
 ############# screen to show the filtering of the data ###########
@@ -60,7 +64,7 @@ def filter():
         "SELECT * FROM legend where type_ in ('status','primary_jrss','position_type')")
     count = list(cur.fetchall())
     cur.close()
-    return render_template('filter.html', count=count)
+    return render_template('check.html', count=count)
 
 ################# function to return the filtered data ################
 @demand.route('/demandfil', methods=['GET', 'POST'])
@@ -168,8 +172,8 @@ def writedemand():
         flash(msg)
         cur.close()
         # server.sendmail(sender_email, receiver_email, message)
-        card_name ="New Job Demand for ID:" + str(id)+"  created by " + str(connect.session_info['username'])
-        create_card(card_name)
+        # card_name ="New Job Demand for ID:" + str(id)+"  created by " + str(connect.session_info['username'])
+        # create_card(card_name)
     return redirect(url_for('demand.demander'))
     # return render_template('check.html',msg =(len(g),len(t),p))
 

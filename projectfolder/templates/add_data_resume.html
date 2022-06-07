@@ -7,16 +7,13 @@
 <div class="container-fluid">
     <div class=" blackbox add-height">
         <form action="{{ url_for('resume.writeresume') }}" method="post">
-            <table class="table ">
-                <thead>
-                    <h3>Add data</h3>
-                </thead>
-                <tbody>
+            <h3>Add data</h3>
+            <div class="container">
+                <div class="row">
                     {% for i in range(user|length -2)%}
                     {% if i%2==0 %}
-                    <tr>
                         {% endif %}
-                        <td>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
                             {% set a=verify[i]|string %}
                             {% set c=a.strip("')")%}
                             {% set d=c.strip("('")%}
@@ -24,7 +21,7 @@
                             <div class="form-group">
                                 {% if user[i][0]|lower in count %}
                                 {% if user[i][0]|lower == 'linking_jd' %}
-                                <label for={{user[i][0]|lower}}>{{user[i][0]|capitalize}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
+                                <label for={{user[i][0]|lower}}>{{head[i][0]}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
                                 class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
                                 title="{{b[0][1]}}"></i>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fa-solid fa-star fa-2xs" style="color:red"></i><br>
                                 <select name={{user[i][0]|lower}} id={{user[i][0]|lower}}  class="col-8" required>
@@ -34,7 +31,7 @@
                                     {% endfor %}
                                 </select>
                                 {% else %}
-                                <label for={{user[i][0]|lower}}>{{user[i][0]|capitalize}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
+                                <label for={{user[i][0]|lower}}>{{head[i][0]}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
                                 class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
                                 title="{{b[0][1]}}"></i>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fa-solid fa-star fa-2xs" style="color:red"></i><br>
                                 <select name={{user[i][0]|lower}} id={{user[i][0]|lower}}  class="col-8" required>
@@ -46,7 +43,7 @@
                                 {% endif %}
                                 {% else %}
                                 {% if user[i][0]|lower not in nothis %}
-                                <label for={{user[i][0]|lower}}>{{user[i][0]|capitalize}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp
+                                <label for={{user[i][0]|lower}}>{{head[i][0]}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp
                                 <i class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
                                     title="{{b[0][1]}}"></i>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fa-solid fa-star fa-2xs" style="color:red"></i>
                                     {% if b[0][2]=='date' %}
@@ -59,13 +56,12 @@
                                 {% endif %}
                                 {% endif %}
                             </div>
-                        </td>
+                        </div>
                         {% if i%2==1 %}
-                    </tr>
                     {% endif %}
                     {% endfor %}
-                </tbody>
-            </table>
+                </div>
+            </div>
             <input type="submit" class="btn btn-primary" value="Add Data">
             <input type="button" class="btn btn-primary" value="Cancel" onclick="history.back()"/>
         </form>

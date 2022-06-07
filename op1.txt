@@ -1,0 +1,215 @@
+name: saumya singh
+
+                   global business services        
+
+mobile: 9076532930
+
+
+
+education 
+
+
+
+qualifications
+
+
+
+
+
+
+
+degree
+
+university
+
+bachelor of technology (b.tech)
+
+pranveer singh institute of technology/dr.apj abdul kalam technical university . 
+
+
+
+	professional experience	
+
+profile
+
+
+
+having 2.5 years of experience in it industry.
+
+ability to develop mapping using informatica developer tool & usage of transformation in it.
+
+fair working experience on informatica dei tool using json as a source and target.
+
+used amazon s3 services as a source and target.
+
+performed data validation by writing hql queries.
+
+fair understanding of apache spark with python & hadoop ecosystem.
+
+ability to develop data processing tasks using pyspark for reading data from the external sources, merge data ,perform data enrichments & load into target.
+
+converting sql queries to spark transformation.
+
+used spark2.1.x api to stream data from various sources in real time & developed spark scripts as per the requirement.
+
+developed spark code using spark sql & dataframes for aggregation.
+
+worked in data migration project for configuration changes & testing .
+
+creating the zena jobs for the daily loads.
+
+scheduling the jobs via zena tool.
+
+helping with data loading in non-prod regions.
+
+fair experience in the field of database technologies ,etl design, bigdata technologies and designed & worked on real-time data use cases. 
+
+extensive experience in performance tuning and designing data flow in large scale hadoop ecosystems.
+
+good understanding of dw-dimensional systems and data lake systems & concepts.
+
+hands on experience in hadoop ecosystem (apache) and hadoop stack-hive, informatica bdm tool.
+
+basic understanding of spark transformation, actions.
+
+strong perseverance and diligence towards attaining challenging goals and possess good communication skills and quick learning ability.
+
+good communication skills, interpersonal skills, self-motivated, quick learner, team player.
+
+
+
+
+
+key skills
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+bigdata stack/technologies
+
+hive, ambari, spark
+
+programming & scripting
+
+python, unix-shell scripting
+
+scientific packages
+
+numpy, pandas
+
+database
+
+oracle
+
+nosql/columnar db
+
+impala
+
+etl tools
+
+informatica dei, informatica bdm
+
+
+
+career history
+
+
+
+
+
+
+
+
+
+
+
+
+
+assignment history
+
+
+
+
+
+
+
+
+
+company 
+
+duration
+
+ibm india pvt ltd
+
+oct 2021 to till date
+
+tata consultancy services ltd
+
+june 2019 to oct 2021
+
+
+
+company
+
+ibm (oct 2021-till date)-bcbsma
+
+role
+
+data engineer– data platform
+
+responsibilities
+
+worked in healthcare domain
+
+worked on informatica dei tool to develop mappings using json as a source.
+
+used amazon s3 services as source and target.
+
+
+
+
+
+
+
+			
+
+company
+
+tcs (june 2019-oct 2021)
+
+role
+
+system engineer– data platform
+
+responsibilities
+
+worked in insurance domain for non-life (auto ,property)
+
+worked on informatica bdm tool to develop mappings.
+
+fair knowledge on pyspark 
+
+
+
+
+
+
+
+
+
+page 1 of 6

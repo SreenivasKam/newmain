@@ -42,10 +42,12 @@
                     {% for element in user %}
                     {% if element[0] == 'priority' %}
                     <th> &nbsp </th>
+                    <th></th>
                     {% else %}
-                    <th scope="col">{{ element[0] }}</th>
+                    <th scope="col">{{ element[0]}}</th>
                     {% endif %}
                     {% endfor %}
+                    <th></th>
                     <th></th>
                 </tr>
             </thead>

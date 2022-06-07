@@ -8,8 +8,16 @@
 <script>
     document.getElementById("jobswipe").classList.add("invisible");
     document.getElementById("jobin").classList.add("invisible");
+    document.getElementById("resumeswipeing").href = '/resume2';
+    var submitButton = document.getElementById('resumeing');
+    submitButton.setAttribute('onclick', "location.href='/resume2");
 </script>
 {% endif %}
+<style>
+    .disabled-link {
+        pointer-events: none;
+    }
+</style>
 <div class="parent flex-parent">
     <div class="child flex-child">
         <h2>Resume Tracker</h2>
@@ -21,8 +29,6 @@
         {% endif %}
     </div>
     <div class="child flex-child push-right">
-
-        <button type="button" class="btn1 only-shadow" onclick="location.href='/add_data_resume'">+ New&nbsp</button>
         <button type="button" class="btn1 only-shadow"
             onclick="location.href='/filter_resume'">&nbsp&nbsp&nbspFilter&nbsp&nbsp&nbsp </button>
     </div>
@@ -46,7 +52,7 @@
                     <th> &nbsp</th>
                     {% endif %}
                     {% endfor %}
-                    <th></th>
+                    <th>Status of the profile</th>
                     <th></th>
                 </tr>
             </thead>
@@ -70,22 +76,42 @@
                         </form>
                     {% endif %} -->
                     {% if ns.x == 10 %}
-                    <td><button href ="{{elment}}" onclick=" window.open('{{element}}','_blank')"
+                    <td><button href="{{elment}}" onclick=" window.open('{{element}}','_blank')"
                             class="btn btn-success down ">open</button></td>
                     {% endif %}
 
                     {% endfor %}
                     <td>
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        <select class="col-8" required>
+                            <option value="None">None</option>
+                            {% for element in tabledata %}
+                            <option value="{{element[1]}}">{{element[1]}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        {% for key, value in dict1.items() %}
+                        {% if  nd.k|string in value%}
+                        <a class="btn btn-warning down" href="{{ url_for('resume.viewedjd',key1=key) }}"
+                            class="disabled-link">View Jd</a>
+                        {% endif %}
+                        {% endfor %}
+                        <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-expanded="false">
                             Actions
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ url_for('resume.updated',id = nd.k) }}">Update</a>
-                            {% if session_info['groupno'] == 2  %}
-                            <a class="dropdown-item" href="{{ url_for('resume.deleted',id = nd.k) }}">Delete</a>
+                            {% if session_info['groupno'] == 3  %}
+                            <a class="dropdown-item" href="{{ url_for('resume.selected',id = nd.k) }}">Select for Interview</a>
+                            <a class="dropdown-item" href="{{ url_for('resume.reject',id = nd.k) }}">Reject</a>
+                            
+                            {% for key, value in dict1.items() %}
+                                {% if  nd.k|string in value%}
+                                <a class="dropdown-item" href="{{ url_for('resume.viewedjd',key1=key) }}"  class="disabled-link">View Jd</a>
+                                {% endif %}
+                            {% endfor %}
                             {% endif %}
-                        </div>
+                        </div> -->
                     </td>
                     {% endfor %}
                 </tr>
