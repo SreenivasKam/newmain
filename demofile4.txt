@@ -1,0 +1,12 @@
+Update user_table set skills = 'Spark,Pyspark,Databricks' where user_id = 2 ;
+insert into access_table (groupid,user_id,skills) values (3,2,'Spark,Pyspark,Databricks');
+Update user_table set skills = 'Power BI,SQL' where user_id = 3 ;
+insert into access_table (groupid,user_id,skills) values (3,3,'Power BI,SQL');
+Update user_table set skills = 'Spark,Pyspark,Databricks' where user_id = 4 ;
+insert into access_table (groupid,user_id,skills) values (3,4,'Spark,Pyspark,Databricks');
+Update user_table set skills = 'DW designer' where user_id = 5 ;
+insert into access_table (groupid,user_id,skills) values (3,5,'DW designer');
+Update user_table set skills = 'Data modelling,Data ware house designing' where user_id = 6 ;
+insert into access_table (groupid,user_id,skills) values (3,6,'Data modelling,Data ware house designing');
+Update user_table set skills = 'Azure' where user_id = 7 ;
+insert into access_table (groupid,user_id,skills) values (3,7,'Azure');

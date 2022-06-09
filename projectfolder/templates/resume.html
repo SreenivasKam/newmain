@@ -47,7 +47,6 @@
                     {% endif %}
                     {% endfor %}
                     <th></th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -58,7 +57,7 @@
                     {% for element in result %}
                     <td>{{element}}</td>
                     {% set ns.x = ns.x + 1 %}
-                    {% if ns.x==3 %}
+                    {% if ns.x==2 %}
                     {% set nd.k = element %}
                     {% endif %}
 

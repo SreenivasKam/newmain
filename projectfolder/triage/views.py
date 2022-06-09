@@ -40,14 +40,14 @@ def shortlist(id):
     for ele in paths:
         d=0
         checknumber=0
-        result = executetrige(ele[8], fetchData)
-        newdict[ele[1]] = result
+        result = executetrige(ele[9], fetchData)
+        newdict[ele[0]] = result
         # return render_template('check.html',msg = paths)
         if(result=='Shortlisted'):
             cur.execute('select user_id from resumemapping ;')
             listuser1 = cur.fetchall()
             listuser = list(map(lambda x: x[0], listuser1))
-            il = "select demand_id from resumemapping where unique_id = '" + str(ele[1])+"';"
+            il = "select demand_id from resumemapping where position_id = " + str(ele[0])+";"
             cur.execute(il)
             getdata = list(cur.fetchall())
             getfeed = list(map(lambda x: str(x[0]), getdata))
@@ -65,7 +65,7 @@ def shortlist(id):
                         if(check):
                             # return render_template('check.html',msg =(k,skill) )
                             o = "insert into alloted_resumes values("+str(i[0])+",1,'"+str(i[1])+"');"
-                            po = "insert into resumemapping values("+str(i[0])+","+str(id)+",'"+str(ele[1])+"','Sent for Review');"
+                            po = "insert into resumemapping values("+str(i[0])+","+str(id)+","+str(ele[0])+",'Sent for Review');"
                             # return render_template('check.html',msg = (po,o))
                             cur.execute(po)
                             cur.execute(o)
@@ -82,7 +82,7 @@ def shortlist(id):
                             if(check):
                                 # return render_template('check.html',msg = (i[0],listuser))
                                 o = "insert into alloted_resumes values("+str(i[0])+",1,'"+str(i[1])+"');"
-                                po = "insert into resumemapping values("+str(i[0])+","+str(id)+",'"+str(ele[1])+"','Sent for Review');"
+                                po = "insert into resumemapping values("+str(i[0])+","+str(id)+","+str(ele[0])+",'Sent for Review');"
                                 # return render_template('check.html',msg =po)
                                 cur.execute(po)
                                 cur.execute(o)
@@ -104,7 +104,7 @@ def shortlist(id):
                             if(check):
                                 p = number[1]+1
                                 o = "update alloted_resumes set numberofresumes=" + str(p) + " where user_id = " +str(number[0])+";"
-                                po = "insert into resumemapping values("+str(number[0])+","+str(id)+",'"+str(ele[1])+"','Sent for Review');"
+                                po = "insert into resumemapping values("+str(number[0])+","+str(id)+","+str(ele[0])+",'Sent for Review');"
                                 # return render_template('check.html',msg =po)
                                 cur.execute(po)
                                 cur.execute(o)
@@ -120,7 +120,7 @@ def shortlist(id):
     ########################
     mysql.connection.commit()
     if(f==1):
-        flash("Shortlisted Resume have been sent for review"+str(qw)+"")
+        flash("Shortlisted Resume have been sent for review ")
     else:
-        flash("no new resumes for shortlist"+str(qw)+"")
+        flash("No new resumes for shortlist")
     return redirect(url_for('demand.demander'))

@@ -64,7 +64,7 @@
                     {% for element in result %}
                     <td>{{element}}</td>
                     {% set ns.x = ns.x + 1 %}
-                    {% if ns.x==3 %}
+                    {% if ns.x==2 %}
                     {% set nd.k = element %}
                     {% endif %}
 
@@ -91,7 +91,7 @@
                     </td>
                     <td>
                         {% for key, value in dict1.items() %}
-                        {% if  nd.k|string in value%}
+                        {% if  nd.k in value%}
                         <a class="btn btn-warning down" href="{{ url_for('resume.viewedjd',key1=key) }}"
                             class="disabled-link">View Jd</a>
                         {% endif %}

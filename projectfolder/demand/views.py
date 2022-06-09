@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, url_for, redirect
+from flask import Blueprint, session,render_template, request, flash, url_for, redirect
 from flask_mysqldb import MySQL
 import random
 from projectfolder import app,mysql
@@ -13,18 +13,21 @@ demand = Blueprint('demand', __name__)
 ############## Screen for displaying the active job demands ###############
 @demand.route('/demand')
 def demander():
-    if(connect.session_info['groupno']!=3):
-        cur = mysql.connection.cursor()
-        cur.execute(
-            "Select type_ FROM demand_comments;")
-        header = (cur.fetchall())
-        cur.execute("SELECT * from demands order by priority desc,last_updated_date desc;")
-        data = list(cur.fetchall())
-        cur.close()
-        return render_template('demand.html', user=header, data=data, filter=0,session_info=connect.session_info)
-    else:
-        return redirect(url_for('resume.resumer2'))
+    if(session['id']):
+        if(session['groupno']!=3):
+            cur = mysql.connection.cursor()
+            cur.execute(
+                "Select type_ FROM demand_comments;")
+            header = (cur.fetchall())
+            cur.execute("SELECT * from demands order by priority desc,last_updated_date desc;")
+            data = list(cur.fetchall())
+            cur.close()
+            return render_template('demand.html', user=header, data=data, filter=0,session_info=session)
+        else:
+            return redirect(url_for('resume.resumer2'))
         # return render_template('check.html', msg = session_info['groupno'])
+    else:
+        return redirect(url_for('core.logout'))
 
 ########### screen which shows the columns for adding the data ###########
 @demand.route('/add_data')
@@ -64,6 +67,7 @@ def filter():
         "SELECT * FROM legend where type_ in ('status','primary_jrss','position_type')")
     count = list(cur.fetchall())
     cur.close()
+    # return render_template('check.html',msg=session['username'])
     return render_template('filter.html', count=count)
 
 ################# function to return the filtered data ################
@@ -138,7 +142,7 @@ def writedemand():
                     t.append(request.form.get(s, False))
                 else:
                     if(s in name):
-                        t.append(connect.session_info['username'])
+                        t.append(session['username'])
                     else:
                         t.append(request.form.get(s, False))
         for ele in nothis:
@@ -153,7 +157,7 @@ def writedemand():
         m = str(m)
         m = m[1:-1]
         t = t[:-2]
-        t.append(connect.session_info['username'])
+        t.append(session['username'])
         if(priorityVaraiable =='Open'):
             t.append(1)
         else:
@@ -163,7 +167,7 @@ def writedemand():
         t = str(t)
         t = t[1:-1]
         o = 'INSERT INTO data_logs VALUES (' + m + ');'
-        p= 'INSERT INTO demands ('+g+') VALUES ('+t+')'
+        p= 'INSERT INTO demands ('+g+') VALUES ('+t+');'
         cur.execute(p)
         cur.execute(o)
         f = open("demofile2.txt", "a")
@@ -188,14 +192,14 @@ def logs():
     header = ['Unique Id','Status','Sub Status','Comments','Date Updated']
     cur.execute("SELECT * from data_logs order by date_updated desc limit 10;")
     data = list(cur.fetchall())
-    header1 = ['Unique Id','Status','Comments','Date Updated']
+    header1 = ['Position Id','Status','Comments','Date Updated']
     cur.execute("SELECT * from resume_logs order by date_updated desc limit 10;")
     data1 = list(cur.fetchall())
     cur.close()
-    if(connect.session_info['groupno'] != 3):  
-        return render_template('logs.html', user=header, data=data, user1=header1, data1=data1,showresume = 0,session_info=connect.session_info)
+    if(session['groupno'] != 3):  
+        return render_template('logs.html', user=header, data=data, user1=header1, data1=data1,showresume = 0,session_info=session)
     else:
-        return render_template('logs.html', user=header, data=data, user1=header1, data1=data1,showresume = 1,session_info=connect.session_info)
+        return render_template('logs.html', user=header, data=data, user1=header1, data1=data1,showresume = 1,session_info=session)
 
 ############ screen to the fields for updating the data#################
 @demand.route('/updates/<id>')
@@ -262,7 +266,7 @@ def changes():
         now = datetime.now()
         dt_string = now.strftime("%Y-%m-%d")
         p = p+" last_updated_date = '" + dt_string + "', "
-        p = p+" last_updated_by = '"+ str(connect.session_info['username']) + "', " 
+        p = p+" last_updated_by = '"+ str(session['username']) + "', " 
         if(priorityVaraiable =='Open'):
             p = p + " priority = '1'" + " where ID = '" + id + "' ;"
         else:
@@ -350,7 +354,7 @@ def filterLogsPushBack():
         cur.execute("SELECT * from resume_logs limit 10;")
         data1 = list(cur.fetchall())
         cur.close()
-        return render_template('logs.html', user=header, data=data, user1=header1, data1=data1,showresume = 0,session_info=connect.session_info)
+        return render_template('logs.html', user=header, data=data, user1=header1, data1=data1,showresume = 0,session_info=session)
 
 @demand.route('/shortlistedjd/<id>')
 def shortlistedjd(id):

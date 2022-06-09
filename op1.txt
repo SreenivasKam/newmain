@@ -1,16 +1,13 @@
-name: saumya singh
+vishal prakash
 
-                   global business services        
+data scientist
 
-mobile: 9076532930
 
 
 
-education 
 
 
 
-qualifications
 
 
 
@@ -18,198 +15,252 @@ qualifications
 
 
 
-degree
 
-university
 
-bachelor of technology (b.tech)
 
-pranveer singh institute of technology/dr.apj abdul kalam technical university . 
 
 
 
-	professional experience	
 
-profile
 
 
 
-having 2.5 years of experience in it industry.
 
-ability to develop mapping using informatica developer tool & usage of transformation in it.
 
-fair working experience on informatica dei tool using json as a source and target.
 
-used amazon s3 services as a source and target.
 
-performed data validation by writing hql queries.
 
-fair understanding of apache spark with python & hadoop ecosystem.
 
-ability to develop data processing tasks using pyspark for reading data from the external sources, merge data ,perform data enrichments & load into target.
 
-converting sql queries to spark transformation.
 
-used spark2.1.x api to stream data from various sources in real time & developed spark scripts as per the requirement.
 
-developed spark code using spark sql & dataframes for aggregation.
 
-worked in data migration project for configuration changes & testing .
 
-creating the zena jobs for the daily loads.
 
-scheduling the jobs via zena tool.
+9096153599
 
-helping with data loading in non-prod regions.
+vpraksh634@gmail.com deokar park pimple gurav pune :411061
 
-fair experience in the field of database technologies ,etl design, bigdata technologies and designed & worked on real-time data use cases. 
 
-extensive experience in performance tuning and designing data flow in large scale hadoop ecosystems.
 
-good understanding of dw-dimensional systems and data lake systems & concepts.
 
-hands on experience in hadoop ecosystem (apache) and hadoop stack-hive, informatica bdm tool.
 
-basic understanding of spark transformation, actions.
+objective
 
-strong perseverance and diligence towards attaining challenging goals and possess good communication skills and quick learning ability.
+	being a data scientist enthusiast looking for the challenging opportunity ,i intend to be a part of an organization where i can constantly learn and apply my knowledge, integrate myself into the organizational culture and diligently work to add value to it.
 
-good communication skills, interpersonal skills, self-motivated, quick learner, team player.
 
 
+summary
 
 
 
-key skills
+	having 3.6+ years of experience in data scientist & python development.
 
+	experience in the development of algorithm for machine learning and deep learning python .
 
+	experience in the image processing and nlp, computer vision.
 
+	experience in the development of modules for ai and neural network python and other technologies.
 
+	working experience in data manipulation and data wrangling packages in python and writing well designed, testable, efficient code by using best software development practices
 
+	creating website layout/user interfaces by using standard html/css practices. integrating data from
 
+	various back-end services and databases
 
+	experience in making responsible web pages using html,css, django framework
 
 
 
 
 
+experience
 
 
 
+	3.6+ years of experience as a data scientist with python developer at starsun technology pvt.ltd
 
+( www.starlinkinfo.in) from 10 july 2018 to the present.
 
 
 
-bigdata stack/technologies
+technical skills
 
-hive, ambari, spark
+	data scientist technologies: machine learning, deep learning, image processing ,nlp, neural network, artificial intelligence, computer vision, statistical tool.
 
-programming & scripting
+	languages: python, r
 
-python, unix-shell scripting
+	bigdata- hive, pyspark, scala.
 
-scientific packages
+	framework - django , aws,(ec2)
 
-numpy, pandas
+	web technologies : html, css ,
 
-database
+	ide and tools: sts, pycharm, anaconda, notepad++
 
-oracle
+	others- azure machine learning, tableau, sql, ms office suite.
 
-nosql/columnar db
 
-impala
 
-etl tools
+education
 
-informatica dei, informatica bdm
 
 
+	diploma in data science.
 
-career history
+	passed bachelors of engineering in electronics and telecommunication from amravati university
 
+	with cgpa 6.53.
 
+	passed diploma in electronics and telecommunication from msbte mumbai with aggregate of
 
+	69.82 %.
 
+	passed higher and secondary school certificate from maharashtra state board with 60%.
 
+	passed secondary school certificate from maharashtra state board with 57%.
 
 
 
+professional experience
 
+python developer
 
+ecommerce product classification:
 
+	the primary goal of an ecommerce site is to sell goods online. this project with developing an e-commerce website for online product sales. it provides the user with a catalog of different
 
+products available for purchase in the store. in order to facilitate online purchase, a shopping cart is
 
-assignment history
+provided to the user.
 
+	experience in data science technologies: python, r, and machine learning algorithms and data visualization tool tableau, deep learning, nlp
 
+	experience working on an ecommerce application
 
+	experience with developing object-oriented software in python
 
+	experience developing web services (soap/rest api)
 
+	backend software development lifecycle experience including the ability to perform independent analysis
 
+	experience and understanding of development lifecycle
 
+	experience in reviewing python code for running the troubleshooting test-cases and bug issues.
 
+	used python's sci-kit-learn library to understand the details of a client telemarketing campaign.
 
-company 
+	optimized the pricing of products in real-time.
 
-duration
+	designed and applied statistical and mathematical methods for corporate analytics that were implemented into client-facing products.
 
-ibm india pvt ltd
+	contributed model complex mobile carrier problems through using statistical, algorithmic, mining, and visualization techniques.
 
-oct 2021 to till date
+	produced operable insights using supervised and unsupervised machine learning.
 
-tata consultancy services ltd
+	predictive modeled, and statistical analysis using artificial neural networks (ann)
 
-june 2019 to oct 2021
+	used machine learning algorithms to build a model able to predict which clients to engage based on a variety of client, macro, and campaign-specific characteristics.
 
+	used python ide pycharm for developing the code and performing the unit test.
 
+	used perforce version control system and python tools for visual studio(ptvs) ide.
 
-company
+	create and write result reports in different formats like text, csv, xls, and json.
 
-ibm (oct 2021-till date)-bcbsma
+	worked on csv files while trying to get input from the sql database.
 
-role
 
-data engineer– data platform
 
-responsibilities
 
-worked in healthcare domain
 
-worked on informatica dei tool to develop mappings using json as a source.
+projects:
 
-used amazon s3 services as source and target.
+fraudulent insurance claim detection technology :
 
+	python, pyspark,numpy, scikit-learn, seaborn, random forest, logistic regression description: creating fraudulent insurance claim predicting model for our client.
 
+	i was able to predict that the insured has fraud claim or not. so that the client could decide whether to consider its claim or to investigate further before servicing it further. i applied logistic regression, decision tree, random forest algorithm for predictions.
 
+sentiment analysis of call conversation technology:
 
+	automatic pdf report python, nlp, nltk, deep speech, in this project we have a client from calling process where client have inbound call process. we have detect the sentiment from the call conversation to detect sentiments of both employee and the caller to improve the process. as well we have to generate the faq’s out of this conversations.
 
+classifier technology:
 
+		python, nlp, nltk, python-pdfbox, apache-pdfbox, in this
 
-			
+	project we have client who is in the fertilizer testing . in this project we are building the automatic pdf report classifier which will classify the report as a draft report and the final report .in addition to that we have to take some annotation details of that document on the basis of the report to store some metadata of that document..
 
-company
 
-tcs (june 2019-oct 2021)
 
-role
 
-system engineer– data platform
 
-responsibilities
 
-worked in insurance domain for non-life (auto ,property)
 
-worked on informatica bdm tool to develop mappings.
 
-fair knowledge on pyspark 
 
 
 
+projects:
 
+junior data scientist
 
+financial & data analytics:
 
+	develop data solutions using multiple sources: python, pyspark,r, and machine learning algorithms and data visualization tool tableau, deep learning, nlp computer vision, opencv,
 
+	cnn, mask r cnn, pytorch, rnn, nn, and other platform api’s
 
+	collaborate with team members to optimize customer
 
-page 1 of 6
+	data visualization of complex data and analytics result in the modern data visualization tool & predictive analytics
+
+	steering rapid model creation in python using pandas,numpy, scikit-learn &plot.ly for data visualization
+
+	analyze on system or data processes, data structures, analytics methods and apply key techniques of data science (machine learning, data mining, analysis) to build high-quality predictive system
+
+	self dependent execution and managing to analytical and project
+
+	identify hidden pattern or systematic risk using qualitative and quantitative data analysis
+
+	develop solutions allowing highly effective presentation and engaging visualization for decision making
+
+	work with the data scientist to develop a python codebase for predictive and prescriptive modeling, along with the development of other data science capabilities
+
+	created multivariate regression-based attribution model & segmentation module using k-means clustering
+
+	creating an nlp model for sentiment analysis  for predictive analytics in on aws(ec2)
+
+additional details
+
+
+
+	participated in ds global hackathon 2k19.
+
+	hobbies : catching snakes & cooking.
+
+
+
+	personal profile	
+
+	date of birth : 16 july 1989
+
+	gender : male
+
+	marital status : single
+
+	permanent address : buldana (maharashtra)
+
+	current address : pune (ms)
+
+
+
+	declaration	
+
+i hereby declare that the information provided above is true to the best of my knowledge and belief.
+
+
+
+vishal itware

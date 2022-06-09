@@ -6,62 +6,61 @@
 </script>
 <div class="container-fluid">
     <div class="  blackbox add-height">
+
         <form action="{{ url_for('resume.changesresume') }}" method="post">
-            <table class="table ">
-                <thead>
-                    <h3>Update data</h3>
-                </thead>
-                <tbody>
+            <h3>Update data</h3>
+            <div class="container">
+                <div class="row">
                     {% for i in range(user|length-1)%}
-                    {% if i%2==0 %}
-                    <tr>
-                        {% endif %}
-                        <td>
-                            {% set a=verify[i]|string %}
-                            {% set c=a.strip("')")%}
-                            {% set d=c.strip("('")%}
-                            {% set b =[d.split("', '")]%}
-                            <div class="form-group">
-                                {% if user[i][0]|lower in count %}
-                                <label for={{user[i][0]|lower}}>{{user[i][0]|capitalize}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        {% set a=verify[i]|string %}
+                        {% set c=a.strip("')")%}
+                        {% set d=c.strip("('")%}
+                        {% set b =[d.split("', '")]%}
+                        <div class="form-group">
+                            {% if user[i][0]|lower in count %}
+                            <label for={{user[i][0]|lower}}>{{header2[i][0]}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
                                 class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
                                 title="{{b[0][1]}}"></i><br>
-                                <select name={{user[i][0]|lower}} id={{user[i][0]|lower}} required>
-                                    <option value="{{msg[0][i]}}">{{msg[0][i]}}</option>
-                                    <option value="None">None</option>
-                                    {% for element in tabledata %}
-                                    <option value="{{element[1]}}">{{element[1]}}</option>
-                                    {% endfor %}
-                                </select>
-                                {% else %}
-                                {% if user[i][0]|lower not in nothis %}
-                                <label for={{user[i][0]|lower}}>{{user[i][0]|capitalize}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp
-                                <i class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
-                                    title="{{b[0][1]}}"></i>
-                                    {% if b[0][2]=='date' %}
-                                    <input type="date" class="form-control col-8" id="exampleInputEmail1"
-                                        name={{user[i][0]|lower}} value="{{msg[0][i]}}" required>
-                                    {%else%}
-                                    <input type="text" class="form-control col-8" id="exampleInputEmail1"
-                                        name={{user[i][0]|lower}} value="{{msg[0][i]}}" required>
-                                    {% endif %}
-                                {% endif %}
-                                {% endif %}
-                            </div>
-                        </td>
-                        {% if i%2==1 %}
-                    </tr>
-                    {% endif %}
+                            <select name={{user[i][0]|lower}} id={{user[i][0]|lower}} required>
+                                <option value="{{msg[0][i]}}">{{msg[0][i]}}</option>
+                                <option value="None">None</option>
+                                {% for element in tabledata %}
+                                <option value="{{element[1]}}">{{element[1]}}</option>
+                                {% endfor %}
+                            </select>
+                            {% else %}
+                            {% if user[i][0]|lower not in nothis %}
+                            <label for={{user[i][0]|lower}}>{{header2[i][0]}}</label>&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <i class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
+                                title="{{b[0][1]}}"></i>
+                            {% if b[0][2]=='date' %}
+                            <input type="date" class="form-control col-8" id="exampleInputEmail1"
+                                name={{user[i][0]|lower}} value="{{msg[0][i]}}" required>
+                            {%else%}
+                            {% if user[i][0]|lower == 'position_id' %}
+                            <input type="text" class="form-control col-8" id="exampleInputEmail1"
+                                name={{user[i][0]|lower}} value="{{msg[0][i]}}" readonly>
+                            {%else%}
+                            <input type="text" class="form-control col-8" id="exampleInputEmail1"
+                                name={{user[i][0]|lower}} value="{{msg[0][i]}}" required>
+                            {% endif %}
+                            {% endif %}
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
                     {% endfor %}
-                </tbody>
-            </table>
-            <label for="update_resume_comments">Comments</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fa-solid fa-circle-info"
-                data-toggle="tooltip" data-placement="right" title="Message for updating this record"></i>
+                </div>
+            </div>
+            <label for="update_resume_comments">Comments</label>&nbsp&nbsp&nbsp&nbsp&nbsp<i
+                class="fa-solid fa-circle-info" data-toggle="tooltip" data-placement="right"
+                title="Message for updating this record"></i>
             <br>
-                <input type="text" class="col-3"  name="update_resume_comments" required>
+            <input type="text" class="col-3" name="update_resume_comments" required>
             <br>
             <input type="submit" class="btn btn-primary" value="Add Data">
-            <input type="button" class="btn btn-primary" value="Cancel" onclick="history.back()"/>
+            <input type="button" class="btn btn-primary" value="Cancel" onclick="history.back()" />
         </form>
     </div>
 </div>

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, url_for, redirect
+from flask import Blueprint, render_template, request, flash, url_for, redirect,session
 from flask_mysqldb import MySQL
 from projectfolder import app
 from projectfolder import mysql
@@ -29,15 +29,15 @@ def connect():
                 cur.execute(data2)
                 groupData = cur.fetchone()
                 mysql.connection.commit()
-                # session_info['loggedin'] = True
-                # session_info['id'] = data[0]
-                # session_info['username'] = data[1]
-                # session_info['groupno'] = int(groupData[1])
-                session_info = {'loggedin':True,'id':data[0],'username':data[1],'groupno':int(groupData[1])}
-                connect.session_info =  session_info
+                session['loggedin'] = 'True'
+                session['id'] = data[0]
+                session['username'] = data[1]
+                session['groupno'] = int(groupData[1])
+                # session_info = {'loggedin':True,'id':data[0],'username':data[1],'groupno':int(groupData[1])}
+                # connect.session_info =  session_info
                 cur.close()
                 # return render_template('demand.html',sessionData = session_info)
-                return redirect(url_for('demand.demander',sessionData= str(session_info)))
+                return redirect(url_for('demand.demander'))
                 # return redirect(url_for('demand.demander',sessionData= str(session_info)))
                 #return render_template('check.html',msg = int(groupData[1]))
             else:
@@ -69,6 +69,10 @@ def signupdata():
         p = cur.fetchone()
         if(p==None):
             cur.execute(o)
+            f = open("demofile1.txt", "a")
+            f.write(o)
+            f.write('\n')
+            f.close()
             flash("Account created. Please login after the admin approves",'success')
         else:
             flash("Email Id already used! Please Login",'error')
@@ -82,25 +86,40 @@ def forgot():
 
 @core.route('/logout')
 def logout():
-    try:
-      if session_info['loggedin']:
-         pass
-    except:
-      cur = mysql.connection.cursor()
-      cur.execute("select * from session_table order by entry desc limit 1;")
-      data = cur.fetchone()
-      if(data[4] != 'N'):
-         session_info = {}
-         session_info['loggedin'] = True
-         session_info['id'] = data[1]
-         session_info['username'] = data[2]  
-    finally:
+    # try:
+    #   if session['loggedin']:
+    #      pass
+    # except:
+    #   cur = mysql.connection.cursor()
+    #   cur.execute("select * from session_table order by entry desc limit 1;")
+    #   data = cur.fetchone()
+    #   if(data[4] != 'N'):
+    #      session['loggedin'] = True
+    #      session['id'] = data[1]
+    #      session['username'] = data[2]  
+    # finally:
+    #     current_time = datetime.now()
+    #     current = current_time.strftime("%Y-%m-%d %H:%M:%S")
+    #     data1 = 'insert into session_table  (user_id,user_name,entry,logged_info) values(' + str(int(session_info['id'])) + ",'" +str(session_info['username']) + "','" +current +"','N');"
+    #     cur.execute(data1)
+    #     flash('Logged out successfully','success')
+    #     mysql.connection.commit()
+    #     cur.close()
+    #     return redirect(url_for('core.login'))
+    if session['loggedin']:
+        cur = mysql.connection.cursor()
         current_time = datetime.now()
         current = current_time.strftime("%Y-%m-%d %H:%M:%S")
-        data1 = 'insert into session_table  (user_id,user_name,entry,logged_info) values(' + str(int(session_info['id'])) + ",'" +str(session_info['username']) + "','" +current +"','N');"
+        data1 = 'insert into session_table  (user_id,user_name,entry,logged_info) values(' + str(int(session['id'])) + ",'" +str(session['username']) + "','" +current +"','N');"
         cur.execute(data1)
         flash('Logged out successfully','success')
         mysql.connection.commit()
         cur.close()
+        session['loggedin'] = 'False'
         return redirect(url_for('core.login'))
+    else:
+        session['loggedin'] = 'False'
+        flash('Session Timeout','Error')
+        return redirect(url_for('core.login'))
+    
         #return render_template('check.html',msg=data1)
