@@ -3,7 +3,7 @@ from flask_mysqldb import MySQL
 from projectfolder import app
 from projectfolder import mysql
 from datetime import datetime
-import cache
+# import cache
 
 core = Blueprint('core', __name__)
 @core.route('/')
@@ -38,6 +38,7 @@ def connect():
                 cur.close()
                 # return render_template('demand.html',sessionData = session_info)
                 return redirect(url_for('demand.demander',sessionData= str(session_info)))
+                # return redirect(url_for('demand.demander',sessionData= str(session_info)))
                 #return render_template('check.html',msg = int(groupData[1]))
             else:
                 if(data[4]=='Empty'):

@@ -9,4 +9,4 @@ from projectfolder.mlmodel.newcode import executetrige
 panelist = Blueprint('panelist', __name__)
 @panelist.route('/')
 def viewpalist():
-    return render_template('panelistscreen.html',result=result)
+    return render_template('panelistscreen.html')

@@ -27,7 +27,7 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'sree9078'
 app.config['MYSQL_DB'] = 'project'
 db = SQLAlchemy(app)
-Migrate(app,db)
+# Migrate(app,db)
 
 mysql = MySQL(app)
 ##########################################################

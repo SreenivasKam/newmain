@@ -83,3 +83,14 @@ def pushData1():
         mysql.connection.commit()
    flash('Legend Successfully added to Database','success')
    return redirect(url_for('settings.managelegend'))
+
+@settings.route('/viewusers')
+def viewusers():
+   cur =mysql.connection.cursor()
+   cur.execute(
+        "SHOW COLUMNS FROM user_table;")
+   header = ['User Id','User Name','Email','Skills']
+   types="select user_id,user_name,email,skills from user_table where user_id <> 1"
+   cur.execute(types)
+   typeData=cur.fetchall()
+   return render_template('settings.html',header=header,typeData=typeData,elementValue = 3,session_info=connect.session_info)

@@ -23,8 +23,7 @@
         float: right;
         width: 80%;
         background: rgb(245, 245, 245);
-        height: 100vh;
-        overflow-x: scroll;
+        height: fit-content;
         border-radius: 10px;
         padding: 15px;
     }
@@ -70,10 +69,10 @@
 <script>
     document.getElementById("jobswipe").classList.add("invisible");
     document.getElementById("jobin").classList.add("invisible");
-    document.getElementById("resumeing").onclick="location.href='/resume2'";
-    document.getElementById("resumeswipeing").href='/resume2';
+    document.getElementById("resumeing").onclick = "location.href='/resume2'";
+    document.getElementById("resumeswipeing").href = '/resume2';
     var submitButton = document.getElementById('resumeing');
-    submitButton.setAttribute('onclick',  "location.href='/resume2");
+    submitButton.setAttribute('onclick', "location.href='/resume2");
 </script>
 {% endif %}
 <div class="container-fluid ">
@@ -97,6 +96,12 @@
                 <h6 class="present" onclick="location.href='/managelegend'">Manage Legend</h6>
                 {% else %}
                 <h6 onclick="location.href='/managelegend'">Manage Legend</h6>
+                {% endif %}
+                <div class="solid"></div>
+                {% if elementValue == 3  %}
+                <h6 class="present" onclick="location.href='/viewusers'">View Active Users</h6>
+                {% else %}
+                <h6 onclick="location.href='/viewusers'">View Active Users</h6>
                 {% endif %}
                 <div class="solid"></div>
                 {% endif %}
@@ -234,6 +239,55 @@
                             </div>
                         </form>
 
+                    </div>
+                    {% elif elementValue == 3  %}
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                    {% if category=='error' %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endif %}
+
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <div class="container-fluid ">
+                        <h4>Active Users</h4>
+                        <table class="table table-hover">
+                            <thead class="thead">
+                                <tr class="table-warning">
+                                    {% for element in header %}
+                                    <th>{{ element}}</th>
+                                    {% endfor %}
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                                {% for i in typeData %}
+                                <tr class="table-light">
+                                    <td>{{i[0]}}</td>
+                                    <td>{{i[1]}}</td>
+                                    <td>{{i[2]}}</td>
+                                    <td>{{i[3]}}</td>
+                                    <td>
+                                        <button class="btn btn-danger down">Delete User</button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                     {% else %}
                     <div class="container-fluid center1">

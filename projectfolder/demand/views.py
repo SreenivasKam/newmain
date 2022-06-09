@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, flash, url_for, redirect
 from flask_mysqldb import MySQL
 import random
 from projectfolder import app,mysql
-from flask_mail import Mail, Message
+# from flask_mail import Mail, Message
 # from projectfolder.trello.back import create_card
 # from projectfolder.trello.back import create_list
 from projectfolder.core.views import connect
@@ -64,7 +64,7 @@ def filter():
         "SELECT * FROM legend where type_ in ('status','primary_jrss','position_type')")
     count = list(cur.fetchall())
     cur.close()
-    return render_template('check.html', count=count)
+    return render_template('filter.html', count=count)
 
 ################# function to return the filtered data ################
 @demand.route('/demandfil', methods=['GET', 'POST'])
@@ -165,7 +165,11 @@ def writedemand():
         o = 'INSERT INTO data_logs VALUES (' + m + ');'
         p= 'INSERT INTO demands ('+g+') VALUES ('+t+')'
         cur.execute(p)
-        cur.execute(o)    
+        cur.execute(o)
+        f = open("demofile2.txt", "a")
+        f.write(p)
+        f.write(o)
+        f.close()
         mysql.connection.commit()
         # displaying message
         msg = 'Data has been added to the database'
@@ -181,14 +185,10 @@ def writedemand():
 @demand.route('/logs')
 def logs():
     cur = mysql.connection.cursor()
-    cur.execute(
-        "SHOW COLUMNS FROM data_logs;")
-    header = (cur.fetchall())
+    header = ['Unique Id','Status','Sub Status','Comments','Date Updated']
     cur.execute("SELECT * from data_logs order by date_updated desc limit 10;")
     data = list(cur.fetchall())
-    cur.execute(
-        "SHOW COLUMNS FROM resume_logs;")
-    header1 = (cur.fetchall())
+    header1 = ['Unique Id','Status','Comments','Date Updated']
     cur.execute("SELECT * from resume_logs order by date_updated desc limit 10;")
     data1 = list(cur.fetchall())
     cur.close()
@@ -341,7 +341,6 @@ def filterLogsPushBack():
         o = "select * from data_logs where " + str(field) + " " + str(value) + " order by date_updated desc;"
         cur.execute(o)
         data = cur.fetchall()
-        cur = mysql.connection.cursor()
         cur.execute(
         "SHOW COLUMNS FROM data_logs;")
         header = (cur.fetchall())
@@ -353,3 +352,10 @@ def filterLogsPushBack():
         cur.close()
         return render_template('logs.html', user=header, data=data, user1=header1, data1=data1,showresume = 0,session_info=connect.session_info)
 
+@demand.route('/shortlistedjd/<id>')
+def shortlistedjd(id):
+    cur = mysql.connection.cursor()
+    header = ['User Id','Demand Id','Unique Id','Status']
+    cur.execute('select * from resumemapping where demand_id ='+str(id)+ ' order by user_id;')
+    data = cur.fetchall()
+    return render_template('viewshortlist.html',id=id,header=header,data=data)

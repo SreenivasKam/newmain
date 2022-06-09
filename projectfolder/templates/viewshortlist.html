@@ -1,0 +1,55 @@
+{% extends 'home.html' %}
+{% block content %}
+<style>
+    .align {
+        text-align: start;
+        padding: 10px;
+    }
+
+    .card {
+        padding: 6px;
+    }
+
+    .left-column {
+        display: none;
+    }
+
+    .right-column {
+        width: 100%;
+    }
+</style>
+<div class="parent flex-parent">
+    <div class="child flex-child">
+        <h3>Shortlised Resumes</h3>
+    </div>
+    <div class="child flex-child push-right">
+        <input type="button" value="Close" class="btn btn-primary"
+            onclick="window.opener=null; window.close(); history.back(); return false;" />
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="blackbox horizon add-height">
+        <table class="table table-hover">
+            <thead lass="thead">
+                <tr class="table-warning">
+                    {% for element in header %}
+                    <td>
+                        {{ element }}
+                    </td>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody class="tbody">
+                {% for i in data %}
+                <tr class="table-light">
+                    <td>{{i[0]}}</td>
+                    <td>{{i[1]}}</td>
+                    <td>{{i[2]}}</td>
+                    <td>{{i[3]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
