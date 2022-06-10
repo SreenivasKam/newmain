@@ -361,7 +361,13 @@ def filterLogsPushBack():
 @demand.route('/shortlistedjd/<id>')
 def shortlistedjd(id):
     cur = mysql.connection.cursor()
-    header = ['User Id','Demand Id','Unique Id','Status']
+    header = ['User Id','Name','Demand Id','Position Id','Status']
     cur.execute('select * from resumemapping where demand_id ='+str(id)+ ' order by user_id;')
     data = cur.fetchall()
-    return render_template('viewshortlist.html',id=id,header=header,data=data)
+    cur.execute('select user_id,user_name from user_table')
+    fetchdata = list(cur.fetchall())  
+    d1 =  {} 
+    for ele in fetchdata:
+        d1[ele[0]]= ele[1]
+    # return render_template('check.html',msg =d1)
+    return render_template('viewshortlist.html',id=id,d1=d1,header=header,data=data)
