@@ -10,3 +10,7 @@ Update user_table set skills = 'Data modelling,Data ware house designing' where 
 insert into access_table (groupid,user_id,skills) values (3,6,'Data modelling,Data ware house designing');
 Update user_table set skills = 'Azure' where user_id = 7 ;
 insert into access_table (groupid,user_id,skills) values (3,7,'Azure');
+Update user_table set skills = 'Snowflake' where user_id = 8 ;
+insert into access_table (groupid,user_id,skills) values (3,8,'Snowflake');
+Update user_table set skills = 'Python,Java' where user_id = 9 ;
+insert into access_table (groupid,user_id,skills) values (3,9,'Python,Java');

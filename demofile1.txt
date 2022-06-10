@@ -4,3 +4,5 @@ insert into user_table (user_name,email,user_password,skills) values ('Tom','tom
 insert into user_table (user_name,email,user_password,skills) values ('Hope','hope@gmail.com','hope','Empty');
 insert into user_table (user_name,email,user_password,skills) values ('Lucas','lucas@gmail.com','lucas','Empty');
 insert into user_table (user_name,email,user_password,skills) values ('Azure','azure@gmail.com','azure','Empty');
+insert into user_table (user_name,email,user_password,skills) values ('Sam','sam@gmail.com','sam','Empty');
+insert into user_table (user_name,email,user_password,skills) values ('Python Guy','python@gmail.com','123','Empty');

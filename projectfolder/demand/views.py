@@ -258,8 +258,10 @@ def changes():
                 if(i == 0):
                     id = str(request.form.get(s, False))
                 else:
+                    df = str(request.form.get(s, False))
+                    df = df.replace("'", "-")
                     p = str(p) + s + " = '" + \
-                        str(request.form.get(s, False)) + "', "
+                        df + "', "
                 if(s in logs):
                     m.append(request.form.get(s, False))
 

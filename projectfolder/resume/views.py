@@ -214,7 +214,9 @@ def changesresume():
             if(i==0):
                 id=str(request.form.get(s, False))
             else:
-                p = str(p)+ s + " = '" + str(request.form.get(s, False))+ "', "
+                df = str(request.form.get(s, False))
+                df = df.replace("'", "-")
+                p = str(p)+ s + " = '" +df + "', "
             if(s in logs):
                 m.append(request.form.get(s, False))
 
@@ -231,7 +233,7 @@ def changesresume():
         m = str(m)
         m = m[1:-1]
         o = 'INSERT INTO resume_logs VALUES (' + m +');'
-        # return render_template('check.html',msg = o)
+        # return render_template('check.html',msg = p)
         #cur.execute('INSERT INTO emp_profiles VALUES ('+g+')', tuple(t))
         cur.execute(o)
         cur.execute(p)

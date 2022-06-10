@@ -4,7 +4,30 @@
     document.getElementById("jobswipe").classList.add("high2");
     document.getElementById("jobin").classList.add("high");
 </script>
-
+<style>
+    .loader {
+      border: 8px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 8px solid #0d7cc1;
+      width: 40px;
+      height: 40px;
+      margin:auto;
+      margin-right: 10px;
+      -webkit-animation: spin 0.85s linear infinite; /* Safari */
+      animation: spin 0.85s linear infinite;
+    }
+    
+    /* Safari */
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    </style>
 <style>
     td{
         max-width: 450px;
@@ -22,12 +45,11 @@
             <button type="button" class="btn btn-outline-danger down" onclick="location.href='/demand'">Back</button>
         </div>
         {%else%}
-        <h2>Active Job Demands</h2>
+        <div class="inline-block"><h2>Active Job Demands&nbsp&nbsp </h2><div id="loads" class="loader  invisible"></div></div>
         {% endif %}
-
+        
     </div>
     <div class="child flex-child push-right">
-
         <button type="button" class="btn1 only-shadow" onclick="location.href='/add_data'">+ New&nbsp</button>
         <button type="button" class="btn1 only-shadow"
             onclick="location.href='/filter'">&nbsp&nbsp&nbspFilter&nbsp&nbsp&nbsp </button>
@@ -106,7 +128,7 @@
                             {% if session_info['groupno'] == 2  %}
                             <!-- <a class="dropdown-item" href="{{ url_for('demand.delete',id = ns.x) }}">Delete</a> -->
                             {% endif %}
-                            <a class="dropdown-item" href="{{ url_for('triage.shortlist',id = ns.x) }}">Shortlist Resumes</a>
+                            <a class="dropdown-item" href="{{ url_for('triage.shortlist',id = ns.x) }}" onclick="makevisisble()">Shortlist Resumes</a>
                             <a class="dropdown-item" href="{{ url_for('demand.shortlistedjd',id = ns.x) }}">View Shortlisted Resumes</a>
 
                         </div>
@@ -118,4 +140,9 @@
         </table>
     </div>
 </div>
+<script>
+    function makevisisble(){
+        document.getElementById("loads").classList.remove("invisible");
+    }
+</script>
 {% endblock %}
